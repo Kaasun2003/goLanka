@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "goLanka - Sri Lankan Real-Time Bus Transit and Season Pass Web Application",
+  "type": "module",
   "dependencies": {
     "axios": "^1.6.8",
     "leaflet": "^1.9.4",
@@ -13,32 +14,16 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "react-scripts": "5.0.1",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.3",
+    "vite": "^5.4.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }
