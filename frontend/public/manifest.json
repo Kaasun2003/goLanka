@@ -1,0 +1,15 @@
+{
+  "short_name": "goLanka",
+  "name": "goLanka - Sri Lankan Bus Transit",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "192x192 512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0A192F",
+  "background_color": "#020617"
+}

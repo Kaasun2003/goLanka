@@ -1,0 +1,31 @@
+{
+  "name": "golanka-backend",
+  "version": "1.0.0",
+  "description": "goLanka Sri Lankan Bus Transit Web App - Express & Socket.io Backend API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "sri-lanka",
+    "bus-tracking",
+    "transit",
+    "socketio",
+    "express",
+    "mongodb",
+    "golanka"
+  ],
+  "author": "goLanka Transit Solutions",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.1",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
