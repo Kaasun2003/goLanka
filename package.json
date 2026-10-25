@@ -1,0 +1,14 @@
+{
+  "name": "golanka-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "goLanka Sri Lankan Bus Transit Web Application - Monorepo Root",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "start": "npm --prefix frontend start",
+    "server": "npm --prefix backend start",
+    "client": "npm --prefix frontend start"
+  }
+}
