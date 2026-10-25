@@ -99,20 +99,18 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
 
   return (
     <>
-      {/* Floating Sticky Liquid Glass Navigation Bar */}
-      <header className="sticky top-2 sm:top-3.5 z-50 w-full px-2.5 sm:px-4 md:px-6 xl:px-8 py-1 transition-all">
-        {/* Liquid Glass Capsule Bar */}
-        <div className="w-full liquid-glass-container px-3.5 sm:px-5 xl:px-7 py-2.5 sm:py-3 shadow-2xl">
-          <div className="flex items-center justify-between gap-3 xl:gap-5">
+      {/* Clean Full-Width Sticky Top Navigation Bar */}
+      <header className="sticky top-0 z-50 w-full backdrop-blur-2xl bg-slate-950/95 border-b border-slate-800/90 shadow-2xl transition-all">
+        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="flex items-center justify-between h-20 sm:h-22 gap-4 xl:gap-6">
             
-            {/* 1. LEFT ZONE: 3D Liquid Glass Orb Logo & Brand */}
-            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-              {/* 3D Liquid Glass Orb - Spherical lens styling from user reference */}
-              <div className="w-12 h-12 sm:w-13 sm:h-13 liquid-glass-orb p-1 flex-shrink-0 cursor-pointer">
+            {/* 1. LEFT ZONE: Logo & Brand Title */}
+            <Link to="/" className="flex items-center gap-3.5 group flex-shrink-0">
+              <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5 flex-shrink-0">
                 <img
                   src="/logo.jpg"
                   alt="goLanka Logo"
-                  className="w-full h-full object-cover rounded-full shadow-inner"
+                  className="w-full h-full object-cover rounded-xl"
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.parentElement.innerHTML = `<span class="text-xl font-black text-emerald-400">gL</span>`;
@@ -122,38 +120,38 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
 
               <div className="space-y-0.5 whitespace-nowrap">
                 <div className="flex items-center gap-2">
-                  <span className="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-emerald-300 transition-colors drop-shadow-sm">
+                  <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors">
                     go<span className="text-emerald-400">Lanka</span>
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider liquid-glass-pill px-2.5 py-0.5 text-emerald-300 border-emerald-500/30 shadow-sm">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     🇱🇰 Transit
                   </span>
                 </div>
-                <p className="text-[11px] sm:text-xs text-slate-300/80 font-medium tracking-wide">
+                <p className="text-xs text-slate-400 font-medium tracking-wide">
                   ශ්‍රී ලංකා ඩිජිටල් බස් ප්‍රවාහන ජාලය
                 </p>
               </div>
             </Link>
 
-            {/* 2. CENTER ZONE: Liquid Glass Navigation Tab Pills */}
-            <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2.5 2xl:gap-3 flex-shrink-0 flex-nowrap">
+            {/* 2. CENTER ZONE: Single-Line Navigation Tabs */}
+            <nav className="hidden lg:flex items-center gap-2 xl:gap-3 2xl:gap-4 flex-shrink-0 flex-nowrap">
               {navLinks.map((link) => {
                 const active = isActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`group relative px-3.5 xl:px-4 2xl:px-5 py-2 xl:py-2.5 text-sm xl:text-[15px] font-bold transition-all duration-300 flex items-center gap-2 whitespace-nowrap flex-shrink-0 flex-nowrap ${
+                    className={`group relative px-4 xl:px-5 py-2.5 rounded-2xl text-sm xl:text-[15px] font-bold transition-all duration-200 flex items-center gap-2.5 whitespace-nowrap flex-shrink-0 flex-nowrap ${
                       active
-                        ? 'liquid-glass-pill-active text-emerald-300 font-extrabold'
-                        : 'liquid-glass-pill text-slate-200 hover:text-white'
+                        ? 'text-emerald-300 bg-slate-900 border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/15'
+                        : 'text-slate-300 hover:text-white hover:bg-slate-900/80 border-2 border-transparent'
                     }`}
                   >
-                    <span className="text-base xl:text-lg transition-transform group-hover:scale-110 flex-shrink-0 drop-shadow-sm">
+                    <span className="text-lg xl:text-xl transition-transform group-hover:scale-110 flex-shrink-0">
                       {link.icon}
                     </span>
-                    <span className="tracking-wide whitespace-nowrap leading-none select-none drop-shadow-sm">
+                    <span className="tracking-wide whitespace-nowrap leading-none select-none">
                       {link.label}
                     </span>
                     
@@ -165,39 +163,43 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                     )}
 
                     {link.isNew && (
-                      <span className="text-[10px] uppercase font-black bg-blue-500/25 text-blue-200 border border-blue-400/40 px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap shadow-sm">
+                      <span className="text-[10px] uppercase font-black bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap shadow-sm">
                         NEW
                       </span>
+                    )}
+
+                    {active && (
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-emerald-400 rounded-full"></span>
                     )}
                   </Link>
                 );
               })}
             </nav>
 
-            {/* 3. RIGHT ZONE: Liquid Glass Interactive Controls */}
-            <div className="hidden lg:flex items-center gap-2.5 xl:gap-3 2xl:gap-4 flex-shrink-0 flex-nowrap">
+            {/* 3. RIGHT ZONE: QR Button, Bell, Theme, Language & Hotline */}
+            <div className="hidden lg:flex items-center gap-3 xl:gap-4 flex-shrink-0 flex-nowrap">
               
-              {/* Quick Access "📱 QR පාස්" Liquid Glass Button */}
+              {/* Quick Access "📱 QR පාස්" Button */}
               <button
                 type="button"
                 onClick={() => setQrModalOpen(true)}
-                className="liquid-glass-qr-btn px-3.5 xl:px-4 py-2 xl:py-2.5 text-slate-950 font-black text-xs sm:text-sm tracking-wide flex items-center gap-2 active:scale-95 whitespace-nowrap flex-shrink-0 cursor-pointer"
+                className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-500/25 border border-emerald-300/40 flex items-center gap-2 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
                 title="Open My Digital QR Pass (මගේ QR පාස් එක)"
               >
-                <span className="text-sm xl:text-base flex-shrink-0">📱</span>
+                <span className="text-base flex-shrink-0">📱</span>
                 <span className="whitespace-nowrap font-black">{getQrPassLabel()}</span>
               </button>
 
-              {/* Liquid Glass Circular Notification Bell Button */}
+              {/* Notification Bell Icon */}
               <div className="relative flex-shrink-0" ref={notificationRef}>
                 <button
                   type="button"
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="liquid-glass-icon-btn text-slate-200 hover:text-white relative focus:outline-none flex-shrink-0 cursor-pointer"
+                  className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0 cursor-pointer"
                   title="Live Transit Alerts (සජීවී නිවේදන)"
                   aria-label="View Transit Notifications"
                 >
-                  <span className="text-base xl:text-lg">🔔</span>
+                  <span className="text-xl">🔔</span>
                   {/* Active pulsing badge dot */}
                   <span className="absolute top-2.5 right-2.5 flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
@@ -205,10 +207,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                   </span>
                 </button>
 
-                {/* Live Transit Alerts Liquid Glass Dropdown Popup */}
+                {/* Live Transit Alerts Dropdown Popup */}
                 {notificationsOpen && (
-                  <div className="absolute right-0 mt-3 w-80 sm:w-96 liquid-glass-container rounded-3xl p-5 shadow-2xl z-50 animate-fadeIn space-y-3">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-slate-900 border-2 border-slate-700/80 rounded-3xl p-5 shadow-2xl z-50 animate-fadeIn space-y-3">
+                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                       <div className="flex items-center gap-2">
                         <span className="text-lg">📢</span>
                         <h4 className="text-sm font-bold text-white">සජීවී මාර්ග නිවේදන (Transit Alerts)</h4>
@@ -218,25 +220,25 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                       </span>
                     </div>
 
-                    <div className="space-y-2 max-h-72 overflow-y-auto">
+                    <div className="space-y-2.5 max-h-72 overflow-y-auto">
                       {transitAlerts.map((alert) => (
                         <div
                           key={alert.id}
-                          className="p-3 liquid-glass-pill rounded-2xl space-y-1 text-left"
+                          className="p-3 bg-slate-950 rounded-2xl border border-slate-800 space-y-1 text-left"
                         >
                           <div className="flex items-center justify-between">
                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${alert.tagColor}`}>
                               {alert.tag}
                             </span>
-                            <span className="text-[10px] text-slate-400">{alert.time}</span>
+                            <span className="text-[10px] text-slate-500">{alert.time}</span>
                           </div>
-                          <h5 className="text-xs font-bold text-slate-100">{alert.title}</h5>
-                          <p className="text-[11px] text-slate-300/80 leading-snug">{alert.desc}</p>
+                          <h5 className="text-xs font-bold text-slate-200">{alert.title}</h5>
+                          <p className="text-[11px] text-slate-400 leading-snug">{alert.desc}</p>
                         </div>
                       ))}
                     </div>
 
-                    <div className="pt-2 border-t border-white/10 text-center">
+                    <div className="pt-2 border-t border-slate-800 text-center">
                       <span className="text-[11px] text-slate-400">
                         National Transport Commission • Verified Status
                       </span>
@@ -245,25 +247,25 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 )}
               </div>
 
-              {/* Circular Liquid Glass Dark / Light Mode Theme Toggle Button */}
+              {/* Theme Toggle Button */}
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="liquid-glass-icon-btn text-slate-200 hover:text-white group flex-shrink-0 cursor-pointer"
+                className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group flex-shrink-0 cursor-pointer"
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
               >
                 <div className="transform transition-transform duration-500 ease-in-out group-hover:rotate-180">
                   {isLightMode ? (
-                    <span className="text-base xl:text-lg">🌙</span>
+                    <span className="text-xl">🌙</span>
                   ) : (
-                    <span className="text-base xl:text-lg text-amber-300">☀️</span>
+                    <span className="text-xl text-amber-300">☀️</span>
                   )}
                 </div>
               </button>
 
-              {/* Segmented Liquid Glass Trilingual Language Switcher */}
-              <div className="liquid-glass-segmented flex-shrink-0 whitespace-nowrap">
+              {/* Trilingual Language Switcher Toggle */}
+              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1.5 shadow-inner flex-shrink-0 whitespace-nowrap">
                 {languages.map((lang) => {
                   const isSelected = currentLang === lang.code;
                   return (
@@ -271,10 +273,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-3 py-1.5 text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+                      className={`px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
                         isSelected
-                          ? 'liquid-glass-seg-active font-black'
-                          : 'text-slate-300 hover:text-white'
+                          ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
+                          : 'text-slate-400 hover:text-white hover:bg-slate-800'
                       }`}
                       aria-label={`Switch language to ${lang.label}`}
                     >
@@ -284,14 +286,14 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 })}
               </div>
 
-              {/* Liquid Glass 24/7 SLTB Line Badge */}
-              <div className="liquid-glass-pill px-3.5 py-1.5 flex items-center gap-2 flex-shrink-0 whitespace-nowrap hidden xl:flex">
-                <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider whitespace-nowrap">
-                  24/7 LINE
+              {/* 24/7 SLTB Line */}
+              <div className="pl-3 xl:pl-4 border-l border-slate-800 text-right flex-shrink-0 whitespace-nowrap hidden xl:block">
+                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">
+                  24/7 SLTB Line
                 </span>
                 <a
                   href="tel:1955"
-                  className="text-sm font-mono font-black text-amber-400 hover:text-amber-300 flex items-center gap-1 transition-colors whitespace-nowrap"
+                  className="text-sm xl:text-base font-mono font-black text-amber-400 hover:text-amber-300 flex items-center gap-1 justify-end transition-colors whitespace-nowrap"
                   title="Call SLTB Passenger Helpline"
                 >
                   <span>📞</span>

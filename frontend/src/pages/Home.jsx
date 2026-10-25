@@ -164,7 +164,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
             <div className="lg:col-span-5 space-y-6 text-left">
               
               {/* Active Network Pill Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full liquid-glass-pill text-xs sm:text-sm font-bold text-slate-200 shadow-md">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-emerald-500/30 text-xs sm:text-sm font-bold text-slate-200 shadow-md">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping flex-shrink-0"></span>
                 <span className="text-emerald-400 font-extrabold whitespace-nowrap">
                   {t.heroBadge || '1,850+ Active Buses Today • Island-wide Real-Time GPS'}
@@ -188,7 +188,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
 
               {/* 4 Feature Badges (Island-wide, Real-Time GPS, Fleets, Digital QR) */}
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="liquid-glass-pill p-3.5 rounded-2xl flex items-center gap-3">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors">
                   <span className="text-2xl flex-shrink-0">🗺️</span>
                   <div>
                     <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
@@ -200,11 +200,11 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                   </div>
                 </div>
 
-                <div className="liquid-glass-pill p-3.5 rounded-2xl flex items-center gap-3">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors">
                   <span className="text-2xl flex-shrink-0">⚡</span>
                   <div>
                     <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      {currentLang === 'en' ? 'Telemetry' : currentLang === 'ta' ? 'நேரலை ஜிபிஎஸ்' : 'සජීවී දත්ත'}
+                      {currentLang === 'en' ? 'Telemetry' : currentLang === 'ta' ? 'நேරலை ஜிபிஎஸ்' : 'සජීවී දත්ත'}
                     </span>
                     <span className="text-xs sm:text-sm font-black text-emerald-400">
                       Real-Time GPS
@@ -212,11 +212,11 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                   </div>
                 </div>
 
-                <div className="liquid-glass-pill p-3.5 rounded-2xl flex items-center gap-3">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors">
                   <span className="text-2xl flex-shrink-0">🚌</span>
                   <div>
                     <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      {currentLang === 'en' ? 'Bus Network' : currentLang === 'ta' ? 'பேருந்து நெட்வொர்க்' : 'බස් ජාලය'}
+                      {currentLang === 'en' ? 'Bus Network' : currentLang === 'ta' ? 'பேருந்து நெட்වொர்க்' : 'බස් ජාලය'}
                     </span>
                     <span className="text-xs sm:text-sm font-black text-white">
                       SLTB & Private
@@ -224,7 +224,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                   </div>
                 </div>
 
-                <div className="liquid-glass-pill p-3.5 rounded-2xl flex items-center gap-3">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors">
                   <span className="text-2xl flex-shrink-0">📱</span>
                   <div>
                     <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
@@ -240,7 +240,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
 
             {/* RIGHT COLUMN (2nd Image Content): PickMe/Uber Style Smart Search Card & Popular Routes */}
             <div className="lg:col-span-7">
-              <div className="liquid-glass-container rounded-3xl p-5 sm:p-7 shadow-2xl relative text-left">
+              <div className="bg-slate-900/95 backdrop-blur-2xl border-2 border-slate-700/80 rounded-3xl p-5 sm:p-7 shadow-2xl relative text-left">
                 
                 <form onSubmit={handleSearch} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
@@ -267,7 +267,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                       <button
                         type="button"
                         onClick={handleSwap}
-                        className="liquid-glass-icon-btn text-slate-300 hover:text-white group focus:outline-none cursor-pointer"
+                        className="p-3.5 rounded-2xl bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-300 border border-slate-700/80 transition-all shadow-md group focus:outline-none cursor-pointer flex items-center justify-center"
                         title={currentLang === 'en' ? 'Swap Origin and Destination' : currentLang === 'ta' ? 'மாற்றுக' : 'මාරු කරන්න'}
                         aria-label="Swap locations"
                       >
@@ -311,7 +311,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                             if (!fromQuery) setFromQuery(stop.value);
                             else setToQuery(stop.value);
                           }}
-                          className="px-2.5 py-1.5 rounded-xl liquid-glass-pill text-slate-200 hover:text-white font-medium transition-all cursor-pointer text-xs"
+                          className="px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700/80 font-medium transition-all cursor-pointer text-xs shadow-sm"
                         >
                           {stop.name}
                         </button>
@@ -371,7 +371,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                             <button
                               type="button"
                               onClick={() => navigate(`/tracker?route=${route.routeNumber}`)}
-                              className="px-3 py-1.5 liquid-glass-pill hover:liquid-glass-pill-active text-emerald-300 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer"
+                              className="px-3.5 py-1.5 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
                             >
                               <span>🛰️</span> {t.viewLive || 'සජීවීව බලන්න'}
                             </button>
