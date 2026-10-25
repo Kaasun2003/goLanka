@@ -99,146 +99,144 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 backdrop-blur-2xl bg-slate-950/95 border-b border-slate-800/90 shadow-2xl transition-all">
-        {/* Full-width edge-to-edge container without max-w constraint */}
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="flex items-center justify-between h-22 sm:h-24 gap-4 xl:gap-6">
+      {/* Floating Sticky Liquid Glass Navigation Bar */}
+      <header className="sticky top-2 sm:top-3.5 z-50 w-full px-2.5 sm:px-4 md:px-6 xl:px-8 py-1 transition-all">
+        {/* Liquid Glass Capsule Bar */}
+        <div className="w-full liquid-glass-container px-3.5 sm:px-5 xl:px-7 py-2.5 sm:py-3 shadow-2xl">
+          <div className="flex items-center justify-between gap-3 xl:gap-5">
             
-            {/* 1. LEFT ZONE: Brand Logo & Title */}
-            <Link to="/" className="flex items-center gap-3.5 xl:gap-4 group flex-shrink-0">
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5 flex-shrink-0">
+            {/* 1. LEFT ZONE: 3D Liquid Glass Orb Logo & Brand */}
+            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
+              {/* 3D Liquid Glass Orb - Spherical lens styling from user reference */}
+              <div className="w-12 h-12 sm:w-13 sm:h-13 liquid-glass-orb p-1 flex-shrink-0 cursor-pointer">
                 <img
                   src="/logo.jpg"
                   alt="goLanka Logo"
-                  className="w-full h-full object-cover rounded-xl"
+                  className="w-full h-full object-cover rounded-full shadow-inner"
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = `<span class="text-2xl font-black text-emerald-400">gL</span>`;
+                    e.target.parentElement.innerHTML = `<span class="text-xl font-black text-emerald-400">gL</span>`;
                   }}
                 />
               </div>
 
               <div className="space-y-0.5 whitespace-nowrap">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+                  <span className="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-emerald-300 transition-colors drop-shadow-sm">
                     go<span className="text-emerald-400">Lanka</span>
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 px-2.5 py-1 rounded-full shadow-sm">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider liquid-glass-pill px-2.5 py-0.5 text-emerald-300 border-emerald-500/30 shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     🇱🇰 Transit
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 font-medium tracking-wide">
+                <p className="text-[11px] sm:text-xs text-slate-300/80 font-medium tracking-wide">
                   ශ්‍රී ලංකා ඩිජිටල් බස් ප්‍රවාහන ජාලය
                 </p>
               </div>
             </Link>
 
-            {/* 2. CENTER ZONE: Single-Line Spacious Navigation Tabs */}
-            <nav className="hidden lg:flex items-center gap-2 xl:gap-3 2xl:gap-5 flex-shrink-0 flex-nowrap">
+            {/* 2. CENTER ZONE: Liquid Glass Navigation Tab Pills */}
+            <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2.5 2xl:gap-3 flex-shrink-0 flex-nowrap">
               {navLinks.map((link) => {
                 const active = isActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`group relative px-3.5 xl:px-4 2xl:px-5 py-2.5 xl:py-3 rounded-2xl text-sm xl:text-[15px] 2xl:text-base font-bold transition-all duration-200 flex items-center gap-2 xl:gap-2.5 whitespace-nowrap flex-shrink-0 flex-nowrap ${
+                    className={`group relative px-3.5 xl:px-4 2xl:px-5 py-2 xl:py-2.5 text-sm xl:text-[15px] font-bold transition-all duration-300 flex items-center gap-2 whitespace-nowrap flex-shrink-0 flex-nowrap ${
                       active
-                        ? 'text-emerald-300 bg-slate-900/95 border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/15'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-900/80 border-2 border-transparent'
+                        ? 'liquid-glass-pill-active text-emerald-300 font-extrabold'
+                        : 'liquid-glass-pill text-slate-200 hover:text-white'
                     }`}
                   >
-                    <span className="text-lg xl:text-xl transition-transform group-hover:scale-110 flex-shrink-0">
+                    <span className="text-base xl:text-lg transition-transform group-hover:scale-110 flex-shrink-0 drop-shadow-sm">
                       {link.icon}
                     </span>
-                    <span className="tracking-wide whitespace-nowrap leading-none select-none">
+                    <span className="tracking-wide whitespace-nowrap leading-none select-none drop-shadow-sm">
                       {link.label}
                     </span>
                     
                     {link.isLive && (
                       <span className="flex h-2.5 w-2.5 relative ml-0.5 flex-shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-sm"></span>
                       </span>
                     )}
 
                     {link.isNew && (
-                      <span className="text-[10px] uppercase font-black bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap">
+                      <span className="text-[10px] uppercase font-black bg-blue-500/25 text-blue-200 border border-blue-400/40 px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap shadow-sm">
                         NEW
                       </span>
-                    )}
-
-                    {active && (
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-emerald-400 rounded-full"></span>
                     )}
                   </Link>
                 );
               })}
             </nav>
 
-            {/* 3. RIGHT ZONE: QR Pass, Theme Toggle, Notifications, Languages & Hotline */}
-            <div className="hidden lg:flex items-center gap-2.5 xl:gap-3.5 2xl:gap-5 flex-shrink-0 flex-nowrap">
+            {/* 3. RIGHT ZONE: Liquid Glass Interactive Controls */}
+            <div className="hidden lg:flex items-center gap-2.5 xl:gap-3 2xl:gap-4 flex-shrink-0 flex-nowrap">
               
-              {/* Quick Access "📱 QR පාස්" Button with subtle glow */}
+              {/* Quick Access "📱 QR පාස්" Liquid Glass Button */}
               <button
                 type="button"
                 onClick={() => setQrModalOpen(true)}
-                className="px-3.5 xl:px-4 py-2 xl:py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-500/25 border border-emerald-300/40 flex items-center gap-1.5 xl:gap-2 active:scale-95 transition-all whitespace-nowrap flex-shrink-0"
+                className="liquid-glass-qr-btn px-3.5 xl:px-4 py-2 xl:py-2.5 text-slate-950 font-black text-xs sm:text-sm tracking-wide flex items-center gap-2 active:scale-95 whitespace-nowrap flex-shrink-0 cursor-pointer"
                 title="Open My Digital QR Pass (මගේ QR පාස් එක)"
               >
                 <span className="text-sm xl:text-base flex-shrink-0">📱</span>
-                <span className="whitespace-nowrap">{getQrPassLabel()}</span>
+                <span className="whitespace-nowrap font-black">{getQrPassLabel()}</span>
               </button>
 
-              {/* Notification Bell Icon with Active Badge Dot */}
+              {/* Liquid Glass Circular Notification Bell Button */}
               <div className="relative flex-shrink-0" ref={notificationRef}>
                 <button
                   type="button"
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="p-2.5 xl:p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0"
+                  className="liquid-glass-icon-btn text-slate-200 hover:text-white relative focus:outline-none flex-shrink-0 cursor-pointer"
                   title="Live Transit Alerts (සජීවී නිවේදන)"
                   aria-label="View Transit Notifications"
                 >
-                  <span className="text-lg xl:text-xl">🔔</span>
+                  <span className="text-base xl:text-lg">🔔</span>
                   {/* Active pulsing badge dot */}
-                  <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+                  <span className="absolute top-2.5 right-2.5 flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
                   </span>
                 </button>
 
-                {/* Live Transit Alerts Dropdown Popup */}
+                {/* Live Transit Alerts Liquid Glass Dropdown Popup */}
                 {notificationsOpen && (
-                  <div className="absolute right-0 mt-3 w-80 sm:w-96 bg-slate-900 border-2 border-slate-700/80 rounded-3xl p-5 shadow-2xl z-50 animate-fadeIn space-y-3">
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <div className="absolute right-0 mt-3 w-80 sm:w-96 liquid-glass-container rounded-3xl p-5 shadow-2xl z-50 animate-fadeIn space-y-3">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
                       <div className="flex items-center gap-2">
                         <span className="text-lg">📢</span>
                         <h4 className="text-sm font-bold text-white">සජීවී මාර්ග නිවේදන (Transit Alerts)</h4>
                       </div>
-                      <span className="text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-0.5 rounded-full">
                         3 New
                       </span>
                     </div>
 
-                    <div className="space-y-2.5 max-h-72 overflow-y-auto">
+                    <div className="space-y-2 max-h-72 overflow-y-auto">
                       {transitAlerts.map((alert) => (
                         <div
                           key={alert.id}
-                          className="p-3 bg-slate-950 rounded-2xl border border-slate-800 space-y-1 text-left"
+                          className="p-3 liquid-glass-pill rounded-2xl space-y-1 text-left"
                         >
                           <div className="flex items-center justify-between">
                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${alert.tagColor}`}>
                               {alert.tag}
                             </span>
-                            <span className="text-[10px] text-slate-500">{alert.time}</span>
+                            <span className="text-[10px] text-slate-400">{alert.time}</span>
                           </div>
-                          <h5 className="text-xs font-bold text-slate-200">{alert.title}</h5>
-                          <p className="text-[11px] text-slate-400 leading-snug">{alert.desc}</p>
+                          <h5 className="text-xs font-bold text-slate-100">{alert.title}</h5>
+                          <p className="text-[11px] text-slate-300/80 leading-snug">{alert.desc}</p>
                         </div>
                       ))}
                     </div>
 
-                    <div className="pt-2 border-t border-slate-800 text-center">
+                    <div className="pt-2 border-t border-white/10 text-center">
                       <span className="text-[11px] text-slate-400">
                         National Transport Commission • Verified Status
                       </span>
@@ -247,25 +245,25 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 )}
               </div>
 
-              {/* Dark / Light Mode Theme Toggle Button with Smooth Rotation Animation */}
+              {/* Circular Liquid Glass Dark / Light Mode Theme Toggle Button */}
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-2.5 xl:p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group flex-shrink-0"
+                className="liquid-glass-icon-btn text-slate-200 hover:text-white group flex-shrink-0 cursor-pointer"
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
               >
                 <div className="transform transition-transform duration-500 ease-in-out group-hover:rotate-180">
                   {isLightMode ? (
-                    <span className="text-lg xl:text-xl">🌙</span>
+                    <span className="text-base xl:text-lg">🌙</span>
                   ) : (
-                    <span className="text-lg xl:text-xl text-amber-300">☀️</span>
+                    <span className="text-base xl:text-lg text-amber-300">☀️</span>
                   )}
                 </div>
               </button>
 
-              {/* Trilingual Language Switcher Toggle */}
-              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1 xl:p-1.5 shadow-inner flex-shrink-0 whitespace-nowrap">
+              {/* Segmented Liquid Glass Trilingual Language Switcher */}
+              <div className="liquid-glass-segmented flex-shrink-0 whitespace-nowrap">
                 {languages.map((lang) => {
                   const isSelected = currentLang === lang.code;
                   return (
@@ -273,10 +271,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-3 xl:px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                      className={`px-3 py-1.5 text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
                         isSelected
-                          ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
-                          : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                          ? 'liquid-glass-seg-active font-black'
+                          : 'text-slate-300 hover:text-white'
                       }`}
                       aria-label={`Switch language to ${lang.label}`}
                     >
@@ -286,14 +284,14 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 })}
               </div>
 
-              {/* 24/7 SLTB Hotline Box */}
-              <div className="pl-3 xl:pl-4 border-l border-slate-800 text-right flex-shrink-0 whitespace-nowrap hidden sm:block">
-                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">
-                  24/7 SLTB Line
+              {/* Liquid Glass 24/7 SLTB Line Badge */}
+              <div className="liquid-glass-pill px-3.5 py-1.5 flex items-center gap-2 flex-shrink-0 whitespace-nowrap hidden xl:flex">
+                <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider whitespace-nowrap">
+                  24/7 LINE
                 </span>
                 <a
                   href="tel:1955"
-                  className="text-sm xl:text-base font-mono font-black text-amber-400 hover:text-amber-300 flex items-center gap-1 justify-end transition-colors whitespace-nowrap"
+                  className="text-sm font-mono font-black text-amber-400 hover:text-amber-300 flex items-center gap-1 transition-colors whitespace-nowrap"
                   title="Call SLTB Passenger Helpline"
                 >
                   <span>📞</span>
@@ -302,14 +300,14 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               </div>
             </div>
 
-            {/* Mobile Controls (Right side of mobile bar) */}
+            {/* Mobile Controls (Liquid Glass Buttons for mobile) */}
             <div className="flex lg:hidden items-center gap-2">
               
               {/* Quick QR button on mobile */}
               <button
                 type="button"
                 onClick={() => setQrModalOpen(true)}
-                className="px-2.5 py-1.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs shadow-md"
+                className="liquid-glass-qr-btn px-3 py-1.5 text-slate-950 font-black text-xs"
               >
                 📱 QR
               </button>
@@ -318,56 +316,54 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-2 rounded-xl bg-slate-900 text-slate-300 border border-slate-800 text-sm"
+                className="liquid-glass-icon-btn !w-9 !h-9 text-xs"
               >
                 {isLightMode ? '🌙' : '☀️'}
               </button>
 
-              {/* Mobile Menu Toggle Button */}
+              {/* Mobile Menu Toggle Button (styled with 3 liquid glass bars matching reference) */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-2xl bg-slate-900 text-slate-300 hover:text-white border border-slate-800 focus:outline-none shadow-md"
+                className="liquid-glass-icon-btn !w-10 !h-10 text-slate-200 hover:text-white"
                 aria-label="Toggle navigation menu"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  {mobileMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </svg>
+                <div className="flex flex-col gap-1 items-center justify-center w-5">
+                  <span className={`block h-0.5 w-5 bg-slate-200 rounded-full transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+                  <span className={`block h-0.5 w-5 bg-slate-200 rounded-full transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+                  <span className={`block h-0.5 w-5 bg-slate-200 rounded-full transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+                </div>
               </button>
             </div>
           </div>
 
-          {/* 4. MOBILE HAMBURGER MENU DRAWER */}
+          {/* 4. MOBILE HAMBURGER MENU LIQUID GLASS DRAWER */}
           {mobileMenuOpen && (
-            <div className="lg:hidden py-5 border-t border-slate-800/90 space-y-4 animate-fadeIn">
+            <div className="lg:hidden mt-3 pt-4 border-t border-white/10 space-y-3 animate-fadeIn">
               
               {/* Navigation links in drawer */}
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 {navLinks.map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-between px-5 py-3.5 rounded-2xl text-base font-bold transition-all ${
+                    className={`flex items-center justify-between px-4 py-3 rounded-2xl text-base font-bold transition-all ${
                       isActive(link.to)
-                        ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/40 shadow-sm'
-                        : 'text-slate-200 hover:bg-slate-900'
+                        ? 'liquid-glass-pill-active text-emerald-300'
+                        : 'liquid-glass-pill text-slate-200 hover:text-white'
                     }`}
                   >
-                    <div className="flex items-center gap-3.5">
-                      <span className="text-2xl">{link.icon}</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xl">{link.icon}</span>
                       <div>
-                        <span className="block text-base">{link.label}</span>
-                        <span className="text-xs text-slate-400 font-normal">{link.localHint}</span>
+                        <span className="block text-sm sm:text-base">{link.label}</span>
+                        <span className="text-[11px] text-slate-400 font-normal">{link.localHint}</span>
                       </div>
                     </div>
                     {link.isLive && (
-                      <span className="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full font-bold">
-                        LIVE RADAR
+                      <span className="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-0.5 rounded-full font-bold">
+                        LIVE
                       </span>
                     )}
                     {link.isNew && (
@@ -380,18 +376,18 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               </div>
 
               {/* Language switcher pills in mobile drawer */}
-              <div className="pt-2 px-2 flex items-center justify-between bg-slate-900 p-3 rounded-2xl border border-slate-800">
-                <span className="text-xs font-bold text-slate-400">භාෂාව / Language:</span>
-                <div className="flex gap-1.5">
+              <div className="liquid-glass-pill p-3 flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-300">භාෂාව / Language:</span>
+                <div className="liquid-glass-segmented">
                   {languages.map((lang) => (
                     <button
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
+                      className={`px-3 py-1 text-xs font-bold transition-all ${
                         currentLang === lang.code
-                          ? 'bg-emerald-500 text-slate-950 font-black'
-                          : 'text-slate-400'
+                          ? 'liquid-glass-seg-active font-black'
+                          : 'text-slate-300'
                       }`}
                     >
                       {lang.label}
@@ -401,7 +397,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               </div>
 
               {/* Hotline in mobile drawer */}
-              <div className="pt-2 px-2 flex justify-between items-center text-sm text-slate-300">
+              <div className="liquid-glass-pill p-3 flex justify-between items-center text-sm text-slate-300">
                 <span>National Helpline:</span>
                 <a href="tel:1955" className="text-amber-400 font-mono font-bold text-base flex items-center gap-1.5">
                   <span>📞</span> 1955 (SLTB) / 1958
@@ -414,26 +410,26 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
 
       {/* 5. QUICK MY QR PASS POPUP MODAL */}
       {qrModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-          <div className="bg-slate-900 border-2 border-emerald-500/50 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative space-y-5 text-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xl animate-fadeIn">
+          <div className="liquid-glass-container rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative space-y-5 text-center border-white/20">
             
             {/* Close button */}
             <button
               onClick={() => setQrModalOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white text-xl p-1 rounded-lg"
+              className="absolute top-4 right-4 liquid-glass-icon-btn !w-8 !h-8 text-slate-300 hover:text-white text-base"
               aria-label="Close Modal"
             >
               ✕
             </button>
 
             <div className="space-y-1">
-              <span className="inline-block text-4xl mb-1">📱</span>
+              <span className="inline-block text-4xl mb-1 drop-shadow-md">📱</span>
               <h3 className="text-xl font-black text-white">මගේ ඩිජිටල් QR පාස් එක</h3>
-              <p className="text-xs text-slate-400">Official Sri Lankan Digital Bus Transit Pass</p>
+              <p className="text-xs text-slate-300/80">Official Sri Lankan Digital Bus Transit Pass</p>
             </div>
 
             {/* High-contrast QR display */}
-            <div className="p-4 bg-white rounded-2xl shadow-xl mx-auto w-52 h-52 flex flex-col items-center justify-center">
+            <div className="p-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl mx-auto w-52 h-52 flex flex-col items-center justify-center border border-white">
               <svg viewBox="0 0 100 100" className="w-full h-full fill-slate-950">
                 <rect x="5" y="5" width="25" height="25" />
                 <rect x="9" y="9" width="17" height="17" fill="white" />
@@ -462,7 +458,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               </span>
             </div>
 
-            <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-1 text-left">
+            <div className="liquid-glass-pill p-3.5 text-xs text-slate-200 space-y-1.5 text-left">
               <div className="flex justify-between">
                 <span className="text-slate-400">Status:</span>
                 <span className="font-bold text-emerald-400">● Active Transit Pass</span>
@@ -477,13 +473,13 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               <Link
                 to="/season"
                 onClick={() => setQrModalOpen(false)}
-                className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs rounded-xl shadow-md transition-colors"
+                className="flex-1 py-3 liquid-glass-qr-btn text-slate-950 font-black text-xs text-center"
               >
                 සම්පූර්ණ විස්තර බලන්න ➔
               </Link>
               <button
                 onClick={() => setQrModalOpen(false)}
-                className="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl transition-colors"
+                className="px-4 py-3 liquid-glass-pill text-slate-200 hover:text-white font-bold text-xs"
               >
                 වසන්න (Close)
               </button>
