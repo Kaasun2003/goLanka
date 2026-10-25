@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import LiveMap from '../components/LiveMap';
+import LiveMap from '../components/LiveMap.jsx';
 
 const popularRouteFilters = [
   { id: '', label: 'All Live Buses' },

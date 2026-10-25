@@ -1,5 +1,5 @@
 import React from 'react';
-import SeasonPassForm from '../components/SeasonPassForm';
+import SeasonPassForm from '../components/SeasonPassForm.jsx';
 
 const SeasonPage = ({ t }) => {
   const faqs = [

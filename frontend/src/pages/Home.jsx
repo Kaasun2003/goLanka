@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import JourneyPlanner from '../components/JourneyPlanner';
-import SeatBookingHub from '../components/SeatBookingHub';
+import JourneyPlanner from '../components/JourneyPlanner.jsx';
+import SeatBookingHub from '../components/SeatBookingHub.jsx';
 
 const Home = ({ t }) => {
   const navigate = useNavigate();
