@@ -100,13 +100,13 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
   return (
     <>
       <header className="sticky top-0 z-50 backdrop-blur-2xl bg-slate-950/95 border-b border-slate-800/90 shadow-2xl transition-all">
-        {/* Expanded wide container for spacious breathing room */}
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between h-24">
+        {/* Full-width edge-to-edge container without max-w constraint */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="flex items-center justify-between h-22 sm:h-24 gap-4 xl:gap-6">
             
             {/* 1. LEFT ZONE: Brand Logo & Title */}
-            <Link to="/" className="flex items-center gap-4 group flex-shrink-0">
-              <div className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5">
+            <Link to="/" className="flex items-center gap-3.5 xl:gap-4 group flex-shrink-0">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5 flex-shrink-0">
                 <img
                   src="/logo.jpg"
                   alt="goLanka Logo"
@@ -118,8 +118,8 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 />
               </div>
 
-              <div className="space-y-0.5">
-                <div className="flex items-center gap-2.5">
+              <div className="space-y-0.5 whitespace-nowrap">
+                <div className="flex items-center gap-2">
                   <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors">
                     go<span className="text-emerald-400">Lanka</span>
                   </span>
@@ -134,34 +134,36 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               </div>
             </Link>
 
-            {/* 2. CENTER ZONE: Spacious Navigation Tabs */}
-            <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
+            {/* 2. CENTER ZONE: Single-Line Spacious Navigation Tabs */}
+            <nav className="hidden lg:flex items-center gap-2 xl:gap-3 2xl:gap-5 flex-shrink-0 flex-nowrap">
               {navLinks.map((link) => {
                 const active = isActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`group relative px-4 xl:px-5 py-3 rounded-2xl text-[15px] xl:text-base font-bold transition-all duration-200 flex items-center gap-2.5 ${
+                    className={`group relative px-3.5 xl:px-4 2xl:px-5 py-2.5 xl:py-3 rounded-2xl text-sm xl:text-[15px] 2xl:text-base font-bold transition-all duration-200 flex items-center gap-2 xl:gap-2.5 whitespace-nowrap flex-shrink-0 flex-nowrap ${
                       active
                         ? 'text-emerald-300 bg-slate-900/95 border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/15'
                         : 'text-slate-300 hover:text-white hover:bg-slate-900/80 border-2 border-transparent'
                     }`}
                   >
-                    <span className="text-lg transition-transform group-hover:scale-110">
+                    <span className="text-lg xl:text-xl transition-transform group-hover:scale-110 flex-shrink-0">
                       {link.icon}
                     </span>
-                    <span className="tracking-wide">{link.label}</span>
+                    <span className="tracking-wide whitespace-nowrap leading-none select-none">
+                      {link.label}
+                    </span>
                     
                     {link.isLive && (
-                      <span className="flex h-2.5 w-2.5 relative ml-0.5">
+                      <span className="flex h-2.5 w-2.5 relative ml-0.5 flex-shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                       </span>
                     )}
 
                     {link.isNew && (
-                      <span className="text-[10px] uppercase font-black bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] uppercase font-black bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap">
                         NEW
                       </span>
                     )}
@@ -175,29 +177,29 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
             </nav>
 
             {/* 3. RIGHT ZONE: QR Pass, Theme Toggle, Notifications, Languages & Hotline */}
-            <div className="hidden md:flex items-center gap-4 xl:gap-6 flex-shrink-0">
+            <div className="hidden lg:flex items-center gap-2.5 xl:gap-3.5 2xl:gap-5 flex-shrink-0 flex-nowrap">
               
               {/* Quick Access "📱 QR පාස්" Button with subtle glow */}
               <button
                 type="button"
                 onClick={() => setQrModalOpen(true)}
-                className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-500/25 border border-emerald-300/40 flex items-center gap-2 active:scale-95 transition-all"
+                className="px-3.5 xl:px-4 py-2 xl:py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-500/25 border border-emerald-300/40 flex items-center gap-1.5 xl:gap-2 active:scale-95 transition-all whitespace-nowrap flex-shrink-0"
                 title="Open My Digital QR Pass (මගේ QR පාස් එක)"
               >
-                <span className="text-base">📱</span>
-                <span>{getQrPassLabel()}</span>
+                <span className="text-sm xl:text-base flex-shrink-0">📱</span>
+                <span className="whitespace-nowrap">{getQrPassLabel()}</span>
               </button>
 
               {/* Notification Bell Icon with Active Badge Dot */}
-              <div className="relative" ref={notificationRef}>
+              <div className="relative flex-shrink-0" ref={notificationRef}>
                 <button
                   type="button"
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner"
+                  className="p-2.5 xl:p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0"
                   title="Live Transit Alerts (සජීවී නිවේදන)"
                   aria-label="View Transit Notifications"
                 >
-                  <span className="text-xl">🔔</span>
+                  <span className="text-lg xl:text-xl">🔔</span>
                   {/* Active pulsing badge dot */}
                   <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
@@ -249,21 +251,21 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group"
+                className="p-2.5 xl:p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group flex-shrink-0"
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
               >
                 <div className="transform transition-transform duration-500 ease-in-out group-hover:rotate-180">
                   {isLightMode ? (
-                    <span className="text-xl">🌙</span>
+                    <span className="text-lg xl:text-xl">🌙</span>
                   ) : (
-                    <span className="text-xl text-amber-300">☀️</span>
+                    <span className="text-lg xl:text-xl text-amber-300">☀️</span>
                   )}
                 </div>
               </button>
 
               {/* Trilingual Language Switcher Toggle */}
-              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1.5 shadow-inner">
+              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1 xl:p-1.5 shadow-inner flex-shrink-0 whitespace-nowrap">
                 {languages.map((lang) => {
                   const isSelected = currentLang === lang.code;
                   return (
@@ -271,7 +273,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer ${
+                      className={`px-3 xl:px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
                         isSelected
                           ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
                           : 'text-slate-400 hover:text-white hover:bg-slate-800'
@@ -285,13 +287,13 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               </div>
 
               {/* 24/7 SLTB Hotline Box */}
-              <div className="pl-4 border-l border-slate-800 text-right">
-                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              <div className="pl-3 xl:pl-4 border-l border-slate-800 text-right flex-shrink-0 whitespace-nowrap hidden sm:block">
+                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">
                   24/7 SLTB Line
                 </span>
                 <a
                   href="tel:1955"
-                  className="text-base font-mono font-black text-amber-400 hover:text-amber-300 flex items-center gap-1 justify-end transition-colors"
+                  className="text-sm xl:text-base font-mono font-black text-amber-400 hover:text-amber-300 flex items-center gap-1 justify-end transition-colors whitespace-nowrap"
                   title="Call SLTB Passenger Helpline"
                 >
                   <span>📞</span>
