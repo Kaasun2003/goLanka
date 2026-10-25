@@ -4,12 +4,51 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 min-h-screen font-sans;
+    @apply bg-slate-950 text-slate-100 min-h-screen font-sans transition-colors duration-300;
     background-image: 
       radial-gradient(at 0% 0%, rgba(141, 21, 58, 0.12) 0px, transparent 50%),
       radial-gradient(at 100% 100%, rgba(255, 190, 41, 0.08) 0px, transparent 50%),
       radial-gradient(at 50% 50%, rgba(15, 23, 42, 1) 0px, transparent 100%);
   }
+}
+
+/* Light Theme Overrides */
+html.light-mode body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(37, 99, 235, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, #f1f5f9 0px, transparent 100%) !important;
+}
+
+html.light-mode header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light-mode header .text-white {
+  color: #0f172a !important;
+}
+
+html.light-mode header .text-slate-300,
+html.light-mode header .text-slate-200 {
+  color: #334155 !important;
+}
+
+html.light-mode header .text-slate-400 {
+  color: #64748b !important;
+}
+
+html.light-mode header .bg-slate-900,
+html.light-mode header .bg-slate-950 {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light-mode header .bg-slate-800 {
+  background-color: #e2e8f0 !important;
 }
 
 /* Leaflet Map overrides for dark-themed sleek UI */
