@@ -17,13 +17,13 @@ html {
 }
 
 /* ==========================================================================
-   PAGE & SECTION ENTRANCE ANIMATIONS
+   PAGE & SECTION ENTRANCE ANIMATIONS (Smooth, Slow, Elegant)
    ========================================================================== */
 
 @keyframes pageEnter {
   0% {
     opacity: 0;
-    transform: translateY(16px) scale(0.99);
+    transform: translateY(20px) scale(0.99);
   }
   100% {
     opacity: 1;
@@ -32,14 +32,14 @@ html {
 }
 
 .animate-page-enter {
-  animation: pageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: pageEnter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: transform, opacity;
 }
 
 @keyframes sectionFadeInUp {
   0% {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(30px);
   }
   100% {
     opacity: 1;
@@ -48,14 +48,14 @@ html {
 }
 
 .animate-fade-in-up {
-  animation: sectionFadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: sectionFadeInUp 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: transform, opacity;
 }
 
 @keyframes sectionScaleIn {
   0% {
     opacity: 0;
-    transform: scale(0.96) translateY(12px);
+    transform: scale(0.95) translateY(20px);
   }
   100% {
     opacity: 1;
@@ -64,17 +64,45 @@ html {
 }
 
 .animate-scale-in {
-  animation: sectionScaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: sectionScaleIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: transform, opacity;
 }
 
-/* Stagger Animation Delays */
-.delay-100 { animation-delay: 100ms; }
-.delay-150 { animation-delay: 150ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-250 { animation-delay: 250ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
+/* ==========================================================================
+   SCROLL REVEAL ANIMATIONS (Slowly load into view as user scrolls down)
+   ========================================================================== */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1), transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-scale {
+  opacity: 0;
+  transform: scale(0.95) translateY(28px);
+  transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1), transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Stagger Animation & Transition Delays */
+.delay-100, .scroll-reveal.delay-100, .revealed.delay-100 { animation-delay: 120ms; transition-delay: 120ms; }
+.delay-150, .scroll-reveal.delay-150, .revealed.delay-150 { animation-delay: 180ms; transition-delay: 180ms; }
+.delay-200, .scroll-reveal.delay-200, .revealed.delay-200 { animation-delay: 240ms; transition-delay: 240ms; }
+.delay-250, .scroll-reveal.delay-250, .revealed.delay-250 { animation-delay: 300ms; transition-delay: 300ms; }
+.delay-300, .scroll-reveal.delay-300, .revealed.delay-300 { animation-delay: 360ms; transition-delay: 360ms; }
+.delay-400, .scroll-reveal.delay-400, .revealed.delay-400 { animation-delay: 480ms; transition-delay: 480ms; }
 
 /* Section Highlight / Focus Pulse Glow when navigated into */
 @keyframes sectionHighlightGlow {

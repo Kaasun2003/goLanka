@@ -12,6 +12,42 @@ import { translations } from './translations.js';
 const AnimatedContent = ({ t, currentLang }) => {
   const location = useLocation();
 
+  // Scroll-triggered Reveal Observer: slowly loads sections and categories as user scrolls down the page
+  useEffect(() => {
+    const observerCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      root: null,
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.08
+    });
+
+    const observeTargets = () => {
+      const targets = document.querySelectorAll('.scroll-reveal:not(.revealed), .scroll-reveal-scale:not(.revealed)');
+      targets.forEach((el) => observer.observe(el));
+    };
+
+    observeTargets();
+
+    // Re-check on dynamic updates (e.g. search results or tabs)
+    const mutationObserver = new MutationObserver(() => {
+      observeTargets();
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, [location.pathname]);
+
   useEffect(() => {
     // If a hash exists (e.g. #booking), smoothly scroll and highlight that section with animation
     if (location.hash) {
@@ -24,8 +60,8 @@ const AnimatedContent = ({ t, currentLang }) => {
           element.classList.add('section-highlight-active');
           setTimeout(() => {
             element.classList.remove('section-highlight-active');
-          }, 2000);
-        }, 150);
+          }, 2400);
+        }, 180);
       }
     } else {
       // Smoothly scroll to top on page navigation

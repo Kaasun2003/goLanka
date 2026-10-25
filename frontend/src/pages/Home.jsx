@@ -416,8 +416,8 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
       </section>
 
       {/* 2. THREE LARGE INTERACTIVE ACTION CARDS (Multilingual Dynamic) */}
-      <section id="services" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up delay-200">
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+      <section id="services" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2 scroll-reveal">
           <span className="text-xs font-black uppercase tracking-widest text-emerald-400">
             {t.coreServicesTag || 'ප්‍රධාන සේවාවන් / Core Services'}
           </span>
@@ -434,8 +434,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
           {/* Card 1: Live Bus Tracker */}
           <div
             onClick={() => navigate('/tracker')}
-            style={{ animationDelay: '100ms' }}
-            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-emerald-500/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98 animate-fade-in-up"
+            className="scroll-reveal-scale delay-100 group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-emerald-500/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98"
           >
             <div className="absolute top-0 right-0 w-36 h-36 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
 
@@ -484,8 +483,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
           {/* Card 2: Seat Booking Hub */}
           <div
             onClick={() => scrollToSection('booking')}
-            style={{ animationDelay: '200ms' }}
-            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-blue-500/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98 animate-fade-in-up"
+            className="scroll-reveal-scale delay-200 group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-blue-500/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98"
           >
             <div className="absolute top-0 right-0 w-36 h-36 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
 
@@ -538,8 +536,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
           {/* Card 3: Online Season Pass */}
           <div
             onClick={() => navigate('/season')}
-            style={{ animationDelay: '300ms' }}
-            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-amber-400/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-amber-400/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98 animate-fade-in-up"
+            className="scroll-reveal-scale delay-300 group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-amber-400/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-amber-400/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98"
           >
             <div className="absolute top-0 right-0 w-36 h-36 bg-amber-400/10 rounded-full blur-2xl group-hover:bg-amber-400/20 transition-all"></div>
 
@@ -589,9 +586,9 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
       </section>
 
       {/* 3. THREE-STEP SIMPLE TRANSIT GUIDE (Multilingual Dynamic) */}
-      <section id="guide" className="max-w-5xl mx-auto px-4 animate-fade-in-up delay-300">
+      <section id="guide" className="max-w-5xl mx-auto px-4 scroll-reveal">
         <div className="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-xl">
-          <div className="text-center max-w-xl mx-auto mb-8 space-y-1">
+          <div className="text-center max-w-xl mx-auto mb-8 space-y-1 scroll-reveal">
             <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest">
               {t.howItWorksTag || 'සරල පියවර 3යි / How It Works'}
             </span>
@@ -601,7 +598,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center sm:text-left">
-            <div className="p-4 bg-slate-950/60 rounded-2xl border border-slate-800 space-y-2">
+            <div className="p-4 bg-slate-950/60 rounded-2xl border border-slate-800 space-y-2 scroll-reveal delay-100">
               <span className="w-8 h-8 rounded-full bg-emerald-500 text-slate-950 font-black text-sm flex items-center justify-center mx-auto sm:mx-0">
                 1
               </span>
@@ -611,7 +608,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
               </p>
             </div>
 
-            <div className="p-4 bg-slate-950/60 rounded-2xl border border-slate-800 space-y-2">
+            <div className="p-4 bg-slate-950/60 rounded-2xl border border-slate-800 space-y-2 scroll-reveal delay-200">
               <span className="w-8 h-8 rounded-full bg-blue-500 text-white font-black text-sm flex items-center justify-center mx-auto sm:mx-0">
                 2
               </span>
@@ -621,7 +618,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
               </p>
             </div>
 
-            <div className="p-4 bg-slate-950/60 rounded-2xl border border-slate-800 space-y-2">
+            <div className="p-4 bg-slate-950/60 rounded-2xl border border-slate-800 space-y-2 scroll-reveal delay-300">
               <span className="w-8 h-8 rounded-full bg-amber-400 text-slate-950 font-black text-sm flex items-center justify-center mx-auto sm:mx-0">
                 3
               </span>
@@ -635,7 +632,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
       </section>
 
       {/* 4. INTEGRATED SEAT BOOKING HUB */}
-      <section id="booking-section" className="px-4 animate-fade-in-up delay-400">
+      <section id="booking-section" className="px-4 scroll-reveal">
         <SeatBookingHub t={t} currentLang={currentLang} />
       </section>
 

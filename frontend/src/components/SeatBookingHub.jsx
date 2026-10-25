@@ -73,7 +73,7 @@ const SeatBookingHub = ({ t = {}, currentLang = 'si' }) => {
   return (
     <div id="booking" className="w-full max-w-6xl mx-auto py-12 p-4 sm:p-8 rounded-3xl transition-all duration-500 border border-transparent">
       {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+      <div className="text-center max-w-3xl mx-auto mb-12 space-y-3 scroll-reveal">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-400/10 text-amber-400 border border-amber-400/30">
           <span>💺</span>
           <span>{getHeaderBadge()}</span>
@@ -88,64 +88,66 @@ const SeatBookingHub = ({ t = {}, currentLang = 'si' }) => {
 
       {/* Partner Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {partners.map((partner, index) => (
-          <div
-            key={partner.id}
-            style={{ animationDelay: `${index * 120}ms` }}
-            className="animate-fade-in-up bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-7 transition-all shadow-xl hover:shadow-2xl flex flex-col justify-between group hover:-translate-y-1.5 duration-300"
-          >
-            <div className="space-y-4">
-              <div className="flex items-start justify-between gap-3">
+        {partners.map((partner, index) => {
+          const delayClass = index === 0 ? 'delay-100' : index === 1 ? 'delay-200' : index === 2 ? 'delay-300' : 'delay-400';
+          return (
+            <div
+              key={partner.id}
+              className={`scroll-reveal-scale ${delayClass} bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-7 transition-all shadow-xl hover:shadow-2xl flex flex-col justify-between group hover:-translate-y-1.5 duration-300`}
+            >
+              <div className="space-y-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+                      {partner.name}
+                    </h3>
+                    <p className="text-xs font-medium text-slate-400 mt-0.5">
+                      {partner.nameLocal}
+                    </p>
+                  </div>
+                  <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${partner.badgeColor}`}>
+                    {partner.badge}
+                  </span>
+                </div>
+
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  {partner.description}
+                </p>
+
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
-                    {partner.name}
-                  </h3>
-                  <p className="text-xs font-medium text-slate-400 mt-0.5">
-                    {partner.nameLocal}
-                  </p>
-                </div>
-                <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${partner.badgeColor}`}>
-                  {partner.badge}
-                </span>
-              </div>
-
-              <p className="text-sm text-slate-300 leading-relaxed">
-                {partner.description}
-              </p>
-
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
-                  Key Express Routes:
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {partner.popularRoutes.map((route, i) => (
-                    <span
-                      key={i}
-                      className="text-xs bg-slate-950 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-800 font-medium"
-                    >
-                      {route}
-                    </span>
-                  ))}
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                    Key Express Routes:
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {partner.popularRoutes.map((route, i) => (
+                      <span
+                        key={i}
+                        className="text-xs bg-slate-950 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-800 font-medium"
+                      >
+                        {route}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-6 pt-5 border-t border-slate-800/80">
-              <a
-                href={partner.linkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-slate-200 text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-md group-hover:bg-amber-400 group-hover:text-slate-950"
-              >
-                <span>{partner.buttonText}</span>
-              </a>
+              <div className="mt-6 pt-5 border-t border-slate-800/80">
+                <a
+                  href={partner.linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-slate-200 text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-md group-hover:bg-amber-400 group-hover:text-slate-950 active:scale-95"
+                >
+                  <span>{partner.buttonText}</span>
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Advisory Notice */}
-      <div className="mt-8 bg-slate-900/50 border border-slate-800/80 rounded-xl p-4 sm:p-5 flex items-start gap-4 text-xs text-slate-400">
+      <div className="mt-8 bg-slate-900/50 border border-slate-800/80 rounded-xl p-4 sm:p-5 flex items-start gap-4 text-xs text-slate-400 scroll-reveal delay-200">
         <span className="text-xl">ℹ️</span>
         <div>
           <strong className="text-slate-200 block mb-0.5">Sri Lanka Transit Advisory for Long-Distance Commuters:</strong>
