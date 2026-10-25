@@ -164,18 +164,17 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
 
   return (
     <div className="space-y-16 sm:space-y-20 pb-16">
-      
       {/* 1. SPLIT HERO SECTION: Left (Hero text) & Right (Search Box & Results) */}
-      <section className="relative pt-6 sm:pt-10 pb-6 px-3 sm:px-6 lg:px-8 xl:px-12 overflow-hidden animate-fade-in-up">
+      <section className="relative pt-6 sm:pt-10 pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
         {/* Subtle background ambient lights */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[400px] bg-emerald-500/10 blur-[130px] pointer-events-none rounded-full"></div>
-        <div className="absolute top-1/3 right-1/4 w-[500px] h-[400px] bg-blue-500/10 blur-[130px] pointer-events-none rounded-full"></div>
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[350px] bg-emerald-500/10 blur-[130px] pointer-events-none rounded-full"></div>
+        <div className="absolute top-1/3 right-1/4 w-[450px] h-[350px] bg-blue-500/10 blur-[130px] pointer-events-none rounded-full"></div>
 
-        <div className="w-full max-w-[1700px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-start lg:items-center">
             
             {/* LEFT COLUMN (1st Image Content): Hero Badge, Large Title, Subtitle & Key Badges */}
-            <div className="lg:col-span-5 space-y-6 text-left animate-fade-in-up delay-100">
+            <div className="lg:col-span-5 space-y-6 text-left animate-fade-in-up delay-100 min-w-0 w-full">
               
               {/* Active Network Pill Badge */}
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-emerald-500/30 text-xs sm:text-sm font-bold text-slate-200 shadow-md">
@@ -187,7 +186,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
 
               {/* Large Catchy Heading */}
               <div className="space-y-3">
-                <h1 className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-black text-white tracking-tight leading-[1.15]">
+                <h1 className="text-3xl sm:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-black text-white tracking-tight leading-[1.15]">
                   {t.heroTitlePart1 || 'ශ්‍රී ලංකාවේ ඕනෑම බස් රථයක්'} <br className="hidden sm:block" />
                   <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
                     {t.heroTitlePart2 || 'පහසුවෙන්ම සොයාගන්න'}
@@ -195,56 +194,56 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                 </h1>
                 
                 {/* Multilingual Subtitle */}
-                <p className="text-base sm:text-lg xl:text-xl text-slate-300 font-medium leading-relaxed">
+                <p className="text-sm sm:text-base xl:text-lg text-slate-300 font-medium leading-relaxed">
                   {t.heroSubtitle || 'Find schedules, track real-time bus locations with live GPS, and manage digital season passes effortlessly.'}
                 </p>
               </div>
 
               {/* 4 Feature Badges (Island-wide, Real-Time GPS, Fleets, Digital QR) */}
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors min-w-0">
                   <span className="text-2xl flex-shrink-0">🗺️</span>
-                  <div>
-                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  <div className="min-w-0">
+                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
                       {currentLang === 'en' ? 'Island-wide' : currentLang === 'ta' ? 'நாடு தழுவிய' : 'දිවයින පුරා'}
                     </span>
-                    <span className="text-xs sm:text-sm font-black text-white">
+                    <span className="text-xs sm:text-sm font-black text-white truncate block">
                       {currentLang === 'en' ? 'All 9 Provinces' : currentLang === 'ta' ? '9 மாகாணங்கள்' : 'පළාත් 9ම'}
                     </span>
                   </div>
                 </div>
 
-                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors min-w-0">
                   <span className="text-2xl flex-shrink-0">⚡</span>
-                  <div>
-                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      {currentLang === 'en' ? 'Telemetry' : currentLang === 'ta' ? 'நேරலை ஜிபிஎஸ்' : 'සජීවී දත්ත'}
+                  <div className="min-w-0">
+                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
+                      {currentLang === 'en' ? 'Telemetry' : currentLang === 'ta' ? 'நேரலை ஜிபிஎஸ்' : 'සජීවී දත්ත'}
                     </span>
-                    <span className="text-xs sm:text-sm font-black text-emerald-400">
+                    <span className="text-xs sm:text-sm font-black text-emerald-400 truncate block">
                       Real-Time GPS
                     </span>
                   </div>
                 </div>
 
-                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors min-w-0">
                   <span className="text-2xl flex-shrink-0">🚌</span>
-                  <div>
-                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                      {currentLang === 'en' ? 'Bus Network' : currentLang === 'ta' ? 'பேருந்து நெட்වொர்க்' : 'බස් ජාලය'}
+                  <div className="min-w-0">
+                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
+                      {currentLang === 'en' ? 'Bus Network' : currentLang === 'ta' ? 'பேருந்து நெட்வொர்க்' : 'බස් ජාලය'}
                     </span>
-                    <span className="text-xs sm:text-sm font-black text-white">
+                    <span className="text-xs sm:text-sm font-black text-white truncate block">
                       SLTB & Private
                     </span>
                   </div>
                 </div>
 
-                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors">
+                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors min-w-0">
                   <span className="text-2xl flex-shrink-0">📱</span>
-                  <div>
-                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  <div className="min-w-0">
+                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
                       {currentLang === 'en' ? 'Digital Pass' : currentLang === 'ta' ? 'டிஜிட்டல் பாஸ்' : 'ඩිජිටල් පාස්'}
                     </span>
-                    <span className="text-xs sm:text-sm font-black text-amber-300">
+                    <span className="text-xs sm:text-sm font-black text-amber-300 truncate block">
                       100% Phone QR
                     </span>
                   </div>
@@ -253,14 +252,14 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
             </div>
 
             {/* RIGHT COLUMN (2nd Image Content): PickMe/Uber Style Smart Search Card & Popular Routes */}
-            <div className="lg:col-span-7">
-              <div className="bg-slate-900/95 backdrop-blur-2xl border-2 border-slate-700/80 rounded-3xl p-5 sm:p-7 shadow-2xl relative text-left animate-scale-in delay-150">
+            <div className="lg:col-span-7 min-w-0 w-full">
+              <div className="bg-slate-900/95 backdrop-blur-2xl border-2 border-slate-700/80 rounded-3xl p-5 sm:p-7 shadow-2xl relative text-left animate-scale-in delay-150 min-w-0">
                 
                 <form onSubmit={handleSearch} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+                  <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
                     
                     {/* Origin Input (From) */}
-                    <div className="md:col-span-5 relative">
+                    <div className="sm:col-span-5 relative min-w-0">
                       <label className="block text-xs font-bold uppercase tracking-wider text-emerald-400 mb-1.5 flex items-center gap-1.5">
                         <span>🟢</span> {t.searchFromLabel || 'කොහෙන්ද? (From / Starting Stop)'}
                       </label>
@@ -277,7 +276,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                     </div>
 
                     {/* Swap Button (1-Click Reverse) */}
-                    <div className="md:col-span-2 flex justify-center pt-1 md:pt-6">
+                    <div className="sm:col-span-2 flex justify-center pt-1 sm:pt-6">
                       <button
                         type="button"
                         onClick={handleSwap}
@@ -292,7 +291,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                     </div>
 
                     {/* Destination Input (To) */}
-                    <div className="md:col-span-5 relative">
+                    <div className="sm:col-span-5 relative min-w-0">
                       <label className="block text-xs font-bold uppercase tracking-wider text-blue-400 mb-1.5 flex items-center gap-1.5">
                         <span>🔴</span> {t.searchToLabel || 'කොහෙටද? (To / Destination)'}
                       </label>
@@ -310,10 +309,10 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                   </div>
 
                   {/* Preset Quick Chips & Search Button */}
-                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="pt-2 flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-3">
                     
                     {/* Preset Quick Chips */}
-                    <div className="flex flex-wrap items-center gap-1.5 text-xs w-full sm:w-auto">
+                    <div className="flex flex-wrap items-center gap-1.5 text-xs w-full">
                       <span className="text-slate-400 font-semibold mr-1">
                         {t.frequentStops || 'නිතර යන තැන්:'}
                       </span>
@@ -335,10 +334,10 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                     {/* Search Action CTA Button */}
                     <button
                       type="submit"
-                      className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 hover:from-emerald-400 hover:to-blue-500 text-slate-950 font-black text-sm sm:text-base tracking-wide shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer whitespace-nowrap"
+                      className="w-full xl:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 hover:from-emerald-400 hover:to-blue-500 text-slate-950 font-black text-sm sm:text-base tracking-wide shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 active:scale-95 cursor-pointer whitespace-nowrap flex-shrink-0"
                     >
                       <span>🔍</span>
-                      <span>{t.searchBtn || 'බස් සොයන්න'} / Search Buses</span>
+                      <span>{t.searchBtn || 'බස් සොයන්න'}</span>
                     </button>
                   </div>
                 </form>
@@ -355,7 +354,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3">
                       {searchResults.map((route, idx) => (
                         <div
                           key={route.routeNumber}
@@ -632,7 +631,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
       </section>
 
       {/* 4. INTEGRATED SEAT BOOKING HUB */}
-      <section id="booking-section" className="px-4 scroll-reveal">
+      <section id="booking-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-reveal">
         <SeatBookingHub t={t} currentLang={currentLang} />
       </section>
 

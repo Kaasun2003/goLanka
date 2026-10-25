@@ -90,7 +90,7 @@ const ProfilePage = ({ t, currentLang = 'si' }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-8 sm:py-12 px-4 sm:px-6 lg:px-8 xl:px-12 space-y-10">
+    <div className="min-h-screen bg-slate-950 text-slate-100 py-8 sm:py-12 px-4 sm:px-6 lg:px-8 space-y-10">
       
       {/* Top Banner / Breadcrumb */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6 animate-fade-in">
@@ -135,10 +135,10 @@ const ProfilePage = ({ t, currentLang = 'si' }) => {
       </div>
 
       {/* Main Grid: Details Card & Active Season Pass Card */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 min-w-0">
         
         {/* LEFT COLUMN: User Details Card (4 cols) */}
-        <div className="lg:col-span-4 space-y-6">
+        <div className="lg:col-span-4 space-y-6 min-w-0">
           <div className="bg-slate-900/90 border-2 border-slate-800 rounded-3xl p-6 sm:p-7 shadow-2xl relative overflow-hidden animate-scale-in">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
 
@@ -232,7 +232,7 @@ const ProfilePage = ({ t, currentLang = 'si' }) => {
         </div>
 
         {/* RIGHT COLUMN: Active Digital Season Pass & Quick Renew (8 cols) */}
-        <div className="lg:col-span-8 space-y-6">
+        <div className="lg:col-span-8 space-y-6 min-w-0">
           
           {/* Renewal Status Notice Banner */}
           {renewNotice && (

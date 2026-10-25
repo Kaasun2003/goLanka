@@ -67,15 +67,15 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
   };
 
   const getLoginButtonLabel = () => {
-    if (currentLang === 'en') return 'Login / Sign Up';
+    if (currentLang === 'en') return 'Login';
     if (currentLang === 'ta') return 'உள்நுழைக';
-    return '👤 ගිණුම / Login';
+    return 'ගිණුම / Login';
   };
 
   const navLinks = [
     { to: '/', label: t.home || 'Home', icon: '🏠', localHint: 'මුල් පිටුව' },
-    { to: '/tracker', label: t.liveTracker || 'Live Bus Tracker', icon: '🛰️', localHint: 'සජීවී සිතියම', isLive: true },
-    { to: '/season', label: t.seasonPass || 'Digital Season Pass', icon: '🎫', localHint: 'සීසන් පාස්' },
+    { to: '/tracker', label: t.liveTracker || 'Live Radar', icon: '🛰️', localHint: 'සජීවී සිතියම', isLive: true },
+    { to: '/season', label: t.seasonPass || 'Season Pass', icon: '🎫', localHint: 'සීසන් පාස්' },
     { to: '/booking', label: getSeatBookingLabel(), icon: '💺', localHint: 'ආසන වෙන්කිරීම', isNew: true }
   ];
 
@@ -122,12 +122,13 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
     <>
       {/* Clean Full-Width Sticky Top Navigation Bar */}
       <header className="sticky top-0 z-50 w-full backdrop-blur-2xl bg-slate-950/95 border-b border-slate-800/90 shadow-2xl transition-all">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="flex items-center justify-between h-20 sm:h-22 gap-4 xl:gap-6">
+        {/* Maximum Width Constraint matching all other pages (max-w-7xl) */}
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20 gap-2 sm:gap-4">
             
             {/* 1. LEFT ZONE: Logo & Brand Title */}
-            <Link to="/" className="flex items-center gap-3.5 group flex-shrink-0">
-              <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5 flex-shrink-0">
+            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5 flex-shrink-0">
                 <img
                   src="/logo.jpg"
                   alt="goLanka Logo"
@@ -144,32 +145,32 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                   <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors">
                     go<span className="text-emerald-400">Lanka</span>
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full shadow-sm">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     🇱🇰 Transit
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 font-medium tracking-wide">
+                <p className="text-[11px] text-slate-400 font-medium tracking-wide hidden 2xl:block">
                   ශ්‍රී ලංකා ඩිජිටල් බස් ප්‍රවාහන ජාලය
                 </p>
               </div>
             </Link>
 
-            {/* 2. CENTER ZONE: Single-Line Navigation Tabs */}
-            <nav className="hidden lg:flex items-center gap-2 xl:gap-3 2xl:gap-4 flex-shrink-0 flex-nowrap">
+            {/* 2. CENTER ZONE: Single-Line Navigation Tabs (xl:flex = 1280px+) */}
+            <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-3 flex-shrink-0">
               {navLinks.map((link) => {
                 const active = isActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`group relative px-4 xl:px-5 py-2.5 rounded-2xl text-sm xl:text-[15px] font-bold transition-all duration-200 flex items-center gap-2.5 whitespace-nowrap flex-shrink-0 flex-nowrap active:scale-95 ${
+                    className={`group relative px-3 2xl:px-4 py-2.5 rounded-2xl text-xs 2xl:text-sm font-bold transition-all duration-200 flex items-center gap-2 whitespace-nowrap flex-shrink-0 active:scale-95 ${
                       active
                         ? 'text-emerald-300 bg-slate-900 border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/15'
                         : 'text-slate-300 hover:text-white hover:bg-slate-900/80 border-2 border-transparent'
                     }`}
                   >
-                    <span className="text-lg xl:text-xl transition-transform group-hover:scale-110 flex-shrink-0">
+                    <span className="text-base 2xl:text-lg transition-transform group-hover:scale-110 flex-shrink-0">
                       {link.icon}
                     </span>
                     <span className="tracking-wide whitespace-nowrap leading-none select-none">
@@ -177,14 +178,14 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                     </span>
                     
                     {link.isLive && (
-                      <span className="flex h-2.5 w-2.5 relative ml-0.5 flex-shrink-0">
+                      <span className="flex h-2 w-2 relative ml-0.5 flex-shrink-0">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-sm"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-sm"></span>
                       </span>
                     )}
 
                     {link.isNew && (
-                      <span className="text-[10px] uppercase font-black bg-blue-500/20 text-blue-300 border border-blue-500/40 px-2 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap shadow-sm">
+                      <span className="text-[9px] uppercase font-black bg-blue-500/20 text-blue-300 border border-blue-500/40 px-1.5 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap shadow-sm">
                         NEW
                       </span>
                     )}
@@ -197,8 +198,8 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               })}
             </nav>
 
-            {/* 3. RIGHT ZONE: Login/Profile, QR Button, Bell, Theme, Language & Hotline */}
-            <div className="hidden lg:flex items-center gap-3 xl:gap-3.5 flex-shrink-0 flex-nowrap">
+            {/* 3. RIGHT ZONE: Login/Profile, QR Button, Bell, Theme & Language (xl:flex = 1280px+) */}
+            <div className="hidden xl:flex items-center gap-2 2xl:gap-3 flex-shrink-0">
               
               {/* AUTHENTICATION / USER PROFILE DROPDOWN */}
               {isAuthenticated && user ? (
@@ -206,13 +207,13 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                   <button
                     type="button"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-slate-900 border-2 border-emerald-500/50 hover:border-emerald-400 text-white shadow-lg shadow-emerald-500/10 transition-all cursor-pointer active:scale-95"
+                    className="flex items-center gap-2 px-3 py-2 rounded-2xl bg-slate-900 border-2 border-emerald-500/50 hover:border-emerald-400 text-white shadow-lg shadow-emerald-500/10 transition-all cursor-pointer active:scale-95"
                     title="User Profile & Account Options"
                   >
-                    <span className="w-8 h-8 rounded-xl bg-slate-950 border border-emerald-400/50 flex items-center justify-center text-lg flex-shrink-0">
+                    <span className="w-7 h-7 rounded-xl bg-slate-950 border border-emerald-400/50 flex items-center justify-center text-base flex-shrink-0">
                       {user.avatar || '👤'}
                     </span>
-                    <div className="text-left hidden xl:block max-w-[130px]">
+                    <div className="text-left hidden 2xl:block max-w-[110px]">
                       <p className="text-xs font-black text-white truncate leading-tight">
                         {user.fullName?.split(' ')[0] || 'Commuter'}
                       </p>
@@ -296,8 +297,8 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 <button
                   type="button"
                   onClick={() => openAuthModal('phone')}
-                  className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-500/25 border border-emerald-300/40 flex items-center gap-2 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
-                  title="Login or Create Account (ගිණුමට පිවිසෙන්න)"
+                  className="px-3.5 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs 2xl:text-sm tracking-wide shadow-lg shadow-emerald-500/25 border border-emerald-300/40 flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
+                  title="Login or Create Account"
                 >
                   <span className="text-base flex-shrink-0">👤</span>
                   <span className="whitespace-nowrap font-black">{getLoginButtonLabel()}</span>
@@ -308,8 +309,8 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               <button
                 type="button"
                 onClick={() => setQrModalOpen(true)}
-                className="px-3.5 py-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-300 font-bold text-xs sm:text-sm tracking-wide shadow-sm flex items-center gap-2 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
-                title="Open My Digital QR Pass (මගේ QR පාස් එක)"
+                className="px-3 py-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
+                title="Open My Digital QR Pass"
               >
                 <span className="text-base flex-shrink-0">📱</span>
                 <span className="whitespace-nowrap font-bold">{getQrPassLabel()}</span>
@@ -320,15 +321,14 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 <button
                   type="button"
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0 cursor-pointer active:scale-90"
-                  title="Live Transit Alerts (සජීවී නිවේදන)"
+                  className="p-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0 cursor-pointer active:scale-90"
+                  title="Live Transit Alerts"
                   aria-label="View Transit Notifications"
                 >
-                  <span className="text-xl">🔔</span>
-                  {/* Active pulsing badge dot */}
-                  <span className="absolute top-2.5 right-2.5 flex h-2.5 w-2.5">
+                  <span className="text-lg">🔔</span>
+                  <span className="absolute top-2 right-2 flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
                   </span>
                 </button>
 
@@ -376,21 +376,21 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group flex-shrink-0 cursor-pointer active:scale-90"
+                className="p-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group flex-shrink-0 cursor-pointer active:scale-90"
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
               >
                 <div className="transform transition-transform duration-500 ease-in-out group-hover:rotate-180">
                   {isLightMode ? (
-                    <span className="text-xl">🌙</span>
+                    <span className="text-lg">🌙</span>
                   ) : (
-                    <span className="text-xl text-amber-300">☀️</span>
+                    <span className="text-lg text-amber-300">☀️</span>
                   )}
                 </div>
               </button>
 
               {/* Trilingual Language Switcher Toggle */}
-              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1.5 shadow-inner flex-shrink-0 whitespace-nowrap">
+              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
                 {languages.map((lang) => {
                   const isSelected = currentLang === lang.code;
                   return (
@@ -398,7 +398,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-3 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
+                      className={`px-2.5 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                         isSelected
                           ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
                           : 'text-slate-400 hover:text-white hover:bg-slate-800'
@@ -410,25 +410,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                   );
                 })}
               </div>
-
-              {/* 24/7 SLTB Line */}
-              <div className="pl-3 xl:pl-4 border-l border-slate-800 text-right flex-shrink-0 whitespace-nowrap hidden 2xl:block">
-                <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">
-                  24/7 SLTB Line
-                </span>
-                <a
-                  href="tel:1955"
-                  className="text-sm xl:text-base font-mono font-black text-amber-400 hover:text-amber-300 flex items-center gap-1 justify-end transition-colors whitespace-nowrap"
-                  title="Call SLTB Passenger Helpline"
-                >
-                  <span>📞</span>
-                  <span>1955</span>
-                </a>
-              </div>
             </div>
 
-            {/* Mobile Controls (Liquid Glass Buttons for mobile) */}
-            <div className="flex lg:hidden items-center gap-2">
+            {/* 4. MOBILE & TABLET CONTROLS (< 1280px / xl:hidden) */}
+            <div className="flex xl:hidden items-center gap-2">
               
               {/* Account / Login button on mobile */}
               {isAuthenticated && user ? (
@@ -483,9 +468,9 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
             </div>
           </div>
 
-          {/* 4. MOBILE HAMBURGER MENU DRAWER */}
+          {/* 5. MOBILE & TABLET HAMBURGER MENU DRAWER */}
           {mobileMenuOpen && (
-            <div className="lg:hidden mt-3 pt-4 border-t border-white/10 space-y-3 animate-fadeIn pb-3">
+            <div className="xl:hidden mt-3 pt-4 border-t border-white/10 space-y-3 animate-fadeIn pb-3">
               
               {/* User Account Tile in Mobile Drawer */}
               {isAuthenticated && user ? (
@@ -598,7 +583,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
         </div>
       </header>
 
-      {/* 5. QUICK MY QR PASS POPUP MODAL */}
+      {/* 6. QUICK MY QR PASS POPUP MODAL */}
       {qrModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xl animate-fadeIn">
           <div className="liquid-glass-container rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative space-y-5 text-center border-white/20">

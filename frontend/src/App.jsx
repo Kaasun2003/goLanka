@@ -113,9 +113,9 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="flex flex-col min-h-screen bg-slate-950 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 font-sans transition-colors duration-300">
+        <div className="flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-slate-950 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 font-sans transition-colors duration-300">
           <Navbar currentLang={currentLang} setLanguage={handleLanguageChange} t={t} />
-          <main className="flex-grow">
+          <main className="flex-grow w-full max-w-[100vw] overflow-x-hidden">
             <AnimatedContent t={t} currentLang={currentLang} />
           </main>
           <Footer t={t} currentLang={currentLang} />
