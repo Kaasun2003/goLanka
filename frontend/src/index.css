@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   body {
     @apply bg-slate-950 text-slate-100 min-h-screen font-sans transition-colors duration-300;
@@ -10,6 +14,100 @@
       radial-gradient(at 100% 100%, rgba(255, 190, 41, 0.08) 0px, transparent 50%),
       radial-gradient(at 50% 50%, rgba(15, 23, 42, 1) 0px, transparent 100%);
   }
+}
+
+/* ==========================================================================
+   PAGE & SECTION ENTRANCE ANIMATIONS
+   ========================================================================== */
+
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-page-enter {
+  animation: pageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+@keyframes sectionFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: sectionFadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+@keyframes sectionScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-scale-in {
+  animation: sectionScaleIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+/* Stagger Animation Delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-250 { animation-delay: 250ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+
+/* Section Highlight / Focus Pulse Glow when navigated into */
+@keyframes sectionHighlightGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    transform: scale(1);
+  }
+  30% {
+    box-shadow: 0 0 35px 8px rgba(16, 185, 129, 0.4);
+    transform: scale(1.008);
+  }
+  70% {
+    box-shadow: 0 0 25px 4px rgba(16, 185, 129, 0.2);
+    transform: scale(1.003);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    transform: scale(1);
+  }
+}
+
+.section-highlight-active {
+  animation: sectionHighlightGlow 2s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  border-color: rgba(16, 185, 129, 0.8) !important;
+  background-color: rgba(15, 23, 42, 0.95) !important;
+}
+
+/* Button Micro-Interaction Active Scale */
+.btn-press {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-press:active {
+  transform: scale(0.96);
 }
 
 /* Light Theme Overrides */

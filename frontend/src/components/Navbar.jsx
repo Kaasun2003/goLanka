@@ -142,7 +142,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`group relative px-4 xl:px-5 py-2.5 rounded-2xl text-sm xl:text-[15px] font-bold transition-all duration-200 flex items-center gap-2.5 whitespace-nowrap flex-shrink-0 flex-nowrap ${
+                    className={`group relative px-4 xl:px-5 py-2.5 rounded-2xl text-sm xl:text-[15px] font-bold transition-all duration-200 flex items-center gap-2.5 whitespace-nowrap flex-shrink-0 flex-nowrap active:scale-95 ${
                       active
                         ? 'text-emerald-300 bg-slate-900 border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/15'
                         : 'text-slate-300 hover:text-white hover:bg-slate-900/80 border-2 border-transparent'
@@ -195,7 +195,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 <button
                   type="button"
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0 cursor-pointer"
+                  className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0 cursor-pointer active:scale-90"
                   title="Live Transit Alerts (සජීවී නිවේදන)"
                   aria-label="View Transit Notifications"
                 >
@@ -209,7 +209,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
 
                 {/* Live Transit Alerts Dropdown Popup */}
                 {notificationsOpen && (
-                  <div className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-slate-900 border-2 border-slate-700/80 rounded-3xl p-5 shadow-2xl z-50 animate-fadeIn space-y-3">
+                  <div className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-slate-900 border-2 border-slate-700/80 rounded-3xl p-5 shadow-2xl z-50 animate-scale-in space-y-3">
                     <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                       <div className="flex items-center gap-2">
                         <span className="text-lg">📢</span>
@@ -251,7 +251,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group flex-shrink-0 cursor-pointer"
+                className="p-3 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group flex-shrink-0 cursor-pointer active:scale-90"
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
               >
@@ -273,7 +273,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                      className={`px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                         isSelected
                           ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
                           : 'text-slate-400 hover:text-white hover:bg-slate-800'

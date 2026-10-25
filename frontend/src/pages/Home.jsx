@@ -119,6 +119,20 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
     setToQuery(temp);
   };
 
+  // Smooth scroll to an in-page section and trigger highlight animation
+  const scrollToSection = (sectionId) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.classList.remove('section-highlight-active');
+      void el.offsetWidth; // trigger reflow
+      el.classList.add('section-highlight-active');
+      setTimeout(() => {
+        el.classList.remove('section-highlight-active');
+      }, 2200);
+    }
+  };
+
   // Filter routes based on PickMe/Uber style search
   const handleSearch = (e) => {
     if (e) e.preventDefault();
@@ -152,7 +166,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
     <div className="space-y-16 sm:space-y-20 pb-16">
       
       {/* 1. SPLIT HERO SECTION: Left (Hero text) & Right (Search Box & Results) */}
-      <section className="relative pt-6 sm:pt-10 pb-6 px-3 sm:px-6 lg:px-8 xl:px-12 overflow-hidden">
+      <section className="relative pt-6 sm:pt-10 pb-6 px-3 sm:px-6 lg:px-8 xl:px-12 overflow-hidden animate-fade-in-up">
         {/* Subtle background ambient lights */}
         <div className="absolute top-1/4 left-1/4 w-[600px] h-[400px] bg-emerald-500/10 blur-[130px] pointer-events-none rounded-full"></div>
         <div className="absolute top-1/3 right-1/4 w-[500px] h-[400px] bg-blue-500/10 blur-[130px] pointer-events-none rounded-full"></div>
@@ -161,7 +175,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
             
             {/* LEFT COLUMN (1st Image Content): Hero Badge, Large Title, Subtitle & Key Badges */}
-            <div className="lg:col-span-5 space-y-6 text-left">
+            <div className="lg:col-span-5 space-y-6 text-left animate-fade-in-up delay-100">
               
               {/* Active Network Pill Badge */}
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-emerald-500/30 text-xs sm:text-sm font-bold text-slate-200 shadow-md">
@@ -240,7 +254,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
 
             {/* RIGHT COLUMN (2nd Image Content): PickMe/Uber Style Smart Search Card & Popular Routes */}
             <div className="lg:col-span-7">
-              <div className="bg-slate-900/95 backdrop-blur-2xl border-2 border-slate-700/80 rounded-3xl p-5 sm:p-7 shadow-2xl relative text-left">
+              <div className="bg-slate-900/95 backdrop-blur-2xl border-2 border-slate-700/80 rounded-3xl p-5 sm:p-7 shadow-2xl relative text-left animate-scale-in delay-150">
                 
                 <form onSubmit={handleSearch} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
@@ -267,7 +281,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                       <button
                         type="button"
                         onClick={handleSwap}
-                        className="p-3.5 rounded-2xl bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-300 border border-slate-700/80 transition-all shadow-md group focus:outline-none cursor-pointer flex items-center justify-center"
+                        className="p-3.5 rounded-2xl bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-300 border border-slate-700/80 transition-all shadow-md group focus:outline-none cursor-pointer flex items-center justify-center active:scale-90"
                         title={currentLang === 'en' ? 'Swap Origin and Destination' : currentLang === 'ta' ? 'மாற்றுக' : 'මාරු කරන්න'}
                         aria-label="Swap locations"
                       >
@@ -311,7 +325,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                             if (!fromQuery) setFromQuery(stop.value);
                             else setToQuery(stop.value);
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700/80 font-medium transition-all cursor-pointer text-xs shadow-sm"
+                          className="px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700/80 font-medium transition-all cursor-pointer text-xs shadow-sm active:scale-95"
                         >
                           {stop.name}
                         </button>
@@ -329,9 +343,9 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                   </div>
                 </form>
 
-                {/* SEARCH RESULTS / POPULAR BUS CORRIDORS (As shown in 2nd image) */}
+                {/* SEARCH RESULTS / POPULAR BUS CORRIDORS (Smooth animated list) */}
                 {searchResults.length > 0 && (
-                  <div className="mt-6 pt-5 border-t border-white/10 space-y-3">
+                  <div key={hasSearched ? `${fromQuery}-${toQuery}` : 'popular-routes'} className="mt-6 pt-5 border-t border-white/10 space-y-3 animate-fade-in-up">
                     <div className="flex justify-between items-center text-xs text-slate-400">
                       <span className="font-bold text-slate-200">
                         {t.routesFound || 'හමු වූ බස් මාර්ග'} ({searchResults.length})
@@ -342,10 +356,11 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {searchResults.map((route) => (
+                      {searchResults.map((route, idx) => (
                         <div
                           key={route.routeNumber}
-                          className="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80 hover:border-emerald-500/50 transition-all flex flex-col justify-between space-y-3 shadow-md"
+                          style={{ animationDelay: `${idx * 70}ms` }}
+                          className="animate-fade-in-up bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80 hover:border-emerald-500/50 transition-all flex flex-col justify-between space-y-3 shadow-md hover:-translate-y-1 duration-200"
                         >
                           <div>
                             <div className="flex items-center justify-between gap-2 mb-1.5">
@@ -371,7 +386,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
                             <button
                               type="button"
                               onClick={() => navigate(`/tracker?route=${route.routeNumber}`)}
-                              className="px-3.5 py-1.5 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                              className="px-3.5 py-1.5 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
                             >
                               <span>🛰️</span> {t.viewLive || 'සජීවීව බලන්න'}
                             </button>
@@ -401,7 +416,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
       </section>
 
       {/* 2. THREE LARGE INTERACTIVE ACTION CARDS (Multilingual Dynamic) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="services" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up delay-200">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
           <span className="text-xs font-black uppercase tracking-widest text-emerald-400">
             {t.coreServicesTag || 'ප්‍රධාන සේවාවන් / Core Services'}
@@ -419,7 +434,8 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
           {/* Card 1: Live Bus Tracker */}
           <div
             onClick={() => navigate('/tracker')}
-            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-emerald-500/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 cursor-pointer flex flex-col justify-between overflow-hidden"
+            style={{ animationDelay: '100ms' }}
+            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-emerald-500/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98 animate-fade-in-up"
           >
             <div className="absolute top-0 right-0 w-36 h-36 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
 
@@ -453,7 +469,11 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
             <div className="mt-8 pt-5 border-t border-slate-800/80">
               <button
                 type="button"
-                className="w-full py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm transition-all shadow-md flex items-center justify-center gap-2 group-hover:shadow-emerald-500/20"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate('/tracker');
+                }}
+                className="w-full py-3.5 px-5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm transition-all shadow-md flex items-center justify-center gap-2 group-hover:shadow-emerald-500/20 active:scale-95"
               >
                 <span>{t.cardTrackerBtn || 'සජීවී සිතියම බලන්න'}</span>
                 <span>➔</span>
@@ -463,11 +483,9 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
 
           {/* Card 2: Seat Booking Hub */}
           <div
-            onClick={() => {
-              const el = document.getElementById('booking');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-blue-500/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 cursor-pointer flex flex-col justify-between overflow-hidden"
+            onClick={() => scrollToSection('booking')}
+            style={{ animationDelay: '200ms' }}
+            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-blue-500/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-blue-500/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98 animate-fade-in-up"
           >
             <div className="absolute top-0 right-0 w-36 h-36 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
 
@@ -505,7 +523,11 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
             <div className="mt-8 pt-5 border-t border-slate-800/80">
               <button
                 type="button"
-                className="w-full py-3.5 px-5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-black text-sm transition-all shadow-md flex items-center justify-center gap-2 group-hover:shadow-blue-500/20"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  scrollToSection('booking');
+                }}
+                className="w-full py-3.5 px-5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-black text-sm transition-all shadow-md flex items-center justify-center gap-2 group-hover:shadow-blue-500/20 active:scale-95"
               >
                 <span>{t.cardBookingBtn || 'ආසන වෙන්කිරීම් වෙත'}</span>
                 <span>➔</span>
@@ -516,7 +538,8 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
           {/* Card 3: Online Season Pass */}
           <div
             onClick={() => navigate('/season')}
-            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-amber-400/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-amber-400/10 cursor-pointer flex flex-col justify-between overflow-hidden"
+            style={{ animationDelay: '300ms' }}
+            className="group relative bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-slate-800 hover:border-amber-400/80 rounded-3xl p-7 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-amber-400/10 cursor-pointer flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 active:scale-98 animate-fade-in-up"
           >
             <div className="absolute top-0 right-0 w-36 h-36 bg-amber-400/10 rounded-full blur-2xl group-hover:bg-amber-400/20 transition-all"></div>
 
@@ -550,7 +573,11 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
             <div className="mt-8 pt-5 border-t border-slate-800/80">
               <button
                 type="button"
-                className="w-full py-3.5 px-5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm transition-all shadow-md flex items-center justify-center gap-2 group-hover:shadow-amber-400/20"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate('/season');
+                }}
+                className="w-full py-3.5 px-5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm transition-all shadow-md flex items-center justify-center gap-2 group-hover:shadow-amber-400/20 active:scale-95"
               >
                 <span>{t.cardSeasonBtn || 'සීසන් පාස් අයදුම් කරන්න'}</span>
                 <span>➔</span>
@@ -562,7 +589,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
       </section>
 
       {/* 3. THREE-STEP SIMPLE TRANSIT GUIDE (Multilingual Dynamic) */}
-      <section className="max-w-5xl mx-auto px-4">
+      <section id="guide" className="max-w-5xl mx-auto px-4 animate-fade-in-up delay-300">
         <div className="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-xl">
           <div className="text-center max-w-xl mx-auto mb-8 space-y-1">
             <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest">
@@ -608,7 +635,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
       </section>
 
       {/* 4. INTEGRATED SEAT BOOKING HUB */}
-      <section className="px-4">
+      <section id="booking-section" className="px-4 animate-fade-in-up delay-400">
         <SeatBookingHub t={t} currentLang={currentLang} />
       </section>
 

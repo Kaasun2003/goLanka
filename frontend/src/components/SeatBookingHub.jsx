@@ -71,7 +71,7 @@ const SeatBookingHub = ({ t = {}, currentLang = 'si' }) => {
   };
 
   return (
-    <div id="booking" className="w-full max-w-6xl mx-auto py-12">
+    <div id="booking" className="w-full max-w-6xl mx-auto py-12 p-4 sm:p-8 rounded-3xl transition-all duration-500 border border-transparent">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-400/10 text-amber-400 border border-amber-400/30">
@@ -88,10 +88,11 @@ const SeatBookingHub = ({ t = {}, currentLang = 'si' }) => {
 
       {/* Partner Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {partners.map((partner) => (
+        {partners.map((partner, index) => (
           <div
             key={partner.id}
-            className="bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-7 transition-all shadow-xl hover:shadow-2xl flex flex-col justify-between group"
+            style={{ animationDelay: `${index * 120}ms` }}
+            className="animate-fade-in-up bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 sm:p-7 transition-all shadow-xl hover:shadow-2xl flex flex-col justify-between group hover:-translate-y-1.5 duration-300"
           >
             <div className="space-y-4">
               <div className="flex items-start justify-between gap-3">
