@@ -1,7 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = ({ t }) => {
+const Footer = ({ t = {}, currentLang = 'si' }) => {
+  const getFooterDesc = () => {
+    if (currentLang === 'en') {
+      return "Sri Lanka's unified digital passenger transit ecosystem. Enabling real-time GPS tracking, electronic season passes, and schedule intelligence across all 25 administrative districts.";
+    }
+    if (currentLang === 'ta') {
+      return "இலங்கையின் ஒருங்கிணைந்த டிஜிட்டல் பயணிகள் போக்குவரத்து அமைப்பு. நிகழ்நேர ஜிபிஎஸ் கண்காணிப்பு, மின்சார சீசன் பாஸ்கள் மற்றும் பயண அட்டவணைகள்.";
+    }
+    return "ශ්‍රී ලංකාවේ ඒකාබද්ධ ඩිජිටල් මගී ප්‍රවාහන ජාලය. සජීවී GPS ස්ථානගත කිරීම්, ඩිජිටල් වාර ප්‍රවේශපත්‍ර සහ දිවයිනේ සියලුම දිස්ත්‍රික්ක 25 ආවරණය වන පරිදි බස් කාලසටහන් සේවාව.";
+  };
+
   return (
     <footer className="bg-slate-950 border-t border-slate-900 text-slate-400 text-sm mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -9,7 +19,7 @@ const Footer = ({ t }) => {
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl overflow-hidden border border-amber-400/40">
+              <div className="w-10 h-10 rounded-xl overflow-hidden border border-emerald-400/40">
                 <img
                   src="/logo.jpg"
                   alt="goLanka"
@@ -21,11 +31,11 @@ const Footer = ({ t }) => {
                 />
               </div>
               <span className="text-2xl font-black text-white tracking-tight">
-                go<span className="text-amber-400">Lanka</span>
+                go<span className="text-emerald-400">Lanka</span>
               </span>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm">
-              Sri Lanka's unified digital passenger transit ecosystem. Enabling real-time GPS tracking, electronic season passes, and schedule intelligence across all 25 administrative districts.
+              {getFooterDesc()}
             </p>
             <div className="flex items-center gap-2 pt-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">

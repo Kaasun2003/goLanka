@@ -47,20 +47,42 @@ const partners = [
   }
 ];
 
-const SeatBookingHub = ({ t }) => {
+const SeatBookingHub = ({ t = {}, currentLang = 'si' }) => {
+  const getHeaderBadge = () => {
+    if (currentLang === 'en') return 'Intercity & Expressway Seat Reservation';
+    if (currentLang === 'ta') return 'நகரங்களுக்கு இடையிலான & அதிவேக நெடுஞ்சாலை இருக்கை முன்பதிவு';
+    return 'අන්තර්නගර සහ අධිවේගී ආසන වෙන්කිරීම';
+  };
+
+  const getHeading = () => {
+    if (currentLang === 'en') return 'Centralized Seat Booking Hub';
+    if (currentLang === 'ta') return 'மத்திய இருக்கை முன்பதிவு மையம்';
+    return 'නිල බස් ආසන වෙන්කිරීම් මධ්‍යස්ථානය';
+  };
+
+  const getSubheading = () => {
+    if (currentLang === 'en') {
+      return 'Direct integrated gateway to Sri Lanka’s authorized online booking portals. Reserve your seat in advance for highway luxury coaches and overnight inter-provincial journeys.';
+    }
+    if (currentLang === 'ta') {
+      return 'இலங்கையின் அங்கீகரிக்கப்பட்ட ஆன்லைன் முன்பதிவு தளங்களுக்கான நேரடி ஒருங்கிணைப்பு. நெடுஞ்சாலை சொகுசு பேருந்துகளில் முன்கூட்டியே இருக்கைகளை முன்பதிவு செய்யுங்கள்.';
+    }
+    return 'ශ්‍රී ලංකාවේ ප්‍රමුඛතම ආසන වෙන්කිරීමේ පද්ධති වෙත ඍජු ප්‍රවේශය. අධිවේගී හා දුරගමන් සුඛෝපභෝගී බස් රථවල ඔබගේ ආසනය නිවසේ සිටම පහසුවෙන් වෙන්කරවා ගන්න.';
+  };
+
   return (
     <div id="booking" className="w-full max-w-6xl mx-auto py-12">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-400/10 text-amber-400 border border-amber-400/30">
           <span>💺</span>
-          <span>Intercity & Expressway Seat Reservation</span>
+          <span>{getHeaderBadge()}</span>
         </div>
         <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
-          Centralized Seat Booking Hub
+          {getHeading()}
         </h2>
         <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-          Direct integrated gateway to Sri Lanka’s authorized online booking portals. Reserve your seat in advance for highway luxury coaches and overnight inter-provincial journeys.
+          {getSubheading()}
         </p>
       </div>
 

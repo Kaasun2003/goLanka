@@ -30,13 +30,13 @@ function App() {
         <Navbar currentLang={currentLang} setLanguage={handleLanguageChange} t={t} />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Home t={t} />} />
-            <Route path="/tracker" element={<TrackerPage t={t} />} />
-            <Route path="/season" element={<SeasonPage t={t} />} />
-            <Route path="/booking" element={<BookingPage t={t} />} />
+            <Route path="/" element={<Home t={t} currentLang={currentLang} />} />
+            <Route path="/tracker" element={<TrackerPage t={t} currentLang={currentLang} />} />
+            <Route path="/season" element={<SeasonPage t={t} currentLang={currentLang} />} />
+            <Route path="/booking" element={<BookingPage t={t} currentLang={currentLang} />} />
           </Routes>
         </main>
-        <Footer t={t} />
+        <Footer t={t} currentLang={currentLang} />
       </div>
     </Router>
   );
