@@ -42,9 +42,11 @@ mongoose
 // API Routes
 const busRoutes = require('./routes/busRoutes');
 const seasonRoutes = require('./routes/seasonRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 app.use('/api/buses', busRoutes);
 app.use('/api/season', seasonRoutes);
+app.use('/api/auth', authRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

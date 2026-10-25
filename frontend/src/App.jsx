@@ -2,15 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
+import AuthModal from './components/AuthModal.jsx';
 import Home from './pages/Home.jsx';
 import TrackerPage from './pages/TrackerPage.jsx';
 import SeasonPage from './pages/SeasonPage.jsx';
 import BookingPage from './pages/BookingPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
+import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { translations } from './translations.js';
 
 // Animated Route Wrapper that animates the target page/section every time a navigation occurs
 const AnimatedContent = ({ t, currentLang }) => {
   const location = useLocation();
+  const { openAuthModal } = useAuth();
+
+  // If user navigates directly to /login, automatically trigger auth modal
+  useEffect(() => {
+    if (location.pathname === '/login') {
+      openAuthModal('phone');
+    }
+  }, [location.pathname, openAuthModal]);
 
   // Scroll-triggered Reveal Observer: slowly loads sections and categories as user scrolls down the page
   useEffect(() => {
@@ -76,6 +87,8 @@ const AnimatedContent = ({ t, currentLang }) => {
         <Route path="/tracker" element={<TrackerPage t={t} currentLang={currentLang} />} />
         <Route path="/season" element={<SeasonPage t={t} currentLang={currentLang} />} />
         <Route path="/booking" element={<BookingPage t={t} currentLang={currentLang} />} />
+        <Route path="/profile" element={<ProfilePage t={t} currentLang={currentLang} />} />
+        <Route path="/login" element={<ProfilePage t={t} currentLang={currentLang} />} />
       </Routes>
     </div>
   );
@@ -98,15 +111,18 @@ function App() {
   }, [t]);
 
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen bg-slate-950 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 font-sans transition-colors duration-300">
-        <Navbar currentLang={currentLang} setLanguage={handleLanguageChange} t={t} />
-        <main className="flex-grow">
-          <AnimatedContent t={t} currentLang={currentLang} />
-        </main>
-        <Footer t={t} currentLang={currentLang} />
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="flex flex-col min-h-screen bg-slate-950 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 font-sans transition-colors duration-300">
+          <Navbar currentLang={currentLang} setLanguage={handleLanguageChange} t={t} />
+          <main className="flex-grow">
+            <AnimatedContent t={t} currentLang={currentLang} />
+          </main>
+          <Footer t={t} currentLang={currentLang} />
+          <AuthModal t={t} currentLang={currentLang} />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

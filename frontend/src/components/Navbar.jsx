@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
+  const { user, isAuthenticated, openAuthModal, logout } = useAuth();
+  const navigate = useNavigate();
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [qrModalOpen, setQrModalOpen] = useState(false);
   const [isLightMode, setIsLightMode] = useState(() => {
     return localStorage.getItem('golanka_theme') === 'light';
@@ -11,6 +16,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
 
   const location = useLocation();
   const notificationRef = useRef(null);
+  const userMenuRef = useRef(null);
 
   // Sync theme with document element
   useEffect(() => {
@@ -23,16 +29,25 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
     }
   }, [isLightMode]);
 
-  // Close notifications dropdown on outside click
+  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (notificationRef.current && !notificationRef.current.contains(event.target)) {
         setNotificationsOpen(false);
       }
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setUserDropdownOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setUserDropdownOpen(false);
+  }, [location.pathname]);
 
   const toggleTheme = () => {
     setIsLightMode(!isLightMode);
@@ -49,6 +64,12 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
     if (currentLang === 'en') return 'My QR Pass';
     if (currentLang === 'ta') return 'QR பாஸ்';
     return 'QR පාස්';
+  };
+
+  const getLoginButtonLabel = () => {
+    if (currentLang === 'en') return 'Login / Sign Up';
+    if (currentLang === 'ta') return 'உள்நுழைக';
+    return '👤 ගිණුම / Login';
   };
 
   const navLinks = [
@@ -176,18 +197,122 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               })}
             </nav>
 
-            {/* 3. RIGHT ZONE: QR Button, Bell, Theme, Language & Hotline */}
-            <div className="hidden lg:flex items-center gap-3 xl:gap-4 flex-shrink-0 flex-nowrap">
+            {/* 3. RIGHT ZONE: Login/Profile, QR Button, Bell, Theme, Language & Hotline */}
+            <div className="hidden lg:flex items-center gap-3 xl:gap-3.5 flex-shrink-0 flex-nowrap">
               
+              {/* AUTHENTICATION / USER PROFILE DROPDOWN */}
+              {isAuthenticated && user ? (
+                <div className="relative flex-shrink-0" ref={userMenuRef}>
+                  <button
+                    type="button"
+                    onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                    className="flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-slate-900 border-2 border-emerald-500/50 hover:border-emerald-400 text-white shadow-lg shadow-emerald-500/10 transition-all cursor-pointer active:scale-95"
+                    title="User Profile & Account Options"
+                  >
+                    <span className="w-8 h-8 rounded-xl bg-slate-950 border border-emerald-400/50 flex items-center justify-center text-lg flex-shrink-0">
+                      {user.avatar || '👤'}
+                    </span>
+                    <div className="text-left hidden xl:block max-w-[130px]">
+                      <p className="text-xs font-black text-white truncate leading-tight">
+                        {user.fullName?.split(' ')[0] || 'Commuter'}
+                      </p>
+                      <span className="text-[10px] text-emerald-400 font-bold block truncate leading-tight">
+                        {user.userType === 'Student' ? '🎓 Student' : user.userType === 'Office Commuter' ? '💼 Office' : '👤 Commuter'}
+                      </span>
+                    </div>
+                    <span className="text-xs text-slate-400">▾</span>
+                  </button>
+
+                  {/* Profile Dropdown Popup */}
+                  {userDropdownOpen && (
+                    <div className="absolute right-0 top-full mt-3 w-72 bg-slate-900 border-2 border-slate-700/90 rounded-3xl p-4 shadow-2xl z-50 animate-scale-in space-y-3">
+                      {/* Header Summary */}
+                      <div className="flex items-center gap-3 border-b border-slate-800 pb-3">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-emerald-500/40 flex items-center justify-center text-2xl flex-shrink-0">
+                          {user.avatar || '👤'}
+                        </div>
+                        <div className="truncate text-left">
+                          <h4 className="text-sm font-black text-white truncate">{user.fullName}</h4>
+                          <p className="text-xs text-slate-400 font-mono truncate">{user.phoneNumber}</p>
+                          <span className="inline-block mt-0.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300">
+                            {user.userType || 'General Commuter'}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Dropdown Navigation Actions */}
+                      <div className="space-y-1 text-left">
+                        <Link
+                          to="/profile"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-xs font-bold text-slate-200 hover:text-white transition-colors"
+                        >
+                          <span className="text-base">👤</span>
+                          <span>{t.myProfile || 'My Profile & Dashboard'}</span>
+                        </Link>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setUserDropdownOpen(false);
+                            setQrModalOpen(true);
+                          }}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-xs font-bold text-slate-200 hover:text-white transition-colors cursor-pointer text-left"
+                        >
+                          <span className="text-base">📱</span>
+                          <span>{t.myQrPass || 'My Digital QR Pass'}</span>
+                        </button>
+
+                        <Link
+                          to="/booking"
+                          onClick={() => setUserDropdownOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-xs font-bold text-slate-200 hover:text-white transition-colors"
+                        >
+                          <span className="text-base">💺</span>
+                          <span>{t.seatBooking || 'Seat Bookings'}</span>
+                        </Link>
+                      </div>
+
+                      {/* Logout Button */}
+                      <div className="pt-2 border-t border-slate-800">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setUserDropdownOpen(false);
+                            logout();
+                            navigate('/');
+                          }}
+                          className="w-full py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 hover:text-rose-200 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+                        >
+                          <span>🚪</span>
+                          <span>{t.logout || 'Logout (ඉවත් වන්න)'}</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* Sleek Login / Sign Up Button */
+                <button
+                  type="button"
+                  onClick={() => openAuthModal('phone')}
+                  className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-500/25 border border-emerald-300/40 flex items-center gap-2 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
+                  title="Login or Create Account (ගිණුමට පිවිසෙන්න)"
+                >
+                  <span className="text-base flex-shrink-0">👤</span>
+                  <span className="whitespace-nowrap font-black">{getLoginButtonLabel()}</span>
+                </button>
+              )}
+
               {/* Quick Access "📱 QR පාස්" Button */}
               <button
                 type="button"
                 onClick={() => setQrModalOpen(true)}
-                className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-500/25 border border-emerald-300/40 flex items-center gap-2 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
+                className="px-3.5 py-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-300 font-bold text-xs sm:text-sm tracking-wide shadow-sm flex items-center gap-2 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
                 title="Open My Digital QR Pass (මගේ QR පාස් එක)"
               >
                 <span className="text-base flex-shrink-0">📱</span>
-                <span className="whitespace-nowrap font-black">{getQrPassLabel()}</span>
+                <span className="whitespace-nowrap font-bold">{getQrPassLabel()}</span>
               </button>
 
               {/* Notification Bell Icon */}
@@ -273,7 +398,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
+                      className={`px-3 py-1.5 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                         isSelected
                           ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
                           : 'text-slate-400 hover:text-white hover:bg-slate-800'
@@ -287,7 +412,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               </div>
 
               {/* 24/7 SLTB Line */}
-              <div className="pl-3 xl:pl-4 border-l border-slate-800 text-right flex-shrink-0 whitespace-nowrap hidden xl:block">
+              <div className="pl-3 xl:pl-4 border-l border-slate-800 text-right flex-shrink-0 whitespace-nowrap hidden 2xl:block">
                 <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">
                   24/7 SLTB Line
                 </span>
@@ -305,11 +430,30 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
             {/* Mobile Controls (Liquid Glass Buttons for mobile) */}
             <div className="flex lg:hidden items-center gap-2">
               
+              {/* Account / Login button on mobile */}
+              {isAuthenticated && user ? (
+                <Link
+                  to="/profile"
+                  className="w-9 h-9 rounded-xl bg-slate-900 border border-emerald-500/40 flex items-center justify-center text-sm shadow-sm"
+                  title="My Profile"
+                >
+                  {user.avatar || '👤'}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => openAuthModal('phone')}
+                  className="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs"
+                >
+                  👤 Login
+                </button>
+              )}
+
               {/* Quick QR button on mobile */}
               <button
                 type="button"
                 onClick={() => setQrModalOpen(true)}
-                className="liquid-glass-qr-btn px-3 py-1.5 text-slate-950 font-black text-xs"
+                className="liquid-glass-qr-btn px-2.5 py-1.5 text-slate-950 font-black text-xs"
               >
                 📱 QR
               </button>
@@ -323,7 +467,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 {isLightMode ? '🌙' : '☀️'}
               </button>
 
-              {/* Mobile Menu Toggle Button (styled with 3 liquid glass bars matching reference) */}
+              {/* Mobile Menu Toggle Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -339,10 +483,54 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
             </div>
           </div>
 
-          {/* 4. MOBILE HAMBURGER MENU LIQUID GLASS DRAWER */}
+          {/* 4. MOBILE HAMBURGER MENU DRAWER */}
           {mobileMenuOpen && (
-            <div className="lg:hidden mt-3 pt-4 border-t border-white/10 space-y-3 animate-fadeIn">
+            <div className="lg:hidden mt-3 pt-4 border-t border-white/10 space-y-3 animate-fadeIn pb-3">
               
+              {/* User Account Tile in Mobile Drawer */}
+              {isAuthenticated && user ? (
+                <div className="p-3 bg-slate-900 rounded-2xl border border-slate-800 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-2xl">{user.avatar || '👤'}</span>
+                    <div className="text-left">
+                      <p className="text-xs font-black text-white">{user.fullName}</p>
+                      <p className="text-[10px] text-emerald-400 font-mono">{user.phoneNumber}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      to="/profile"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30"
+                    >
+                      Profile
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        logout();
+                      }}
+                      className="px-2 py-1 rounded-xl bg-rose-500/20 text-rose-300 text-xs font-bold"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openAuthModal('phone');
+                  }}
+                  className="w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-sm flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <span>👤</span>
+                  <span>{getLoginButtonLabel()}</span>
+                </button>
+              )}
+
               {/* Navigation links in drawer */}
               <div className="space-y-1.5">
                 {navLinks.map((link) => (
@@ -426,8 +614,12 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
 
             <div className="space-y-1">
               <span className="inline-block text-4xl mb-1 drop-shadow-md">📱</span>
-              <h3 className="text-xl font-black text-white">මගේ ඩිජිටල් QR පාස් එක</h3>
-              <p className="text-xs text-slate-300/80">Official Sri Lankan Digital Bus Transit Pass</p>
+              <h3 className="text-xl font-black text-white">
+                {currentLang === 'si' ? 'මගේ ඩිජිටල් QR පාස් එක' : currentLang === 'ta' ? 'எனது QR பாஸ்' : 'My Digital QR Pass'}
+              </h3>
+              <p className="text-xs text-slate-300/80">
+                {user?.activeSeasonPass?.passType || 'Official Sri Lankan Digital Bus Transit Pass'}
+              </p>
             </div>
 
             {/* High-contrast QR display */}
@@ -456,28 +648,32 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 <rect x="60" y="70" width="15" height="8" />
               </svg>
               <span className="text-[10px] font-mono font-bold text-slate-900 mt-1 block">
-                GL-PASS-OFFICIAL-2026
+                {user?.activeSeasonPass?.qrCodeToken || 'GL-PASS-OFFICIAL-2026'}
               </span>
             </div>
 
             <div className="liquid-glass-pill p-3.5 text-xs text-slate-200 space-y-1.5 text-left">
               <div className="flex justify-between">
-                <span className="text-slate-400">Status:</span>
-                <span className="font-bold text-emerald-400">● Active Transit Pass</span>
+                <span className="text-slate-400">Pass Holder:</span>
+                <span className="font-bold text-white">{user?.fullName || 'Kasun Malinda Bandara'}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-400">Coverage:</span>
-                <span className="text-white">SLTB & Private Joint Routes</span>
+                <span className="text-slate-400">Status:</span>
+                <span className="font-bold text-emerald-400">● {user?.activeSeasonPass?.approvalStatus || 'Active Transit Pass'}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-400">Designated Route:</span>
+                <span className="text-white font-mono">Route {user?.activeSeasonPass?.routeNumber || '138'}</span>
               </div>
             </div>
 
             <div className="flex gap-3">
               <Link
-                to="/season"
+                to="/profile"
                 onClick={() => setQrModalOpen(false)}
                 className="flex-1 py-3 liquid-glass-qr-btn text-slate-950 font-black text-xs text-center"
               >
-                සම්පූර්ණ විස්තර බලන්න ➔
+                සම්පූර්ණ Dashboard එක බලන්න ➔
               </Link>
               <button
                 onClick={() => setQrModalOpen(false)}
