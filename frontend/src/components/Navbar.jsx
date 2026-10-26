@@ -113,15 +113,15 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
                 <div className="space-y-0.5 whitespace-nowrap">
                   <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="text-xl sm:text-2xl 2xl:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors drop-shadow-sm">
-                      go<span className="text-emerald-400">Lanka</span>
+                    <span className="text-xl sm:text-2xl 2xl:text-3xl font-black tracking-tight text-slate-950 group-hover:text-emerald-700 transition-colors drop-shadow-sm">
+                      go<span className="text-emerald-700">Lanka</span>
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2 sm:px-2.5 py-0.5 rounded-full shadow-sm backdrop-blur-md">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-black tracking-wider bg-emerald-500/25 text-slate-950 border border-emerald-600/40 px-2 sm:px-2.5 py-0.5 rounded-full shadow-sm backdrop-blur-md">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
                       🇱🇰 Transit
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-300 font-medium tracking-wide hidden 2xl:block drop-shadow-sm">
+                  <p className="text-[11px] text-slate-950 font-bold tracking-wide hidden 2xl:block drop-shadow-sm">
                     ශ්‍රී ලංකා ඩිජිටල් බස් ප්‍රවාහන ජාලය
                   </p>
                 </div>
@@ -136,16 +136,16 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`group relative px-2 lg:px-2.5 xl:px-3.5 2xl:px-4 py-1.5 xl:py-2 rounded-xl xl:rounded-2xl text-xs 2xl:text-sm font-bold transition-all duration-200 flex items-center gap-1 xl:gap-1.5 2xl:gap-2 whitespace-nowrap flex-shrink-0 active:scale-95 ${
+                    className={`group relative px-2 lg:px-2.5 xl:px-3.5 2xl:px-4 py-1.5 xl:py-2 rounded-xl xl:rounded-2xl text-xs 2xl:text-sm font-black transition-all duration-200 flex items-center gap-1 xl:gap-1.5 2xl:gap-2 whitespace-nowrap flex-shrink-0 active:scale-95 ${
                       active
-                        ? 'text-emerald-300 bg-emerald-500/20 border-2 border-emerald-400/50 shadow-lg shadow-emerald-500/20 backdrop-blur-md'
-                        : 'text-slate-200 hover:text-white hover:bg-white/10 hover:border-white/20 border-2 border-transparent backdrop-blur-sm'
+                        ? 'text-slate-950 bg-emerald-400/35 border-2 border-emerald-600/70 shadow-sm backdrop-blur-md'
+                        : 'text-slate-950 hover:text-black hover:bg-black/10 border-2 border-transparent backdrop-blur-sm'
                     }`}
                   >
                     <span className="text-base xl:text-lg transition-transform group-hover:scale-110 flex-shrink-0">
                       {link.icon}
                     </span>
-                    <span className="tracking-wide whitespace-nowrap leading-none select-none drop-shadow-sm">
+                    <span className="tracking-wide whitespace-nowrap leading-none select-none drop-shadow-sm text-slate-950 font-black">
                       {link.label}
                     </span>
                     
@@ -174,7 +174,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
             <div className="hidden lg:flex items-center gap-1.5 xl:gap-2 2xl:gap-3 flex-shrink-0 z-10">
               
               {/* 1. Trilingual Language Switcher Toggle */}
-              <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl xl:rounded-2xl p-0.5 xl:p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
+              <div className="flex items-center bg-black/10 backdrop-blur-xl border border-black/15 rounded-xl xl:rounded-2xl p-0.5 xl:p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
                 {languages.map((lang) => {
                   const isSelected = currentLang === lang.code;
                   return (
@@ -182,10 +182,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-2 xl:px-2.5 py-1 text-[11px] xl:text-xs font-bold rounded-lg xl:rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
+                      className={`px-2 xl:px-2.5 py-1 text-[11px] xl:text-xs font-black rounded-lg xl:rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                         isSelected
-                          ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
-                          : 'text-slate-300 hover:text-white hover:bg-white/10'
+                          ? 'bg-slate-950 text-white shadow-md font-black'
+                          : 'text-slate-950 hover:text-black hover:bg-black/10'
                       }`}
                       aria-label={`Switch language to ${lang.label}`}
                     >
@@ -209,10 +209,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               >
                 {/* Text Label */}
                 <span
-                  className={`text-[11px] xl:text-xs font-black tracking-wide transition-colors duration-300 select-none ${
+                  className={`text-[11px] xl:text-xs font-black tracking-wide select-none text-slate-950 ${
                     isLightMode
-                      ? 'order-1 pl-2.5 text-slate-900'
-                      : 'order-2 pr-2.5 ml-auto text-slate-100'
+                      ? 'order-1 pl-2.5'
+                      : 'order-2 pr-2.5 ml-auto'
                   }`}
                 >
                   {isLightMode ? 'Dark' : 'Light'}
@@ -298,12 +298,12 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               <button
                 type="button"
                 onClick={() => onOpenQr ? onOpenQr() : setQrModalOpen(true)}
-                className="px-2.5 xl:px-3 py-2 xl:py-2.5 rounded-xl xl:rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-emerald-500/50 text-slate-100 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
+                className="px-2.5 xl:px-3 py-2 xl:py-2.5 rounded-xl xl:rounded-2xl bg-black/10 backdrop-blur-xl border border-black/15 hover:border-emerald-600 text-slate-950 font-black text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
                 title="Open My Digital QR Pass"
               >
                 <span className="text-base flex-shrink-0">📱</span>
-                <span className="whitespace-nowrap font-bold hidden 2xl:inline">{getQrPassLabel()}</span>
-                <span className="whitespace-nowrap font-bold 2xl:hidden">QR</span>
+                <span className="whitespace-nowrap font-black text-slate-950 hidden 2xl:inline">{getQrPassLabel()}</span>
+                <span className="whitespace-nowrap font-black text-slate-950 2xl:hidden">QR</span>
               </button>
 
               {/* 5. USER PROFILE / LOGIN BUTTON (AT THE VERY FAR RIGHT EDGE) */}
@@ -319,14 +319,14 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                       {user.avatar || '👤'}
                     </span>
                     <div className="text-left hidden xl:block max-w-[110px]">
-                      <p className="text-xs font-black text-white truncate leading-tight">
+                      <p className="text-xs font-black text-slate-950 truncate leading-tight">
                         {user.fullName?.split(' ')[0] || 'Commuter'}
                       </p>
-                      <span className="text-[10px] text-emerald-400 font-bold block truncate leading-tight">
+                      <span className="text-[10px] text-emerald-800 font-black block truncate leading-tight">
                         {user.userType === 'Student' ? '🎓 Student' : user.userType === 'Office Commuter' ? '💼 Office' : '👤 Commuter'}
                       </span>
                     </div>
-                    <span className="text-xs text-slate-400">▾</span>
+                    <span className="text-xs text-slate-950 font-black">▾</span>
                   </button>
 
                   {/* Profile Dropdown Popup */}
