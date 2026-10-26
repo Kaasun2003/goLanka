@@ -122,49 +122,51 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
     <>
       {/* Clean Full-Width Sticky Top Navigation Bar */}
       <header className="sticky top-0 z-50 w-full backdrop-blur-2xl bg-slate-950/95 border-b border-slate-800/90 shadow-2xl transition-all">
-        {/* Maximum Width Constraint matching all other pages (max-w-7xl) */}
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 gap-2 sm:gap-4">
+        {/* Full-Width Symmetrical Navigation Bar with edge-to-edge balance */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
+          <div className="relative flex items-center justify-between h-20 gap-2 sm:gap-4">
             
-            {/* 1. LEFT ZONE: Logo & Brand Title */}
-            <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5 flex-shrink-0">
-                <img
-                  src="/logo.jpg"
-                  alt="goLanka Logo"
-                  className="w-full h-full object-cover rounded-xl"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = `<span class="text-xl font-black text-emerald-400">gL</span>`;
-                  }}
-                />
-              </div>
-
-              <div className="space-y-0.5 whitespace-nowrap">
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors">
-                    go<span className="text-emerald-400">Lanka</span>
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    🇱🇰 Transit
-                  </span>
+            {/* 1. LEFT ZONE: Brand Logo & Title */}
+            <div className="flex items-center gap-3 z-10 flex-shrink-0">
+              <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5 flex-shrink-0">
+                  <img
+                    src="/logo.jpg"
+                    alt="goLanka Logo"
+                    className="w-full h-full object-cover rounded-xl"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentElement.innerHTML = `<span class="text-xl font-black text-emerald-400">gL</span>`;
+                    }}
+                  />
                 </div>
-                <p className="text-[11px] text-slate-400 font-medium tracking-wide hidden 2xl:block">
-                  ශ්‍රී ලංකා ඩිජිටල් බස් ප්‍රවාහන ජාලය
-                </p>
-              </div>
-            </Link>
 
-            {/* 2. CENTER ZONE: Single-Line Navigation Tabs (xl:flex = 1280px+) */}
-            <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-3 flex-shrink-0">
+                <div className="space-y-0.5 whitespace-nowrap">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+                      go<span className="text-emerald-400">Lanka</span>
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full shadow-sm">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      🇱🇰 Transit
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-400 font-medium tracking-wide hidden 2xl:block">
+                    ශ්‍රී ලංකා ඩිජිටල් බස් ප්‍රවාහන ජාලය
+                  </p>
+                </div>
+              </Link>
+            </div>
+
+            {/* 2. CENTER ZONE: Single-Line Navigation Tabs (xl:flex = 1280px+) - Exactly Centered */}
+            <nav className="absolute left-1/2 -translate-x-1/2 z-10 hidden xl:flex items-center gap-1.5 2xl:gap-3 flex-shrink-0">
               {navLinks.map((link) => {
                 const active = isActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`group relative px-3 2xl:px-4 py-2.5 rounded-2xl text-xs 2xl:text-sm font-bold transition-all duration-200 flex items-center gap-2 whitespace-nowrap flex-shrink-0 active:scale-95 ${
+                    className={`group relative px-3 2xl:px-4 py-2 2xl:py-2.5 rounded-2xl text-xs 2xl:text-sm font-bold transition-all duration-200 flex items-center gap-2 whitespace-nowrap flex-shrink-0 active:scale-95 ${
                       active
                         ? 'text-emerald-300 bg-slate-900 border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/15'
                         : 'text-slate-300 hover:text-white hover:bg-slate-900/80 border-2 border-transparent'
@@ -199,7 +201,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
             </nav>
 
             {/* 3. RIGHT ZONE: Login/Profile, QR Button, Bell, Theme & Language (xl:flex = 1280px+) */}
-            <div className="hidden xl:flex items-center gap-2 2xl:gap-3 flex-shrink-0">
+            <div className="hidden xl:flex items-center gap-2 2xl:gap-3 flex-shrink-0 z-10">
               
               {/* AUTHENTICATION / USER PROFILE DROPDOWN */}
               {isAuthenticated && user ? (
