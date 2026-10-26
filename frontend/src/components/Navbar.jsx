@@ -1,111 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import { useTheme } from '../context/ThemeContext.jsx';
 
-const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
+const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
   const { user, isAuthenticated, openAuthModal, logout } = useAuth();
+  const { isLightMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [qrModalOpen, setQrModalOpen] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(() => {
-    return localStorage.getItem('golanka_theme') === 'light';
-  });
 
   const location = useLocation();
   const notificationRef = useRef(null);
   const userMenuRef = useRef(null);
-
-  // Sync theme with document element
-  useEffect(() => {
-    if (isLightMode) {
-      document.documentElement.classList.add('light-mode');
-      localStorage.setItem('golanka_theme', 'light');
-    } else {
-      document.documentElement.classList.remove('light-mode');
-      localStorage.setItem('golanka_theme', 'dark');
-    }
-  }, [isLightMode]);
-
-  // Close dropdowns on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
-        setNotificationsOpen(false);
-      }
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-        setUserDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   // Close mobile drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setUserDropdownOpen(false);
   }, [location.pathname]);
-
-  const toggleTheme = (e) => {
-    const nextMode = !isLightMode;
-
-    // 1. Calculate button origin coordinates for radial expansion
-    const rect = e?.currentTarget?.getBoundingClientRect?.();
-    const x = e?.clientX ?? (rect ? rect.left + rect.width / 2 : window.innerWidth / 2);
-    const y = e?.clientY ?? (rect ? rect.top + rect.height / 2 : 40);
-
-    const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    );
-
-    // 2. Physical Glowing Radial Ripple expanding outward across the entire screen
-    try {
-      const ripple = document.createElement('div');
-      ripple.className = 'theme-radial-ripple';
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-      ripple.style.setProperty('--ripple-radius', `${endRadius * 2.2}px`);
-      ripple.style.background = nextMode
-        ? 'radial-gradient(circle, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.92) 50%, rgba(226, 232, 240, 0.7) 100%)'
-        : 'radial-gradient(circle, rgba(2, 6, 23, 0.98) 0%, rgba(15, 23, 42, 0.92) 50%, rgba(15, 23, 42, 0.7) 100%)';
-      document.body.appendChild(ripple);
-
-      setTimeout(() => {
-        ripple.remove();
-      }, 700);
-    } catch {
-      // Fallback if DOM manipulation fails
-    }
-
-    // 3. View Transitions API with circular clip-path reveal
-    if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const transition = document.startViewTransition(() => {
-        setIsLightMode(nextMode);
-      });
-
-      transition.ready.then(() => {
-        document.documentElement.animate(
-          {
-            clipPath: [
-              `circle(0px at ${x}px ${y}px)`,
-              `circle(${endRadius}px at ${x}px ${y}px)`
-            ]
-          },
-          {
-            duration: 650,
-            easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
-            pseudoElement: '::view-transition-new(root)'
-          }
-        );
-      });
-    } else {
-      setIsLightMode(nextMode);
-    }
-  };
 
   // Trilingual Labels for Navigation Tabs
   const getSeatBookingLabel = () => {
@@ -383,7 +299,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               {/* 4. Quick Access "📱 QR පාස්" Button */}
               <button
                 type="button"
-                onClick={() => setQrModalOpen(true)}
+                onClick={() => onOpenQr ? onOpenQr() : setQrModalOpen(true)}
                 className="px-3 py-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
                 title="Open My Digital QR Pass"
               >
@@ -498,15 +414,100 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
 
             </div>
 
-            {/* 4. MOBILE & TABLET CONTROLS (< 1280px / xl:hidden) */}
-            <div className="flex xl:hidden items-center gap-2">
+            {/* 4. COMPACT MOBILE TOP BAR (< md) & TABLET CONTROLS (md:flex xl:hidden) */}
+            
+            {/* MOBILE QUICK ACTION BAR (< md: visible on Android & iOS smartphones) */}
+            <div className="flex md:hidden items-center gap-1.5 sm:gap-2">
               
-              {/* Account / Login button on mobile */}
+              {/* 1-Tap Call Button for 1955 Hotline */}
+              <a
+                href="tel:1955"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 text-rose-300 font-black text-xs active:scale-95 transition-transform"
+                title="Call 1955 Transport Hotline"
+              >
+                <span className="text-xs">📞</span>
+                <span className="font-mono text-xs font-black">1955</span>
+              </a>
+
+              {/* Compact Language Switcher (සිං / EN / த) */}
+              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-xl p-0.5 shadow-inner">
+                {[
+                  { code: 'si', label: 'සිං' },
+                  { code: 'en', label: 'EN' },
+                  { code: 'ta', label: 'த' }
+                ].map((l) => (
+                  <button
+                    key={l.code}
+                    type="button"
+                    onClick={() => setLanguage(l.code)}
+                    className={`px-2 py-1 text-[11px] font-black rounded-lg transition-all active:scale-95 cursor-pointer ${
+                      currentLang === l.code
+                        ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {l.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Dark/Light Mode Quick Toggle with spin/fade transition */}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-90 ${
+                  isLightMode
+                    ? 'bg-amber-100 border border-amber-300 text-amber-600 shadow-amber-200/50'
+                    : 'bg-slate-900 border border-slate-700/80 text-white'
+                }`}
+                title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
+                aria-label="Toggle theme mode"
+              >
+                <div className="transform transition-transform duration-500 hover:rotate-180">
+                  {isLightMode ? (
+                    <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zm12.75 0a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM12 18.75a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zM4.5 12a.75.75 0 01-.75.75H1.5a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.657 6.343a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm-11.314 11.314a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm12.374 1.591a.75.75 0 010 1.06l-1.592 1.592a.75.75 0 01-1.06-1.06l1.591-1.592a.75.75 0 011.061 0zm-11.314-11.314a.75.75 0 010 1.06L5.81 9.274a.75.75 0 11-1.06-1.06l1.591-1.592a.75.75 0 011.061 0z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                    </svg>
+                  )}
+                </div>
+              </button>
+
+            </div>
+
+            {/* TABLET CONTROLS (md:flex xl:hidden) */}
+            <div className="hidden md:flex xl:hidden items-center gap-2">
+              <a
+                href="tel:1955"
+                className="flex items-center gap-1 px-3 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 text-rose-300 font-black text-xs active:scale-95 transition-transform"
+              >
+                <span>📞</span>
+                <span className="font-mono text-xs font-black">1955</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={() => onOpenQr ? onOpenQr() : setQrModalOpen(true)}
+                className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700/80 text-white font-bold text-xs"
+              >
+                📱 QR
+              </button>
+
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-sm"
+              >
+                {isLightMode ? '☀️' : '🌙'}
+              </button>
+
               {isAuthenticated && user ? (
                 <Link
                   to="/profile"
-                  className="w-9 h-9 rounded-xl bg-slate-900 border border-emerald-500/40 flex items-center justify-center text-sm shadow-sm"
-                  title="My Profile"
+                  className="w-9 h-9 rounded-xl bg-slate-900 border border-emerald-500/40 flex items-center justify-center text-sm"
                 >
                   {user.avatar || '👤'}
                 </Link>
@@ -514,55 +515,19 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 <button
                   type="button"
                   onClick={() => openAuthModal('phone')}
-                  className="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs"
+                  className="px-3 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs"
                 >
                   👤 Login
                 </button>
               )}
 
-              {/* Quick QR button on mobile */}
-              <button
-                type="button"
-                onClick={() => setQrModalOpen(true)}
-                className="liquid-glass-qr-btn px-2.5 py-1.5 text-slate-950 font-black text-xs"
-              >
-                📱 QR
-              </button>
-
-              {/* Theme toggle on mobile */}
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className={`!w-9 !h-9 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-90 ${
-                  isLightMode
-                    ? 'bg-amber-100 border border-amber-300 text-amber-600 shadow-amber-200/50'
-                    : 'bg-slate-900 border border-slate-700/80 text-white'
-                }`}
-                title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
-              >
-                {isLightMode ? (
-                  <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zm12.75 0a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM12 18.75a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zM4.5 12a.75.75 0 01-.75.75H1.5a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.657 6.343a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm-11.314 11.314a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm12.374 1.591a.75.75 0 010 1.06l-1.592 1.592a.75.75 0 01-1.06-1.06l1.591-1.592a.75.75 0 011.061 0zm-11.314-11.314a.75.75 0 010 1.06L5.81 9.274a.75.75 0 11-1.06-1.06l1.591-1.592a.75.75 0 011.061 0z" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                  </svg>
-                )}
-              </button>
-
-              {/* Mobile Menu Toggle Button */}
+              {/* Tablet menu button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="liquid-glass-icon-btn !w-10 !h-10 text-slate-200 hover:text-white"
-                aria-label="Toggle navigation menu"
+                className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-slate-200"
               >
-                <div className="flex flex-col gap-1 items-center justify-center w-5">
-                  <span className={`block h-0.5 w-5 bg-slate-200 rounded-full transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-                  <span className={`block h-0.5 w-5 bg-slate-200 rounded-full transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
-                  <span className={`block h-0.5 w-5 bg-slate-200 rounded-full transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
-                </div>
+                ☰
               </button>
             </div>
           </div>

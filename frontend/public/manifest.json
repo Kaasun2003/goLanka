@@ -1,15 +1,18 @@
 {
   "short_name": "goLanka",
-  "name": "goLanka - Sri Lankan Bus Transit",
+  "name": "goLanka - Sri Lanka Bus Transit & Live Radar",
   "icons": [
     {
-      "src": "logo.jpg",
+      "src": "/logo.jpg",
+      "type": "image/jpeg",
       "sizes": "192x192 512x512",
-      "type": "image/jpeg"
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "background_color": "#020617",
+  "theme_color": "#020617",
   "display": "standalone",
-  "theme_color": "#0A192F",
-  "background_color": "#020617"
+  "orientation": "portrait",
+  "description": "Sri Lanka's Modern Real-Time Bus Transit Platform. Live GPS tracking, smart journey planning, digital season passes, and express booking hub."
 }

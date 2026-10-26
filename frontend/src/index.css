@@ -669,3 +669,111 @@ html.light-mode .liquid-glass-seg-active {
   color: #0f172a !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
+
+/* ============================================================
+   MOBILE-FIRST NATIVE APP OPTIMIZATIONS (Android & iOS Safari)
+   ============================================================ */
+
+/* 1. iOS Safe Area Support */
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.75rem);
+}
+
+.mb-safe {
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* 2. Prevent iOS Safari auto-zoom on mobile inputs */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* 3. Minimum 48px touch targets for easy one-handed thumb use */
+.touch-target-min {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* 4. Native App Active Touch Feedback */
+.touch-press {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
+}
+.touch-press:active {
+  transform: scale(0.95);
+  opacity: 0.9;
+}
+
+/* 5. Mobile Slide-Up Bottom Sheet Modal Animations */
+@keyframes slide-up-bottom-sheet {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up-sheet {
+  animation: slide-up-bottom-sheet 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 6. High Contrast Outdoor Readability in Light Mode */
+html.light-mode {
+  --app-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --card-border: #cbd5e1;
+  --text-primary: #020617;
+  --text-secondary: #334155;
+}
+
+html.light-mode h1,
+html.light-mode h2,
+html.light-mode h3,
+html.light-mode h4,
+html.light-mode h5 {
+  color: #020617 !important;
+  text-shadow: none !important;
+}
+
+html.light-mode p {
+  color: #334155 !important;
+}
+
+html.light-mode .bg-slate-900,
+html.light-mode .bg-slate-950 {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light-mode .text-slate-400 {
+  color: #475569 !important;
+}
+
+/* Light mode for mobile bottom navigation */
+html.light-mode .mobile-bottom-nav {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-top: 1px solid #e2e8f0 !important;
+  box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-mode .mobile-bottom-nav span {
+  color: #475569 !important;
+}
+
+html.light-mode .mobile-bottom-nav .active-tab span {
+  color: #059669 !important;
+}
+

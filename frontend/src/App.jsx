@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import AuthModal from './components/AuthModal.jsx';
+import MobileBottomNav from './components/MobileBottomNav.jsx';
+import QrBottomSheet from './components/QrBottomSheet.jsx';
 import Home from './pages/Home.jsx';
 import TrackerPage from './pages/TrackerPage.jsx';
 import SeasonPage from './pages/SeasonPage.jsx';
 import BookingPage from './pages/BookingPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import { ThemeProvider } from './context/ThemeContext.jsx';
 import { translations } from './translations.js';
 
 // Animated Route Wrapper that animates the target page/section every time a navigation occurs
@@ -98,6 +101,7 @@ function App() {
   const [currentLang, setCurrentLang] = useState(() => {
     return localStorage.getItem('golanka_lang') || 'si';
   });
+  const [qrModalOpen, setQrModalOpen] = useState(false);
 
   const handleLanguageChange = (lang) => {
     setCurrentLang(lang);
@@ -111,19 +115,43 @@ function App() {
   }, [t]);
 
   return (
-    <AuthProvider>
-      <Router>
-        <div className="flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-slate-950 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 font-sans transition-colors duration-300">
-          <Navbar currentLang={currentLang} setLanguage={handleLanguageChange} t={t} />
-          <main className="flex-grow w-full max-w-[100vw] overflow-x-hidden">
-            <AnimatedContent t={t} currentLang={currentLang} />
-          </main>
-          <Footer t={t} currentLang={currentLang} />
-          <AuthModal t={t} currentLang={currentLang} />
-        </div>
-      </Router>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <div className="flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-slate-950 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 font-sans transition-colors duration-300">
+            <Navbar 
+              currentLang={currentLang} 
+              setLanguage={handleLanguageChange} 
+              t={t}
+              onOpenQr={() => setQrModalOpen(true)}
+            />
+            <main className="flex-grow w-full max-w-[100vw] overflow-x-hidden pb-24 md:pb-0">
+              <AnimatedContent t={t} currentLang={currentLang} />
+            </main>
+            <Footer t={t} currentLang={currentLang} />
+            
+            {/* Native Mobile Sticky Bottom Navigation (< md) */}
+            <MobileBottomNav 
+              onOpenQr={() => setQrModalOpen(true)}
+              currentLang={currentLang}
+              t={t}
+            />
+
+            {/* Slide-Up Bottom Sheet QR Modal */}
+            <QrBottomSheet 
+              isOpen={qrModalOpen}
+              onClose={() => setQrModalOpen(false)}
+              t={t}
+              currentLang={currentLang}
+            />
+
+            <AuthModal t={t} currentLang={currentLang} />
+          </div>
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
 export default App;
+
