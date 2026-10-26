@@ -201,18 +201,18 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                 onClick={toggleTheme}
                 className={`relative flex items-center h-10 px-1 rounded-full transition-all duration-300 cursor-pointer shadow-inner active:scale-95 flex-shrink-0 group ${
                   isLightMode
-                    ? 'bg-slate-200 border border-slate-300/80 w-[96px] justify-end'
-                    : 'bg-[#0e131d] border border-slate-700/90 w-[96px] justify-start shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]'
+                    ? 'bg-slate-200 border border-slate-300 w-[102px] justify-end'
+                    : 'bg-[#0e131d] border border-slate-700/90 w-[102px] justify-start shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]'
                 }`}
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
               >
                 {/* Text Label */}
                 <span
-                  className={`text-[11px] font-bold tracking-wide transition-colors duration-300 select-none ${
+                  className={`text-xs font-black tracking-wide transition-colors duration-300 select-none ${
                     isLightMode
-                      ? 'order-1 pl-2.5 text-slate-700'
-                      : 'order-2 pr-2.5 ml-auto text-slate-200'
+                      ? 'order-1 pl-3 text-slate-900'
+                      : 'order-2 pr-3 ml-auto text-slate-200'
                   }`}
                 >
                   {isLightMode ? 'Dark' : 'Light'}
