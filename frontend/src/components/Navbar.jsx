@@ -26,7 +26,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
   // Trilingual Labels for Navigation Tabs
   const getSeatBookingLabel = () => {
     if (currentLang === 'en') return 'Seat Booking';
-    if (currentLang === 'ta') return 'இருக்கை முன்பதிவு';
+    if (currentLang === 'ta') return 'இருக்கை பதிவு';
     return 'ආසන වෙන්කිරීම';
   };
 
@@ -91,15 +91,15 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
   return (
     <>
       {/* VisionOS Floating Liquid Glass Navigation Bar */}
-      <header className="sticky top-0 z-50 w-full px-2 sm:px-4 lg:px-6 pt-2 sm:pt-3 pb-1 transition-all duration-300">
+      <header className="sticky top-0 z-50 w-full px-2 sm:px-3 md:px-4 lg:px-5 pt-1.5 sm:pt-2.5 pb-1 transition-all duration-300">
         {/* Floating Liquid Glass Dock with Refraction, Specular Rim & Edge Glow */}
-        <div className="liquid-glass-nav-bar w-full max-w-[1580px] mx-auto rounded-2xl sm:rounded-3xl px-3 sm:px-6 lg:px-8 xl:px-10 transition-all duration-300">
-          <div className="relative flex items-center justify-between h-18 sm:h-20 gap-2 sm:gap-4">
+        <div className="liquid-glass-nav-bar w-full max-w-[1860px] mx-auto rounded-2xl sm:rounded-3xl px-2.5 sm:px-3 md:px-4 lg:px-5 xl:px-6 transition-all duration-300">
+          <div className="relative flex items-center justify-between h-18 sm:h-20 gap-2 lg:gap-3 xl:gap-4 w-full">
             
             {/* 1. LEFT ZONE: Brand Logo & Title */}
-            <div className="flex items-center gap-3 z-10 flex-shrink-0">
-              <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-white/10 backdrop-blur-xl flex items-center justify-center p-0.5 flex-shrink-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 z-10 flex-shrink-0">
+              <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group flex-shrink-0">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-white/10 backdrop-blur-xl flex items-center justify-center p-0.5 flex-shrink-0">
                   <img
                     src="/logo.jpg"
                     alt="goLanka Logo"
@@ -112,12 +112,12 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                 </div>
 
                 <div className="space-y-0.5 whitespace-nowrap">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors drop-shadow-sm">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="text-xl sm:text-2xl 2xl:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors drop-shadow-sm">
                       go<span className="text-emerald-400">Lanka</span>
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2.5 py-0.5 rounded-full shadow-sm backdrop-blur-md">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2 sm:px-2.5 py-0.5 rounded-full shadow-sm backdrop-blur-md">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                       🇱🇰 Transit
                     </span>
                   </div>
@@ -128,21 +128,21 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               </Link>
             </div>
 
-            {/* 2. CENTER ZONE: Single-Line Navigation Tabs (xl:flex = 1280px+) - Exactly Centered */}
-            <nav className="absolute left-1/2 -translate-x-1/2 z-10 hidden xl:flex items-center gap-1.5 2xl:gap-3 flex-shrink-0">
+            {/* 2. CENTER ZONE: Single-Line Navigation Tabs (lg:flex = 1024px+) - Balanced & Responsive */}
+            <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 2xl:gap-3 flex-1 min-w-0 mx-1 xl:mx-2 2xl:mx-3 z-10">
               {navLinks.map((link) => {
                 const active = isActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`group relative px-3 2xl:px-4 py-2 2xl:py-2.5 rounded-2xl text-xs 2xl:text-sm font-bold transition-all duration-200 flex items-center gap-2 whitespace-nowrap flex-shrink-0 active:scale-95 ${
+                    className={`group relative px-2 lg:px-2.5 xl:px-3.5 2xl:px-4 py-1.5 xl:py-2 rounded-xl xl:rounded-2xl text-xs 2xl:text-sm font-bold transition-all duration-200 flex items-center gap-1 xl:gap-1.5 2xl:gap-2 whitespace-nowrap flex-shrink-0 active:scale-95 ${
                       active
                         ? 'text-emerald-300 bg-emerald-500/20 border-2 border-emerald-400/50 shadow-lg shadow-emerald-500/20 backdrop-blur-md'
                         : 'text-slate-200 hover:text-white hover:bg-white/10 hover:border-white/20 border-2 border-transparent backdrop-blur-sm'
                     }`}
                   >
-                    <span className="text-base 2xl:text-lg transition-transform group-hover:scale-110 flex-shrink-0">
+                    <span className="text-base xl:text-lg transition-transform group-hover:scale-110 flex-shrink-0">
                       {link.icon}
                     </span>
                     <span className="tracking-wide whitespace-nowrap leading-none select-none drop-shadow-sm">
@@ -170,11 +170,11 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               })}
             </nav>
 
-            {/* 3. RIGHT ZONE: Language, Theme (Image 2 style), Bell, QR Pass & User Profile (Far Right) */}
-            <div className="hidden xl:flex items-center gap-2 2xl:gap-3 flex-shrink-0 z-10">
+            {/* 3. RIGHT ZONE: Language, Theme (Image 2 style), Bell, QR Pass & User Profile */}
+            <div className="hidden lg:flex items-center gap-1.5 xl:gap-2 2xl:gap-3 flex-shrink-0 z-10">
               
               {/* 1. Trilingual Language Switcher Toggle */}
-              <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
+              <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl xl:rounded-2xl p-0.5 xl:p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
                 {languages.map((lang) => {
                   const isSelected = currentLang === lang.code;
                   return (
@@ -182,7 +182,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                       key={lang.code}
                       type="button"
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-2.5 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
+                      className={`px-2 xl:px-2.5 py-1 text-[11px] xl:text-xs font-bold rounded-lg xl:rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                         isSelected
                           ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
                           : 'text-slate-300 hover:text-white hover:bg-white/10'
@@ -199,20 +199,20 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className={`relative flex items-center h-10 px-1 rounded-full transition-all duration-300 cursor-pointer shadow-inner active:scale-95 flex-shrink-0 group ${
+                className={`relative flex items-center h-9 xl:h-10 px-1 rounded-full transition-all duration-300 cursor-pointer shadow-inner active:scale-95 flex-shrink-0 group ${
                   isLightMode
-                    ? 'bg-slate-200 border border-slate-300 w-[102px] justify-end'
-                    : 'bg-white/10 backdrop-blur-xl border border-white/25 w-[102px] justify-start shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]'
+                    ? 'bg-slate-200 border border-slate-300 w-[88px] xl:w-[100px] justify-end'
+                    : 'bg-white/10 backdrop-blur-xl border border-white/25 w-[88px] xl:w-[100px] justify-start shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]'
                 }`}
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
               >
                 {/* Text Label */}
                 <span
-                  className={`text-xs font-black tracking-wide transition-colors duration-300 select-none ${
+                  className={`text-[11px] xl:text-xs font-black tracking-wide transition-colors duration-300 select-none ${
                     isLightMode
-                      ? 'order-1 pl-3 text-slate-900'
-                      : 'order-2 pr-3 ml-auto text-slate-100'
+                      ? 'order-1 pl-2.5 text-slate-900'
+                      : 'order-2 pr-2.5 ml-auto text-slate-100'
                   }`}
                 >
                   {isLightMode ? 'Dark' : 'Light'}
@@ -220,20 +220,18 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
                 {/* 3D Liquid Glass Orb with glowing Moon/Sun icon */}
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-7 h-7 xl:w-8 xl:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
                     isLightMode
                       ? 'order-2 bg-gradient-to-br from-amber-200 to-amber-400 shadow-[0_2px_12px_rgba(251,191,36,0.6)] border border-amber-300 text-amber-950'
                       : 'order-1 bg-white/15 backdrop-blur-xl shadow-[0_4px_16px_rgba(255,255,255,0.25),inset_0_1px_2px_rgba(255,255,255,0.6)] border border-white/40 text-white'
                   }`}
                 >
                   {isLightMode ? (
-                    /* Glowing Sun SVG */
-                    <svg className="w-4 h-4 text-amber-600 drop-shadow-[0_0_6px_rgba(245,158,11,0.8)]" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-600 drop-shadow-[0_0_6px_rgba(245,158,11,0.8)]" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zm12.75 0a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM12 18.75a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zM4.5 12a.75.75 0 01-.75.75H1.5a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.657 6.343a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm-11.314 11.314a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm12.374 1.591a.75.75 0 010 1.06l-1.592 1.592a.75.75 0 01-1.06-1.06l1.591-1.592a.75.75 0 011.061 0zm-11.314-11.314a.75.75 0 010 1.06L5.81 9.274a.75.75 0 11-1.06-1.06l1.591-1.592a.75.75 0 011.061 0z" />
                     </svg>
                   ) : (
-                    /* Glowing Crisp Crescent Moon SVG */
-                    <svg className="w-4 h-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.95)]" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.95)]" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
                     </svg>
                   )}
@@ -245,12 +243,12 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                 <button
                   type="button"
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="p-2.5 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 text-slate-200 hover:text-white transition-all relative focus:outline-none shadow-sm flex-shrink-0 cursor-pointer active:scale-90"
+                  className="p-2 xl:p-2.5 rounded-xl xl:rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 text-slate-200 hover:text-white transition-all relative focus:outline-none shadow-sm flex-shrink-0 cursor-pointer active:scale-90"
                   title="Live Transit Alerts"
                   aria-label="View Transit Notifications"
                 >
-                  <span className="text-lg">🔔</span>
-                  <span className="absolute top-2 right-2 flex h-2 w-2">
+                  <span className="text-base xl:text-lg">🔔</span>
+                  <span className="absolute top-1.5 right-1.5 flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
                   </span>
@@ -300,7 +298,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               <button
                 type="button"
                 onClick={() => onOpenQr ? onOpenQr() : setQrModalOpen(true)}
-                className="px-3 py-2.5 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-emerald-500/50 text-slate-100 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
+                className="px-2.5 xl:px-3 py-2 xl:py-2.5 rounded-xl xl:rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-emerald-500/50 text-slate-100 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
                 title="Open My Digital QR Pass"
               >
                 <span className="text-base flex-shrink-0">📱</span>
@@ -314,13 +312,13 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                   <button
                     type="button"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-2xl bg-white/10 backdrop-blur-xl border-2 border-emerald-500/50 hover:border-emerald-400 text-white shadow-lg shadow-emerald-500/15 transition-all cursor-pointer active:scale-95"
+                    className="flex items-center gap-1.5 xl:gap-2 px-2.5 xl:px-3 py-1.5 xl:py-2 rounded-xl xl:rounded-2xl bg-white/10 backdrop-blur-xl border-2 border-emerald-500/50 hover:border-emerald-400 text-white shadow-lg shadow-emerald-500/15 transition-all cursor-pointer active:scale-95"
                     title="User Profile & Account Options"
                   >
-                    <span className="w-7 h-7 rounded-xl bg-slate-950/80 border border-emerald-400/50 flex items-center justify-center text-base flex-shrink-0">
+                    <span className="w-7 h-7 rounded-lg xl:rounded-xl bg-slate-950/80 border border-emerald-400/50 flex items-center justify-center text-sm xl:text-base flex-shrink-0">
                       {user.avatar || '👤'}
                     </span>
-                    <div className="text-left hidden 2xl:block max-w-[110px]">
+                    <div className="text-left hidden xl:block max-w-[110px]">
                       <p className="text-xs font-black text-white truncate leading-tight">
                         {user.fullName?.split(' ')[0] || 'Commuter'}
                       </p>
@@ -478,8 +476,8 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
             </div>
 
-            {/* TABLET CONTROLS (md:flex xl:hidden) */}
-            <div className="hidden md:flex xl:hidden items-center gap-2">
+            {/* TABLET CONTROLS (md:flex lg:hidden) */}
+            <div className="hidden md:flex lg:hidden items-center gap-2">
               <a
                 href="tel:1955"
                 className="flex items-center gap-1 px-3 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 text-rose-300 font-black text-xs active:scale-95 transition-transform backdrop-blur-md"
@@ -534,7 +532,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
           {/* 5. MOBILE & TABLET HAMBURGER MENU DRAWER */}
           {mobileMenuOpen && (
-            <div className="xl:hidden mt-3 pt-4 border-t border-white/10 space-y-3 animate-fadeIn pb-3">
+            <div className="lg:hidden mt-3 pt-4 border-t border-white/10 space-y-3 animate-fadeIn pb-3">
               
               {/* User Account Tile in Mobile Drawer */}
               {isAuthenticated && user ? (
