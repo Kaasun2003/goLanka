@@ -165,23 +165,21 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
   return (
     <div className="space-y-16 sm:space-y-20 pb-16">
       {/* 1. SPLIT HERO SECTION: Left (Search Box) & Right (Hero text) with Scenic Bus Background */}
-      <section className="relative pt-6 sm:pt-10 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
-        {/* Scenic Sri Lankan Bus Transit Background Image */}
+      <section className="relative pt-6 sm:pt-10 pb-8 sm:pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
+        {/* Scenic Sri Lankan Bus Transit Background Image (Clearly visible with natural brightness) */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
           <img
             src="/hero-bus-scenic.jpg"
             alt="Scenic Sri Lanka Luxury Bus travel through mist-covered tea estate mountains"
-            className="hero-scenic-img w-full h-full object-cover object-[center_35%] filter brightness-[0.46] contrast-[1.12] saturate-[1.2] transform scale-[1.02] transition-all duration-500"
+            className="hero-scenic-img w-full h-full object-cover object-[center_60%] filter brightness-[0.88] contrast-[1.08] saturate-[1.25] transform scale-[1.01] transition-all duration-500"
           />
-          {/* Dark Mode cinematic gradients for contrast & depth */}
-          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/92 pointer-events-none"></div>
-          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/80 pointer-events-none"></div>
-          <div className="hero-scenic-overlay-dark absolute inset-0 bg-slate-950/25 backdrop-blur-[1px] pointer-events-none"></div>
+          {/* Dark Mode: subtle cinematic gradient so the tea estates, hills, and bus are clearly visible */}
+          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-950/30 to-slate-950/65 pointer-events-none"></div>
+          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/70 pointer-events-none"></div>
 
-          {/* Light Mode clean frosted gradients for contrast & depth */}
-          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-r from-slate-50/95 via-slate-50/80 to-slate-50/92 pointer-events-none"></div>
-          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-slate-50/80 pointer-events-none"></div>
-          <div className="hero-scenic-overlay-light absolute inset-0 bg-white/30 backdrop-blur-[1px] pointer-events-none"></div>
+          {/* Light Mode: gentle frosted daylight gradient */}
+          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-r from-slate-50/70 via-slate-50/25 to-slate-50/65 pointer-events-none"></div>
+          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-slate-50/70 pointer-events-none"></div>
         </div>
 
         {/* Subtle background ambient lights */}
@@ -193,7 +191,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
             
             {/* 1. LEFT COLUMN (2nd Image Content): PickMe/Uber Style Smart Search Card & Popular Routes */}
             <div className="lg:col-span-7 min-w-0 w-full">
-              <div className="bg-slate-900/95 backdrop-blur-2xl border-2 border-slate-700/80 rounded-3xl p-5 sm:p-7 shadow-2xl relative text-left animate-scale-in delay-150 min-w-0">
+              <div className="bg-slate-950/80 backdrop-blur-xl border border-white/15 rounded-3xl p-5 sm:p-7 shadow-2xl relative text-left animate-scale-in delay-150 min-w-0">
                 
                 <form onSubmit={handleSearch} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
@@ -354,73 +352,73 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
             <div className="lg:col-span-5 space-y-6 text-left animate-fade-in-up delay-100 min-w-0 w-full">
               
               {/* Active Network Pill Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-emerald-500/30 text-xs sm:text-sm font-bold text-slate-200 shadow-md">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-950/80 border border-emerald-500/40 text-xs sm:text-sm font-bold text-slate-100 shadow-xl backdrop-blur-md">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping flex-shrink-0"></span>
-                <span className="text-emerald-400 font-extrabold whitespace-nowrap">
+                <span className="text-emerald-400 font-extrabold whitespace-nowrap drop-shadow-sm">
                   {t.heroBadge || '1,850+ Active Buses Today • Island-wide Real-Time GPS'}
                 </span>
               </div>
 
               {/* Large Catchy Heading */}
               <div className="space-y-3">
-                <h1 className="text-3xl sm:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-black text-white tracking-tight leading-[1.15]">
+                <h1 className="text-3xl sm:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-black text-white tracking-tight leading-[1.15] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
                   {t.heroTitlePart1 || 'ශ්‍රී ලංකාවේ ඕනෑම බස් රථයක්'} <br className="hidden sm:block" />
-                  <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
                     {t.heroTitlePart2 || 'පහසුවෙන්ම සොයාගන්න'}
                   </span>
                 </h1>
                 
                 {/* Multilingual Subtitle */}
-                <p className="text-sm sm:text-base xl:text-lg text-slate-300 font-medium leading-relaxed">
+                <p className="text-sm sm:text-base xl:text-lg text-slate-100 font-medium leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] bg-slate-950/35 p-3 rounded-2xl backdrop-blur-sm border border-white/5">
                   {t.heroSubtitle || 'Find schedules, track real-time bus locations with live GPS, and manage digital season passes effortlessly.'}
                 </p>
               </div>
 
               {/* 4 Feature Badges (Island-wide, Real-Time GPS, Fleets, Digital QR) */}
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors min-w-0">
+                <div className="bg-slate-950/75 border border-white/10 backdrop-blur-md rounded-2xl p-3.5 flex items-center gap-3 shadow-xl hover:border-emerald-500/50 transition-colors min-w-0">
                   <span className="text-2xl flex-shrink-0">🗺️</span>
                   <div className="min-w-0">
-                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
+                    <span className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider truncate">
                       {currentLang === 'en' ? 'Island-wide' : currentLang === 'ta' ? 'நாடு தழுவிய' : 'දිවයින පුරා'}
                     </span>
-                    <span className="text-xs sm:text-sm font-black text-white truncate block">
+                    <span className="text-xs sm:text-sm font-black text-white truncate block drop-shadow-sm">
                       {currentLang === 'en' ? 'All 9 Provinces' : currentLang === 'ta' ? '9 மாகாணங்கள்' : 'පළාත් 9ම'}
                     </span>
                   </div>
                 </div>
 
-                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors min-w-0">
+                <div className="bg-slate-950/75 border border-white/10 backdrop-blur-md rounded-2xl p-3.5 flex items-center gap-3 shadow-xl hover:border-emerald-500/50 transition-colors min-w-0">
                   <span className="text-2xl flex-shrink-0">⚡</span>
                   <div className="min-w-0">
-                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
-                      {currentLang === 'en' ? 'Telemetry' : currentLang === 'ta' ? 'நேரலை ஜிபிஎஸ்' : 'සජීවී දත්ත'}
+                    <span className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider truncate">
+                      {currentLang === 'en' ? 'Telemetry' : currentLang === 'ta' ? 'நேරலை ஜிபிஎஸ்' : 'සජීවී දත්ත'}
                     </span>
-                    <span className="text-xs sm:text-sm font-black text-emerald-400 truncate block">
+                    <span className="text-xs sm:text-sm font-black text-emerald-400 truncate block drop-shadow-sm">
                       Real-Time GPS
                     </span>
                   </div>
                 </div>
 
-                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors min-w-0">
+                <div className="bg-slate-950/75 border border-white/10 backdrop-blur-md rounded-2xl p-3.5 flex items-center gap-3 shadow-xl hover:border-emerald-500/50 transition-colors min-w-0">
                   <span className="text-2xl flex-shrink-0">🚌</span>
                   <div className="min-w-0">
-                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
+                    <span className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider truncate">
                       {currentLang === 'en' ? 'Bus Network' : currentLang === 'ta' ? 'பேருந்து நெட்வொர்க்' : 'බස් ජාලය'}
                     </span>
-                    <span className="text-xs sm:text-sm font-black text-white truncate block">
+                    <span className="text-xs sm:text-sm font-black text-white truncate block drop-shadow-sm">
                       SLTB & Private
                     </span>
                   </div>
                 </div>
 
-                <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3 shadow-md hover:border-slate-700 transition-colors min-w-0">
+                <div className="bg-slate-950/75 border border-white/10 backdrop-blur-md rounded-2xl p-3.5 flex items-center gap-3 shadow-xl hover:border-emerald-500/50 transition-colors min-w-0">
                   <span className="text-2xl flex-shrink-0">📱</span>
                   <div className="min-w-0">
-                    <span className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider truncate">
+                    <span className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider truncate">
                       {currentLang === 'en' ? 'Digital Pass' : currentLang === 'ta' ? 'டிஜிட்டல் பாஸ்' : 'ඩිජිටල් පාස්'}
                     </span>
-                    <span className="text-xs sm:text-sm font-black text-amber-300 truncate block">
+                    <span className="text-xs sm:text-sm font-black text-amber-300 truncate block drop-shadow-sm">
                       100% Phone QR
                     </span>
                   </div>

@@ -890,8 +890,8 @@ html.light-mode .hero-scenic-overlay-light {
 }
 
 html.light-mode .hero-scenic-img {
-  filter: brightness(0.96) contrast(1.05) saturate(1.15) !important;
-  opacity: 0.35 !important;
+  filter: brightness(0.98) contrast(1.08) saturate(1.2) !important;
+  opacity: 0.85 !important;
 }
 
 /* ============================================================
