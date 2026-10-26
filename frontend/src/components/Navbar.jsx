@@ -90,16 +90,16 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
   return (
     <>
-      {/* Clean Full-Width Sticky Top Navigation Bar */}
-      <header className="sticky top-0 z-50 w-full backdrop-blur-2xl bg-slate-950/95 border-b border-slate-800/90 shadow-2xl transition-all">
-        {/* Full-Width Symmetrical Navigation Bar with edge-to-edge balance */}
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-          <div className="relative flex items-center justify-between h-20 gap-2 sm:gap-4">
+      {/* VisionOS Floating Liquid Glass Navigation Bar */}
+      <header className="sticky top-0 z-50 w-full px-2 sm:px-4 lg:px-6 pt-2 sm:pt-3 pb-1 transition-all duration-300">
+        {/* Floating Liquid Glass Dock with Refraction, Specular Rim & Edge Glow */}
+        <div className="liquid-glass-nav-bar w-full max-w-[1580px] mx-auto rounded-2xl sm:rounded-3xl px-3 sm:px-6 lg:px-8 xl:px-10 transition-all duration-300">
+          <div className="relative flex items-center justify-between h-18 sm:h-20 gap-2 sm:gap-4">
             
             {/* 1. LEFT ZONE: Brand Logo & Title */}
             <div className="flex items-center gap-3 z-10 flex-shrink-0">
               <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-slate-900 flex items-center justify-center p-0.5 flex-shrink-0">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden shadow-xl border-2 border-emerald-500/40 group-hover:border-emerald-400 transition-all bg-white/10 backdrop-blur-xl flex items-center justify-center p-0.5 flex-shrink-0">
                   <img
                     src="/logo.jpg"
                     alt="goLanka Logo"
@@ -113,15 +113,15 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
                 <div className="space-y-0.5 whitespace-nowrap">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+                    <span className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-emerald-400 transition-colors drop-shadow-sm">
                       go<span className="text-emerald-400">Lanka</span>
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full shadow-sm">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2.5 py-0.5 rounded-full shadow-sm backdrop-blur-md">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                       🇱🇰 Transit
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400 font-medium tracking-wide hidden 2xl:block">
+                  <p className="text-[11px] text-slate-300 font-medium tracking-wide hidden 2xl:block drop-shadow-sm">
                     ශ්‍රී ලංකා ඩිජිටල් බස් ප්‍රවාහන ජාලය
                   </p>
                 </div>
@@ -138,14 +138,14 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                     to={link.to}
                     className={`group relative px-3 2xl:px-4 py-2 2xl:py-2.5 rounded-2xl text-xs 2xl:text-sm font-bold transition-all duration-200 flex items-center gap-2 whitespace-nowrap flex-shrink-0 active:scale-95 ${
                       active
-                        ? 'text-emerald-300 bg-slate-900 border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/15'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-900/80 border-2 border-transparent'
+                        ? 'text-emerald-300 bg-emerald-500/20 border-2 border-emerald-400/50 shadow-lg shadow-emerald-500/20 backdrop-blur-md'
+                        : 'text-slate-200 hover:text-white hover:bg-white/10 hover:border-white/20 border-2 border-transparent backdrop-blur-sm'
                     }`}
                   >
                     <span className="text-base 2xl:text-lg transition-transform group-hover:scale-110 flex-shrink-0">
                       {link.icon}
                     </span>
-                    <span className="tracking-wide whitespace-nowrap leading-none select-none">
+                    <span className="tracking-wide whitespace-nowrap leading-none select-none drop-shadow-sm">
                       {link.label}
                     </span>
                     
@@ -157,13 +157,13 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                     )}
 
                     {link.isNew && (
-                      <span className="text-[9px] uppercase font-black bg-blue-500/20 text-blue-300 border border-blue-500/40 px-1.5 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap shadow-sm">
+                      <span className="text-[9px] uppercase font-black bg-blue-500/25 text-blue-200 border border-blue-400/40 px-1.5 py-0.5 rounded-full flex-shrink-0 whitespace-nowrap shadow-sm backdrop-blur-md">
                         NEW
                       </span>
                     )}
 
                     {active && (
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-emerald-400 rounded-full"></span>
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-emerald-400 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
                     )}
                   </Link>
                 );
@@ -174,7 +174,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
             <div className="hidden xl:flex items-center gap-2 2xl:gap-3 flex-shrink-0 z-10">
               
               {/* 1. Trilingual Language Switcher Toggle */}
-              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
+              <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
                 {languages.map((lang) => {
                   const isSelected = currentLang === lang.code;
                   return (
@@ -185,7 +185,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                       className={`px-2.5 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                         isSelected
                           ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
-                          : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                          : 'text-slate-300 hover:text-white hover:bg-white/10'
                       }`}
                       aria-label={`Switch language to ${lang.label}`}
                     >
@@ -202,7 +202,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                 className={`relative flex items-center h-10 px-1 rounded-full transition-all duration-300 cursor-pointer shadow-inner active:scale-95 flex-shrink-0 group ${
                   isLightMode
                     ? 'bg-slate-200 border border-slate-300 w-[102px] justify-end'
-                    : 'bg-[#0e131d] border border-slate-700/90 w-[102px] justify-start shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]'
+                    : 'bg-white/10 backdrop-blur-xl border border-white/25 w-[102px] justify-start shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]'
                 }`}
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
@@ -212,7 +212,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                   className={`text-xs font-black tracking-wide transition-colors duration-300 select-none ${
                     isLightMode
                       ? 'order-1 pl-3 text-slate-900'
-                      : 'order-2 pr-3 ml-auto text-slate-200'
+                      : 'order-2 pr-3 ml-auto text-slate-100'
                   }`}
                 >
                   {isLightMode ? 'Dark' : 'Light'}
@@ -223,7 +223,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                   className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
                     isLightMode
                       ? 'order-2 bg-gradient-to-br from-amber-200 to-amber-400 shadow-[0_2px_12px_rgba(251,191,36,0.6)] border border-amber-300 text-amber-950'
-                      : 'order-1 bg-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(255,255,255,0.2),inset_0_1px_2px_rgba(255,255,255,0.6)] border border-white/30 text-white'
+                      : 'order-1 bg-white/15 backdrop-blur-xl shadow-[0_4px_16px_rgba(255,255,255,0.25),inset_0_1px_2px_rgba(255,255,255,0.6)] border border-white/40 text-white'
                   }`}
                 >
                   {isLightMode ? (
@@ -245,7 +245,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                 <button
                   type="button"
                   onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="p-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0 cursor-pointer active:scale-90"
+                  className="p-2.5 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 text-slate-200 hover:text-white transition-all relative focus:outline-none shadow-sm flex-shrink-0 cursor-pointer active:scale-90"
                   title="Live Transit Alerts"
                   aria-label="View Transit Notifications"
                 >
@@ -258,8 +258,8 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
                 {/* Live Transit Alerts Dropdown Popup */}
                 {notificationsOpen && (
-                  <div className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-slate-900 border-2 border-slate-700/80 rounded-3xl p-5 shadow-2xl z-50 animate-scale-in space-y-3">
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <div className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-slate-950/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-5 shadow-2xl z-50 animate-scale-in space-y-3">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
                       <div className="flex items-center gap-2">
                         <span className="text-lg">📢</span>
                         <h4 className="text-sm font-bold text-white">සජීවී මාර්ග නිවේදන (Transit Alerts)</h4>
@@ -273,21 +273,21 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                       {transitAlerts.map((alert) => (
                         <div
                           key={alert.id}
-                          className="p-3 bg-slate-950 rounded-2xl border border-slate-800 space-y-1 text-left"
+                          className="p-3 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 space-y-1 text-left"
                         >
                           <div className="flex items-center justify-between">
                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${alert.tagColor}`}>
                               {alert.tag}
                             </span>
-                            <span className="text-[10px] text-slate-500">{alert.time}</span>
+                            <span className="text-[10px] text-slate-400">{alert.time}</span>
                           </div>
-                          <h5 className="text-xs font-bold text-slate-200">{alert.title}</h5>
-                          <p className="text-[11px] text-slate-400 leading-snug">{alert.desc}</p>
+                          <h5 className="text-xs font-bold text-slate-100">{alert.title}</h5>
+                          <p className="text-[11px] text-slate-300 leading-snug">{alert.desc}</p>
                         </div>
                       ))}
                     </div>
 
-                    <div className="pt-2 border-t border-slate-800 text-center">
+                    <div className="pt-2 border-t border-white/10 text-center">
                       <span className="text-[11px] text-slate-400">
                         National Transport Commission • Verified Status
                       </span>
@@ -300,7 +300,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               <button
                 type="button"
                 onClick={() => onOpenQr ? onOpenQr() : setQrModalOpen(true)}
-                className="px-3 py-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
+                className="px-3 py-2.5 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-emerald-500/50 text-slate-100 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
                 title="Open My Digital QR Pass"
               >
                 <span className="text-base flex-shrink-0">📱</span>
@@ -314,10 +314,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                   <button
                     type="button"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-2xl bg-slate-900 border-2 border-emerald-500/50 hover:border-emerald-400 text-white shadow-lg shadow-emerald-500/10 transition-all cursor-pointer active:scale-95"
+                    className="flex items-center gap-2 px-3 py-2 rounded-2xl bg-white/10 backdrop-blur-xl border-2 border-emerald-500/50 hover:border-emerald-400 text-white shadow-lg shadow-emerald-500/15 transition-all cursor-pointer active:scale-95"
                     title="User Profile & Account Options"
                   >
-                    <span className="w-7 h-7 rounded-xl bg-slate-950 border border-emerald-400/50 flex items-center justify-center text-base flex-shrink-0">
+                    <span className="w-7 h-7 rounded-xl bg-slate-950/80 border border-emerald-400/50 flex items-center justify-center text-base flex-shrink-0">
                       {user.avatar || '👤'}
                     </span>
                     <div className="text-left hidden 2xl:block max-w-[110px]">
@@ -333,10 +333,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
                   {/* Profile Dropdown Popup */}
                   {userDropdownOpen && (
-                    <div className="absolute right-0 top-full mt-3 w-72 bg-slate-900 border-2 border-slate-700/90 rounded-3xl p-4 shadow-2xl z-50 animate-scale-in space-y-3">
+                    <div className="absolute right-0 top-full mt-3 w-72 bg-slate-950/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-4 shadow-2xl z-50 animate-scale-in space-y-3">
                       {/* Header Summary */}
-                      <div className="flex items-center gap-3 border-b border-slate-800 pb-3">
-                        <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-emerald-500/40 flex items-center justify-center text-2xl flex-shrink-0">
+                      <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-900 border border-emerald-500/40 flex items-center justify-center text-2xl flex-shrink-0">
                           {user.avatar || '👤'}
                         </div>
                         <div className="truncate text-left">
@@ -430,7 +430,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               </a>
 
               {/* Compact Language Switcher (සිං / EN / த) */}
-              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-xl p-0.5 shadow-inner">
+              <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-0.5 shadow-inner">
                 {[
                   { code: 'si', label: 'සිං' },
                   { code: 'en', label: 'EN' },
@@ -443,7 +443,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                     className={`px-2 py-1 text-[11px] font-black rounded-lg transition-all active:scale-95 cursor-pointer ${
                       currentLang === l.code
                         ? 'bg-emerald-500 text-slate-950 shadow-sm'
-                        : 'text-slate-400 hover:text-white'
+                        : 'text-slate-300 hover:text-white'
                     }`}
                   >
                     {l.label}
@@ -458,7 +458,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
                 className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-90 ${
                   isLightMode
                     ? 'bg-amber-100 border border-amber-300 text-amber-600 shadow-amber-200/50'
-                    : 'bg-slate-900 border border-slate-700/80 text-white'
+                    : 'bg-white/10 backdrop-blur-xl border border-white/20 text-white'
                 }`}
                 title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
                 aria-label="Toggle theme mode"
@@ -482,7 +482,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
             <div className="hidden md:flex xl:hidden items-center gap-2">
               <a
                 href="tel:1955"
-                className="flex items-center gap-1 px-3 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 text-rose-300 font-black text-xs active:scale-95 transition-transform"
+                className="flex items-center gap-1 px-3 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/40 text-rose-300 font-black text-xs active:scale-95 transition-transform backdrop-blur-md"
               >
                 <span>📞</span>
                 <span className="font-mono text-xs font-black">1955</span>
@@ -491,7 +491,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               <button
                 type="button"
                 onClick={() => onOpenQr ? onOpenQr() : setQrModalOpen(true)}
-                className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700/80 text-white font-bold text-xs"
+                className="px-3 py-2 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 text-white font-bold text-xs"
               >
                 📱 QR
               </button>
@@ -499,7 +499,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-sm"
+                className="w-9 h-9 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-sm text-white"
               >
                 {isLightMode ? '☀️' : '🌙'}
               </button>
@@ -507,7 +507,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               {isAuthenticated && user ? (
                 <Link
                   to="/profile"
-                  className="w-9 h-9 rounded-xl bg-slate-900 border border-emerald-500/40 flex items-center justify-center text-sm"
+                  className="w-9 h-9 rounded-xl bg-white/10 backdrop-blur-xl border border-emerald-500/40 flex items-center justify-center text-sm"
                 >
                   {user.avatar || '👤'}
                 </Link>
@@ -525,7 +525,7 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-slate-200"
+                className="w-9 h-9 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-slate-200"
               >
                 ☰
               </button>
