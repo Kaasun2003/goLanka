@@ -166,25 +166,14 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
     <div className="space-y-16 sm:space-y-20 pb-16">
       {/* 1. SPLIT HERO SECTION: Left (Search Box) & Right (Hero text) with Scenic Bus Background extending under navbar */}
       <section className="relative pt-24 sm:pt-28 pb-8 sm:pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
-        {/* Scenic Sri Lankan Bus Transit Background Image (Clearly visible with natural brightness) */}
+        {/* Scenic Sri Lankan Bus Transit Background Image (Pure background image with zero black fade overlays) */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
           <img
             src="/hero-bus-scenic.jpg"
             alt="Scenic Sri Lanka Luxury Bus travel through mist-covered tea estate mountains"
-            className="hero-scenic-img w-full h-full object-cover object-[center_60%] filter brightness-[0.88] contrast-[1.08] saturate-[1.25] transform scale-[1.01] transition-all duration-500"
+            className="hero-scenic-img w-full h-full object-cover object-[center_60%] filter brightness-100 contrast-100 saturate-100"
           />
-          {/* Dark Mode: subtle cinematic gradient so the tea estates, hills, and bus are clearly visible */}
-          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-950/30 to-slate-950/65 pointer-events-none"></div>
-          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none"></div>
-
-          {/* Light Mode: gentle frosted daylight gradient */}
-          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-r from-slate-50/70 via-slate-50/25 to-slate-50/65 pointer-events-none"></div>
-          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent pointer-events-none"></div>
         </div>
-
-        {/* Subtle background ambient lights */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[350px] bg-emerald-500/10 blur-[130px] pointer-events-none rounded-full z-0"></div>
-        <div className="absolute top-1/3 right-1/4 w-[450px] h-[350px] bg-blue-500/10 blur-[130px] pointer-events-none rounded-full z-0"></div>
 
         <div className="w-full max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-start lg:items-center">

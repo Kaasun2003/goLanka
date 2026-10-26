@@ -571,24 +571,24 @@ html.light-mode .mobile-bottom-nav span.text-emerald-400 {
    LIQUID GLASS (Apple visionOS / Ultra-Premium Glassmorphic UI)
    ========================================================================== */
 
-/* VisionOS Liquid Glass Floating Navigation Bar */
+/* VisionOS Black Liquid Glass Floating Navigation Bar (Black in both Dark and Light mode) */
 .liquid-glass-nav-bar {
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.08) 35%,
-    rgba(255, 255, 255, 0.03) 70%,
-    rgba(255, 255, 255, 0.14) 100%
+    rgba(15, 23, 42, 0.94) 0%,
+    rgba(2, 6, 23, 0.96) 50%,
+    rgba(15, 23, 42, 0.94) 100%
   ) !important;
-  backdrop-filter: blur(24px) saturate(200%) brightness(1.15);
-  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.15);
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.65) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: blur(28px) saturate(210%);
+  -webkit-backdrop-filter: blur(28px) saturate(210%);
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 
-    0 16px 36px -8px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.5) !important;
+    0 24px 50px -10px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -805,21 +805,27 @@ html.light-mode .mobile-bottom-nav span.text-emerald-400 {
   color: #ffffff !important;
 }
 
-/* Light Theme Overrides for Liquid Glass */
+/* Light Theme Overrides for Liquid Glass (Keep Navbar Black in Light Mode) */
 html.light-mode .liquid-glass-nav-bar {
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.88) 0%,
-    rgba(241, 245, 249, 0.72) 45%,
-    rgba(226, 232, 240, 0.82) 100%
+    rgba(15, 23, 42, 0.94) 0%,
+    rgba(2, 6, 23, 0.96) 50%,
+    rgba(15, 23, 42, 0.94) 100%
   ) !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.98) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.4) !important;
   box-shadow: 
-    0 20px 40px -10px rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(255, 255, 255, 0.9),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.04) !important;
+    0 24px 50px -10px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+html.light-mode .liquid-glass-nav-bar span,
+html.light-mode .liquid-glass-nav-bar p,
+html.light-mode .liquid-glass-nav-bar a {
+  color: #ffffff;
 }
 
 html.light-mode .liquid-glass-container {
