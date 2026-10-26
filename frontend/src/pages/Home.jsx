@@ -164,13 +164,31 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
 
   return (
     <div className="space-y-16 sm:space-y-20 pb-16">
-      {/* 1. SPLIT HERO SECTION: Left (Search Box) & Right (Hero text) */}
-      <section className="relative pt-6 sm:pt-10 pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
-        {/* Subtle background ambient lights */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[350px] bg-emerald-500/10 blur-[130px] pointer-events-none rounded-full"></div>
-        <div className="absolute top-1/3 right-1/4 w-[450px] h-[350px] bg-blue-500/10 blur-[130px] pointer-events-none rounded-full"></div>
+      {/* 1. SPLIT HERO SECTION: Left (Search Box) & Right (Hero text) with Scenic Bus Background */}
+      <section className="relative pt-6 sm:pt-10 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
+        {/* Scenic Sri Lankan Bus Transit Background Image */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+          <img
+            src="/hero-bus-scenic.jpg"
+            alt="Scenic Sri Lanka Luxury Bus travel through mist-covered tea estate mountains"
+            className="hero-scenic-img w-full h-full object-cover object-[center_35%] filter brightness-[0.46] contrast-[1.12] saturate-[1.2] transform scale-[1.02] transition-all duration-500"
+          />
+          {/* Dark Mode cinematic gradients for contrast & depth */}
+          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/92 pointer-events-none"></div>
+          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/80 pointer-events-none"></div>
+          <div className="hero-scenic-overlay-dark absolute inset-0 bg-slate-950/25 backdrop-blur-[1px] pointer-events-none"></div>
 
-        <div className="w-full max-w-7xl mx-auto">
+          {/* Light Mode clean frosted gradients for contrast & depth */}
+          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-r from-slate-50/95 via-slate-50/80 to-slate-50/92 pointer-events-none"></div>
+          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-slate-50/80 pointer-events-none"></div>
+          <div className="hero-scenic-overlay-light absolute inset-0 bg-white/30 backdrop-blur-[1px] pointer-events-none"></div>
+        </div>
+
+        {/* Subtle background ambient lights */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[350px] bg-emerald-500/10 blur-[130px] pointer-events-none rounded-full z-0"></div>
+        <div className="absolute top-1/3 right-1/4 w-[450px] h-[350px] bg-blue-500/10 blur-[130px] pointer-events-none rounded-full z-0"></div>
+
+        <div className="w-full max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-start lg:items-center">
             
             {/* 1. LEFT COLUMN (2nd Image Content): PickMe/Uber Style Smart Search Card & Popular Routes */}

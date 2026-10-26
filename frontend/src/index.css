@@ -873,6 +873,28 @@ html.light-mode .liquid-glass-seg-active {
 }
 
 /* ============================================================
+   HERO SCENIC BACKGROUND THEME ADAPTATION (Dark & Light Modes)
+   ============================================================ */
+.hero-scenic-overlay-dark {
+  display: block;
+}
+.hero-scenic-overlay-light {
+  display: none;
+}
+
+html.light-mode .hero-scenic-overlay-dark {
+  display: none !important;
+}
+html.light-mode .hero-scenic-overlay-light {
+  display: block !important;
+}
+
+html.light-mode .hero-scenic-img {
+  filter: brightness(0.96) contrast(1.05) saturate(1.15) !important;
+  opacity: 0.35 !important;
+}
+
+/* ============================================================
    MOBILE-FIRST NATIVE APP OPTIMIZATIONS (Android & iOS Safari)
    ============================================================ */
 
