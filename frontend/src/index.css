@@ -153,7 +153,13 @@ html {
   transform: scale(0.96);
 }
 
-/* Light Theme Overrides */
+/* ============================================================
+   COMPREHENSIVE FULL-WEBSITE LIGHT MODE STYLES & RADIAL ANIMATION
+   ============================================================ */
+html.light-mode {
+  color-scheme: light;
+}
+
 html.light-mode body {
   background-color: #f8fafc !important;
   color: #0f172a !important;
@@ -163,33 +169,140 @@ html.light-mode body {
     radial-gradient(at 50% 50%, #f1f5f9 0px, transparent 100%) !important;
 }
 
+/* Header & Navigation in Light Mode */
 html.light-mode header {
   background-color: rgba(255, 255, 255, 0.95) !important;
   border-color: #e2e8f0 !important;
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
 }
 
-html.light-mode header .text-white {
-  color: #0f172a !important;
+/* Backgrounds across all cards, containers and modals */
+html.light-mode .bg-slate-950,
+html.light-mode .bg-slate-950\/70,
+html.light-mode .bg-slate-950\/80,
+html.light-mode .bg-slate-950\/90,
+html.light-mode .bg-slate-950\/95 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
 }
 
-html.light-mode header .text-slate-300,
-html.light-mode header .text-slate-200 {
-  color: #334155 !important;
+html.light-mode .bg-slate-900,
+html.light-mode .bg-slate-900\/70,
+html.light-mode .bg-slate-900\/80,
+html.light-mode .bg-slate-900\/90,
+html.light-mode .bg-slate-900\/95 {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04) !important;
 }
 
-html.light-mode header .text-slate-400 {
-  color: #64748b !important;
-}
-
-html.light-mode header .bg-slate-900,
-html.light-mode header .bg-slate-950 {
+html.light-mode .bg-slate-800,
+html.light-mode .bg-slate-800\/60,
+html.light-mode .bg-slate-800\/80,
+html.light-mode .bg-slate-800\/90 {
   background-color: #f1f5f9 !important;
   border-color: #cbd5e1 !important;
 }
 
-html.light-mode header .bg-slate-800 {
-  background-color: #e2e8f0 !important;
+/* Gradient card backgrounds */
+html.light-mode .from-slate-900.to-slate-950,
+html.light-mode .from-slate-900\/90.to-slate-950\/90 {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Text Colors */
+html.light-mode .text-white {
+  color: #0f172a !important;
+}
+
+html.light-mode .text-slate-200,
+html.light-mode .text-slate-300 {
+  color: #1e293b !important;
+}
+
+html.light-mode .text-slate-400 {
+  color: #475569 !important;
+}
+
+html.light-mode .text-slate-500 {
+  color: #64748b !important;
+}
+
+/* Borders */
+html.light-mode .border-slate-800,
+html.light-mode .border-slate-800\/60,
+html.light-mode .border-slate-800\/80,
+html.light-mode .border-slate-800\/90,
+html.light-mode .border-slate-700,
+html.light-mode .border-slate-700\/60,
+html.light-mode .border-slate-700\/80,
+html.light-mode .border-slate-700\/90,
+html.light-mode .border-white\/10 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Form Inputs, Selects & Placeholders */
+html.light-mode input[type="text"],
+html.light-mode input[type="tel"],
+html.light-mode input[type="email"],
+html.light-mode input[type="password"],
+html.light-mode input[type="date"],
+html.light-mode input[type="number"],
+html.light-mode select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light-mode input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Footer & Dropdowns */
+html.light-mode footer {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Radial Ripple Expanding Transition (Radiating from the button) */
+@keyframes radial-ripple-expand {
+  0% {
+    width: 0px;
+    height: 0px;
+    transform: translate(-50%, -50%);
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.9;
+  }
+  100% {
+    width: var(--ripple-radius, 2800px);
+    height: var(--ripple-radius, 2800px);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+.theme-radial-ripple {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  animation: radial-ripple-expand 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* View Transitions API circular expansion */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 99999;
 }
 
 /* Leaflet Map overrides for dark-themed sleek UI */

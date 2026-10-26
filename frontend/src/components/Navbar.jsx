@@ -49,8 +49,62 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
     setUserDropdownOpen(false);
   }, [location.pathname]);
 
-  const toggleTheme = () => {
-    setIsLightMode(!isLightMode);
+  const toggleTheme = (e) => {
+    const nextMode = !isLightMode;
+
+    // 1. Calculate button origin coordinates for radial expansion
+    const rect = e?.currentTarget?.getBoundingClientRect?.();
+    const x = e?.clientX ?? (rect ? rect.left + rect.width / 2 : window.innerWidth / 2);
+    const y = e?.clientY ?? (rect ? rect.top + rect.height / 2 : 40);
+
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    // 2. Physical Glowing Radial Ripple expanding outward across the entire screen
+    try {
+      const ripple = document.createElement('div');
+      ripple.className = 'theme-radial-ripple';
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      ripple.style.setProperty('--ripple-radius', `${endRadius * 2.2}px`);
+      ripple.style.background = nextMode
+        ? 'radial-gradient(circle, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.92) 50%, rgba(226, 232, 240, 0.7) 100%)'
+        : 'radial-gradient(circle, rgba(2, 6, 23, 0.98) 0%, rgba(15, 23, 42, 0.92) 50%, rgba(15, 23, 42, 0.7) 100%)';
+      document.body.appendChild(ripple);
+
+      setTimeout(() => {
+        ripple.remove();
+      }, 700);
+    } catch {
+      // Fallback if DOM manipulation fails
+    }
+
+    // 3. View Transitions API with circular clip-path reveal
+    if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const transition = document.startViewTransition(() => {
+        setIsLightMode(nextMode);
+      });
+
+      transition.ready.then(() => {
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`
+            ]
+          },
+          {
+            duration: 650,
+            easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+            pseudoElement: '::view-transition-new(root)'
+          }
+        );
+      });
+    } else {
+      setIsLightMode(nextMode);
+    }
   };
 
   // Trilingual Labels for Navigation Tabs
@@ -200,10 +254,145 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               })}
             </nav>
 
-            {/* 3. RIGHT ZONE: Login/Profile, QR Button, Bell, Theme & Language (xl:flex = 1280px+) */}
+            {/* 3. RIGHT ZONE: Language, Theme (Image 2 style), Bell, QR Pass & User Profile (Far Right) */}
             <div className="hidden xl:flex items-center gap-2 2xl:gap-3 flex-shrink-0 z-10">
               
-              {/* AUTHENTICATION / USER PROFILE DROPDOWN */}
+              {/* 1. Trilingual Language Switcher Toggle */}
+              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
+                {languages.map((lang) => {
+                  const isSelected = currentLang === lang.code;
+                  return (
+                    <button
+                      key={lang.code}
+                      type="button"
+                      onClick={() => setLanguage(lang.code)}
+                      className={`px-2.5 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
+                        isSelected
+                          ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
+                          : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                      }`}
+                      aria-label={`Switch language to ${lang.label}`}
+                    >
+                      {lang.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* 2. Theme Toggle Button (Image 2 VisionOS Liquid Glass Capsule Switch) */}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className={`relative flex items-center h-10 px-1 rounded-full transition-all duration-300 cursor-pointer shadow-inner active:scale-95 flex-shrink-0 group ${
+                  isLightMode
+                    ? 'bg-slate-200 border border-slate-300/80 w-[96px] justify-end'
+                    : 'bg-[#0e131d] border border-slate-700/90 w-[96px] justify-start shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]'
+                }`}
+                title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
+                aria-label="Toggle theme mode"
+              >
+                {/* Text Label */}
+                <span
+                  className={`text-[11px] font-bold tracking-wide transition-colors duration-300 select-none ${
+                    isLightMode
+                      ? 'order-1 pl-2.5 text-slate-700'
+                      : 'order-2 pr-2.5 ml-auto text-slate-200'
+                  }`}
+                >
+                  {isLightMode ? 'Dark' : 'Light'}
+                </span>
+
+                {/* 3D Liquid Glass Orb with glowing Moon/Sun icon */}
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
+                    isLightMode
+                      ? 'order-2 bg-gradient-to-br from-amber-200 to-amber-400 shadow-[0_2px_12px_rgba(251,191,36,0.6)] border border-amber-300 text-amber-950'
+                      : 'order-1 bg-white/10 backdrop-blur-xl shadow-[0_4px_16px_rgba(255,255,255,0.2),inset_0_1px_2px_rgba(255,255,255,0.6)] border border-white/30 text-white'
+                  }`}
+                >
+                  {isLightMode ? (
+                    /* Glowing Sun SVG */
+                    <svg className="w-4 h-4 text-amber-600 drop-shadow-[0_0_6px_rgba(245,158,11,0.8)]" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zm12.75 0a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM12 18.75a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zM4.5 12a.75.75 0 01-.75.75H1.5a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.657 6.343a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm-11.314 11.314a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm12.374 1.591a.75.75 0 010 1.06l-1.592 1.592a.75.75 0 01-1.06-1.06l1.591-1.592a.75.75 0 011.061 0zm-11.314-11.314a.75.75 0 010 1.06L5.81 9.274a.75.75 0 11-1.06-1.06l1.591-1.592a.75.75 0 011.061 0z" />
+                    </svg>
+                  ) : (
+                    /* Glowing Crisp Crescent Moon SVG */
+                    <svg className="w-4 h-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.95)]" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                    </svg>
+                  )}
+                </div>
+              </button>
+
+              {/* 3. Notification Bell Icon */}
+              <div className="relative flex-shrink-0" ref={notificationRef}>
+                <button
+                  type="button"
+                  onClick={() => setNotificationsOpen(!notificationsOpen)}
+                  className="p-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0 cursor-pointer active:scale-90"
+                  title="Live Transit Alerts"
+                  aria-label="View Transit Notifications"
+                >
+                  <span className="text-lg">🔔</span>
+                  <span className="absolute top-2 right-2 flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                  </span>
+                </button>
+
+                {/* Live Transit Alerts Dropdown Popup */}
+                {notificationsOpen && (
+                  <div className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-slate-900 border-2 border-slate-700/80 rounded-3xl p-5 shadow-2xl z-50 animate-scale-in space-y-3">
+                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">📢</span>
+                        <h4 className="text-sm font-bold text-white">සජීවී මාර්ග නිවේදන (Transit Alerts)</h4>
+                      </div>
+                      <span className="text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-0.5 rounded-full">
+                        3 New
+                      </span>
+                    </div>
+
+                    <div className="space-y-2.5 max-h-72 overflow-y-auto">
+                      {transitAlerts.map((alert) => (
+                        <div
+                          key={alert.id}
+                          className="p-3 bg-slate-950 rounded-2xl border border-slate-800 space-y-1 text-left"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${alert.tagColor}`}>
+                              {alert.tag}
+                            </span>
+                            <span className="text-[10px] text-slate-500">{alert.time}</span>
+                          </div>
+                          <h5 className="text-xs font-bold text-slate-200">{alert.title}</h5>
+                          <p className="text-[11px] text-slate-400 leading-snug">{alert.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-800 text-center">
+                      <span className="text-[11px] text-slate-400">
+                        National Transport Commission • Verified Status
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 4. Quick Access "📱 QR පාස්" Button */}
+              <button
+                type="button"
+                onClick={() => setQrModalOpen(true)}
+                className="px-3 py-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
+                title="Open My Digital QR Pass"
+              >
+                <span className="text-base flex-shrink-0">📱</span>
+                <span className="whitespace-nowrap font-bold hidden 2xl:inline">{getQrPassLabel()}</span>
+                <span className="whitespace-nowrap font-bold 2xl:hidden">QR</span>
+              </button>
+
+              {/* 5. USER PROFILE / LOGIN BUTTON (AT THE VERY FAR RIGHT EDGE) */}
               {isAuthenticated && user ? (
                 <div className="relative flex-shrink-0" ref={userMenuRef}>
                   <button
@@ -307,111 +496,6 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
                 </button>
               )}
 
-              {/* Quick Access "📱 QR පාස්" Button */}
-              <button
-                type="button"
-                onClick={() => setQrModalOpen(true)}
-                className="px-3 py-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-emerald-500/40 text-slate-200 hover:text-emerald-300 font-bold text-xs 2xl:text-sm tracking-wide shadow-sm flex items-center gap-1.5 active:scale-95 transition-all whitespace-nowrap flex-shrink-0 cursor-pointer"
-                title="Open My Digital QR Pass"
-              >
-                <span className="text-base flex-shrink-0">📱</span>
-                <span className="whitespace-nowrap font-bold">{getQrPassLabel()}</span>
-              </button>
-
-              {/* Notification Bell Icon */}
-              <div className="relative flex-shrink-0" ref={notificationRef}>
-                <button
-                  type="button"
-                  onClick={() => setNotificationsOpen(!notificationsOpen)}
-                  className="p-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all relative focus:outline-none shadow-inner flex-shrink-0 cursor-pointer active:scale-90"
-                  title="Live Transit Alerts"
-                  aria-label="View Transit Notifications"
-                >
-                  <span className="text-lg">🔔</span>
-                  <span className="absolute top-2 right-2 flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                  </span>
-                </button>
-
-                {/* Live Transit Alerts Dropdown Popup */}
-                {notificationsOpen && (
-                  <div className="absolute right-0 top-full mt-3 w-80 sm:w-96 bg-slate-900 border-2 border-slate-700/80 rounded-3xl p-5 shadow-2xl z-50 animate-scale-in space-y-3">
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg">📢</span>
-                        <h4 className="text-sm font-bold text-white">සජීවී මාර්ග නිවේදන (Transit Alerts)</h4>
-                      </div>
-                      <span className="text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-0.5 rounded-full">
-                        3 New
-                      </span>
-                    </div>
-
-                    <div className="space-y-2.5 max-h-72 overflow-y-auto">
-                      {transitAlerts.map((alert) => (
-                        <div
-                          key={alert.id}
-                          className="p-3 bg-slate-950 rounded-2xl border border-slate-800 space-y-1 text-left"
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${alert.tagColor}`}>
-                              {alert.tag}
-                            </span>
-                            <span className="text-[10px] text-slate-500">{alert.time}</span>
-                          </div>
-                          <h5 className="text-xs font-bold text-slate-200">{alert.title}</h5>
-                          <p className="text-[11px] text-slate-400 leading-snug">{alert.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="pt-2 border-t border-slate-800 text-center">
-                      <span className="text-[11px] text-slate-400">
-                        National Transport Commission • Verified Status
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Theme Toggle Button */}
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="p-2.5 rounded-2xl bg-slate-900 border border-slate-700/80 hover:border-slate-600 text-slate-300 hover:text-white transition-all shadow-inner focus:outline-none group flex-shrink-0 cursor-pointer active:scale-90"
-                title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
-                aria-label="Toggle theme mode"
-              >
-                <div className="transform transition-transform duration-500 ease-in-out group-hover:rotate-180">
-                  {isLightMode ? (
-                    <span className="text-lg">🌙</span>
-                  ) : (
-                    <span className="text-lg text-amber-300">☀️</span>
-                  )}
-                </div>
-              </button>
-
-              {/* Trilingual Language Switcher Toggle */}
-              <div className="flex items-center bg-slate-900/90 border border-slate-700/80 rounded-2xl p-1 shadow-inner flex-shrink-0 whitespace-nowrap">
-                {languages.map((lang) => {
-                  const isSelected = currentLang === lang.code;
-                  return (
-                    <button
-                      key={lang.code}
-                      type="button"
-                      onClick={() => setLanguage(lang.code)}
-                      className={`px-2.5 py-1 text-xs font-bold rounded-xl transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
-                        isSelected
-                          ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md font-black'
-                          : 'text-slate-400 hover:text-white hover:bg-slate-800'
-                      }`}
-                      aria-label={`Switch language to ${lang.label}`}
-                    >
-                      {lang.label}
-                    </button>
-                  );
-                })}
-              </div>
             </div>
 
             {/* 4. MOBILE & TABLET CONTROLS (< 1280px / xl:hidden) */}
@@ -449,9 +533,22 @@ const Navbar = ({ currentLang = 'si', setLanguage, t }) => {
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="liquid-glass-icon-btn !w-9 !h-9 text-xs"
+                className={`!w-9 !h-9 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-90 ${
+                  isLightMode
+                    ? 'bg-amber-100 border border-amber-300 text-amber-600 shadow-amber-200/50'
+                    : 'bg-slate-900 border border-slate-700/80 text-white'
+                }`}
+                title={isLightMode ? 'Switch to Dark Theme' : 'Switch to Light Theme'}
               >
-                {isLightMode ? '🌙' : '☀️'}
+                {isLightMode ? (
+                  <svg className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zm12.75 0a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM12 18.75a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zM4.5 12a.75.75 0 01-.75.75H1.5a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.657 6.343a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm-11.314 11.314a.75.75 0 011.06 0l1.592 1.591a.75.75 0 11-1.06 1.06l-1.592-1.59a.75.75 0 010-1.061zm12.374 1.591a.75.75 0 010 1.06l-1.592 1.592a.75.75 0 01-1.06-1.06l1.591-1.592a.75.75 0 011.061 0zm-11.314-11.314a.75.75 0 010 1.06L5.81 9.274a.75.75 0 11-1.06-1.06l1.591-1.592a.75.75 0 011.061 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                  </svg>
+                )}
               </button>
 
               {/* Mobile Menu Toggle Button */}
