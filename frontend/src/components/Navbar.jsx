@@ -90,10 +90,10 @@ const Navbar = ({ currentLang = 'si', setLanguage, t, onOpenQr }) => {
 
   return (
     <>
-      {/* VisionOS Floating Liquid Glass Navigation Bar */}
-      <header className="sticky top-0 z-50 w-full px-2 sm:px-3 md:px-4 lg:px-5 pt-1.5 sm:pt-2.5 pb-1 transition-all duration-300">
+      {/* VisionOS Floating Liquid Glass Navigation Bar (Fixed over page background) */}
+      <header className="fixed top-0 left-0 right-0 z-50 w-full px-2 sm:px-3 md:px-4 lg:px-5 pt-1.5 sm:pt-2 pb-1 bg-transparent pointer-events-none transition-all duration-300">
         {/* Floating Liquid Glass Dock with Refraction, Specular Rim & Edge Glow */}
-        <div className="liquid-glass-nav-bar w-full max-w-[1860px] mx-auto rounded-2xl sm:rounded-3xl px-2.5 sm:px-3 md:px-4 lg:px-5 xl:px-6 transition-all duration-300">
+        <div className="liquid-glass-nav-bar w-full max-w-[1860px] mx-auto rounded-2xl sm:rounded-3xl px-2.5 sm:px-3 md:px-4 lg:px-5 xl:px-6 pointer-events-auto transition-all duration-300">
           <div className="relative flex items-center justify-between h-18 sm:h-20 gap-2 lg:gap-3 xl:gap-4 w-full">
             
             {/* 1. LEFT ZONE: Brand Logo & Title */}

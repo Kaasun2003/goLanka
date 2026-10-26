@@ -165,7 +165,7 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
   return (
     <div className="space-y-16 sm:space-y-20 pb-16">
       {/* 1. SPLIT HERO SECTION: Left (Search Box) & Right (Hero text) with Scenic Bus Background extending under navbar */}
-      <section className="relative -mt-20 sm:-mt-24 pt-24 sm:pt-28 pb-8 sm:pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
+      <section className="relative pt-24 sm:pt-28 pb-8 sm:pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
         {/* Scenic Sri Lankan Bus Transit Background Image (Clearly visible with natural brightness) */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
           <img

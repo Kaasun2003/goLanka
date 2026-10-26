@@ -14,7 +14,7 @@ const ProfilePage = ({ t, currentLang = 'si' }) => {
   // If user is not logged in, show an inviting login prompt card
   if (!isAuthenticated || !user) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-4 sm:p-6 bg-slate-950 text-slate-100">
+      <div className="min-h-[80vh] flex items-center justify-center pt-24 sm:pt-28 pb-8 px-4 sm:px-6 bg-slate-950 text-slate-100">
         <div className="w-full max-w-lg bg-slate-900 border-2 border-slate-800 rounded-3xl p-8 text-center space-y-6 shadow-2xl animate-fade-in-up">
           <div className="w-20 h-20 mx-auto rounded-3xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-4xl shadow-inner">
             👤
@@ -90,7 +90,7 @@ const ProfilePage = ({ t, currentLang = 'si' }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 py-8 sm:py-12 px-4 sm:px-6 lg:px-8 space-y-10">
+    <div className="min-h-screen bg-slate-950 text-slate-100 pt-24 sm:pt-28 pb-12 px-4 sm:px-6 lg:px-8 space-y-10">
       
       {/* Top Banner / Breadcrumb */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6 animate-fade-in">
