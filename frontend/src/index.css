@@ -575,21 +575,20 @@ html.light-mode .mobile-bottom-nav span.text-emerald-400 {
 .liquid-glass-nav-bar {
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(255, 255, 255, 0.04) 30%,
-    rgba(15, 23, 42, 0.42) 75%,
-    rgba(255, 255, 255, 0.08) 100%
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.03) 70%,
+    rgba(255, 255, 255, 0.14) 100%
   ) !important;
-  backdrop-filter: blur(28px) saturate(210%) brightness(1.08);
-  -webkit-backdrop-filter: blur(28px) saturate(210%) brightness(1.08);
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.5) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(24px) saturate(200%) brightness(1.15);
+  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.65) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
   box-shadow: 
-    0 24px 50px -10px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(255, 255, 255, 0.06),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.42),
-    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.25) !important;
+    0 16px 36px -8px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.5) !important;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

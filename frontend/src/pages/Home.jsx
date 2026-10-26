@@ -164,8 +164,8 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
 
   return (
     <div className="space-y-16 sm:space-y-20 pb-16">
-      {/* 1. SPLIT HERO SECTION: Left (Search Box) & Right (Hero text) with Scenic Bus Background */}
-      <section className="relative pt-6 sm:pt-10 pb-8 sm:pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
+      {/* 1. SPLIT HERO SECTION: Left (Search Box) & Right (Hero text) with Scenic Bus Background extending under navbar */}
+      <section className="relative -mt-20 sm:-mt-24 pt-24 sm:pt-28 pb-8 sm:pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden animate-fade-in-up">
         {/* Scenic Sri Lankan Bus Transit Background Image (Clearly visible with natural brightness) */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
           <img
@@ -175,11 +175,11 @@ const Home = ({ t = {}, currentLang = 'si' }) => {
           />
           {/* Dark Mode: subtle cinematic gradient so the tea estates, hills, and bus are clearly visible */}
           <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-950/30 to-slate-950/65 pointer-events-none"></div>
-          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/70 pointer-events-none"></div>
+          <div className="hero-scenic-overlay-dark absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent pointer-events-none"></div>
 
           {/* Light Mode: gentle frosted daylight gradient */}
           <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-r from-slate-50/70 via-slate-50/25 to-slate-50/65 pointer-events-none"></div>
-          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-slate-50/70 pointer-events-none"></div>
+          <div className="hero-scenic-overlay-light absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent pointer-events-none"></div>
         </div>
 
         {/* Subtle background ambient lights */}

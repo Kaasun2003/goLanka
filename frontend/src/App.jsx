@@ -118,14 +118,16 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <Router>
-          <div className="flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-slate-950 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 font-sans transition-colors duration-300">
+          <div className="relative flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-slate-950 text-slate-100 selection:bg-emerald-400 selection:text-slate-950 font-sans transition-colors duration-300">
+            {/* Top Ambient Glow behind Liquid Glass Navbar */}
+            <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-36 bg-gradient-to-b from-emerald-500/20 via-teal-500/10 to-transparent blur-3xl pointer-events-none z-0"></div>
             <Navbar 
               currentLang={currentLang} 
               setLanguage={handleLanguageChange} 
               t={t}
               onOpenQr={() => setQrModalOpen(true)}
             />
-            <main className="flex-grow w-full max-w-[100vw] overflow-x-hidden pb-24 md:pb-0">
+            <main className="flex-grow w-full max-w-[100vw] overflow-x-hidden pb-24 md:pb-0 relative z-10">
               <AnimatedContent t={t} currentLang={currentLang} />
             </main>
             <Footer t={t} currentLang={currentLang} />
